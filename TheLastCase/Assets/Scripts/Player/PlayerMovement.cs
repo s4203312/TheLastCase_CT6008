@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,11 +14,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+
+            if (Physics.Raycast(ray, out hit, 100))
             {
-                player.SetDestination(hit.point);
+                if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
+                {
+                    Debug.Log(hit.point);
+                    player.SetDestination(hit.point);
+                    Debug.Log(player.destination);
+                }
             }
         }
     }
