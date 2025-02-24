@@ -22,7 +22,6 @@ public class InteractActions : MonoBehaviour
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
         Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
 
-        Debug.Log(interactionObject.GetComponent<InteractableObject>().itemData);
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData);
 
         Destroy(interactionObject);

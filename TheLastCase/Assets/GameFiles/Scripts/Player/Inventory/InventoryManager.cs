@@ -6,6 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
 
+    //List for the inventory of the player
     public List<InventoryItemData> Inventory = new List<InventoryItemData>();
 
     private void Awake()
@@ -19,7 +20,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    //Adding item to dictionary
+    //Adding item to list
     public void AddItemToInventory(InventoryItemData item)
     {
         if (!Inventory.Contains(item))
@@ -29,7 +30,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    //Removing item from dictionary
+    //Removing item from list
     public void RemoveItemFromInventory(InventoryItemData item)
     {
         if (Inventory.Contains(item))
@@ -38,22 +39,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    //Checking if item is in Dictionary
+    //Checking if item is in list
     public static bool IsItemInInventory(InventoryItemData item)
     {
         return Instance != null && Instance.Inventory.Contains(item);
-    }
-
-    //Finds data on specific item
-    public static InventoryItemData GetItemData(InventoryItemData item)
-    {
-        if(Instance != null && Instance.Inventory.Contains(item))
-        {
-            return Instance.Inventory[1];   //Wrong
-        }
-        else 
-        { 
-            return null; 
-        }
     }
 }
