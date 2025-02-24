@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractButtonSelection : MonoBehaviour
+public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private Button playerButton;
+    public Button playerButton;
     [SerializeField] private string ActionName;
+    
+    //Data stored about item
+    public InventoryItemData itemData;
     
 
     public void OnCollisionEnter(Collision collision)
