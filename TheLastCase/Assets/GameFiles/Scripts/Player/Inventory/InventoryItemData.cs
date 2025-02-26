@@ -11,11 +11,13 @@ public class InventoryItemData : ScriptableObject
 {
     public string itemName;
     public string itemDescription;
+    public Sprite itemPicture;
     //Can put other things here like UI pic
 
-    public InventoryItemData(string itemName, string itemDescription)
+    public InventoryItemData(string itemName, string itemDescription, Sprite itemPicture)
     {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
+        this.itemPicture = itemPicture;
     }
 }
