@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;
-            }
-            
+            }      
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 

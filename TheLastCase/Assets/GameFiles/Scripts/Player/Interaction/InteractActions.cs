@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class InteractActions : MonoBehaviour
 {
     private GameObject interactionObject;
-    public GameObject player; 
+    public GameObject player;
+
+    [Header("Puzzle Managers")]
+    public ManagerFiguresPuzzle figuresPuzzleManager;
 
     public void OpenDoor()
     {
@@ -26,5 +29,25 @@ public class InteractActions : MonoBehaviour
 
         Destroy(interactionObject);
         interactButton.gameObject.SetActive(false);
+    }
+
+    public void PlaceItem()
+    {
+        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
+
+        if (InventoryManager.IsItemInInventory(figuresPuzzleManager.correctItem))
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(figuresPuzzleManager.correctItem);
+
+            interactionObject.transform.parent.GetChild(0).gameObject.SetActive(true);
+            figuresPuzzleManager.correctFigureHeadsPlaced++;
+            interactButton.gameObject.SetActive(false);
+        }
+
+        else
+        {
+            // add dialogue of player saying you dont have anything for this yet
+        }
     }
 }

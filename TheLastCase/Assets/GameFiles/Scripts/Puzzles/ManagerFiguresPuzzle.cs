@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ManagerFiguresPuzzle : MonoBehaviour
 {
+    public InventoryItemData correctItem;
+
     public int correctFigureHeadsPlaced = 0;
 
     void Update()

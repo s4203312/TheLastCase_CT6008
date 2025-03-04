@@ -11,7 +11,7 @@ public class InteractableObject : MonoBehaviour
     
     //Data stored about item
     public InventoryItemData itemData;
-    
+
 
     public void OnCollisionEnter(Collision collision)
     {
