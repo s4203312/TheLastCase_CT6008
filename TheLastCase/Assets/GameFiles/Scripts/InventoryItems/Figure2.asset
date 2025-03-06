@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add26b580d19be549885d38d756fa83f, type: 3}
-  m_Name: Figures
+  m_Name: Figure2
   m_EditorClassIdentifier: 
-  itemName: Figurine
+  itemName: Figurine2
   itemDescription: A small human shaped object. Looks out of place.
   itemPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

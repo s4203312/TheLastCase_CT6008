@@ -11,6 +11,8 @@ public class InteractActions : MonoBehaviour
     private GameObject interactionObject;
     public GameObject player;
 
+    public InventoryItemData correctItem;
+
     [Header("Puzzle Managers")]
     public ManagerFiguresPuzzle figuresPuzzleManager;
 
@@ -38,14 +40,20 @@ public class InteractActions : MonoBehaviour
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
         Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
 
-        if (InventoryManager.IsItemInInventory(figuresPuzzleManager.correctItem))
-        {
-            InventoryManager.Instance.RemoveItemFromInventory(figuresPuzzleManager.correctItem);
+        correctItem = interactionObject.GetComponent<CorrectItem>().correctItem;
 
-            interactionObject.transform.parent.GetChild(0).gameObject.SetActive(true);
-            interactionObject.transform.parent.GetChild(1).gameObject.SetActive(false);
-            figuresPuzzleManager.CheckPuzzle();
+        Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
+        Transform collider = interactionObject.transform.parent.Find("Collider");
+
+        if (InventoryManager.IsItemInInventory(correctItem))
+        {
+            InventoryManager.Instance.RemoveItemFromInventory(correctItem);
+
+            puzzleItem.gameObject.SetActive(true);
+            collider.gameObject.SetActive(false);
+
             interactButton.gameObject.SetActive(false);
+            correctItem = null;
         }
 
         else

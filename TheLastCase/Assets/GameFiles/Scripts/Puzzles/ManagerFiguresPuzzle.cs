@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
 {
-    public InventoryItemData correctItem;
+    public InventoryItemData figure1;
+    public InventoryItemData figure2;
+    public InventoryItemData figure3;
 
     public GameObject[] figures;
 
