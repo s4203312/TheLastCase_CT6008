@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
+    private IPuzzle puzzle;
+
     private GameObject interactionObject;
     public GameObject player;
 
@@ -41,7 +43,8 @@ public class InteractActions : MonoBehaviour
             InventoryManager.Instance.RemoveItemFromInventory(figuresPuzzleManager.correctItem);
 
             interactionObject.transform.parent.GetChild(0).gameObject.SetActive(true);
-            figuresPuzzleManager.correctFigureHeadsPlaced++;
+            interactionObject.transform.parent.GetChild(1).gameObject.SetActive(false);
+            figuresPuzzleManager.CheckPuzzle();
             interactButton.gameObject.SetActive(false);
         }
 

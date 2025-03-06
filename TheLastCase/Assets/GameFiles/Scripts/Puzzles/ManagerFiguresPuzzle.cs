@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerFiguresPuzzle : MonoBehaviour
+public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
 {
     public InventoryItemData correctItem;
 
-    public int correctFigureHeadsPlaced = 0;
+    public GameObject[] figures;
 
-    void Update()
+    public void CheckPuzzle()
     {
+        int correctFigureHeadsPlaced = 0;
+
+        foreach (GameObject figure in figures)
+        {
+            if (figure.activeInHierarchy)
+                correctFigureHeadsPlaced++;
+        }
+
         if (correctFigureHeadsPlaced == 3)
         {
             Debug.Log("Puzzle Complete");
         }
+    }
+
+    public void PuzzleComplete()
+    {
+
     }
 }
