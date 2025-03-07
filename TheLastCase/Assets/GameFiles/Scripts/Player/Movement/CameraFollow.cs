@@ -5,10 +5,15 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject ghost;
     [SerializeField] private bool Camera;
+
 
     private Vector3 cameraPerspective;
     private Vector3 canvasPerspective;
+
+    public PlayerController playerController;
+    private bool isGhostActive;
 
     private void Start()
     {
@@ -18,14 +23,31 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (Camera)
+        isGhostActive = playerController.isGhostActive;
+
+        if (isGhostActive)
         {
-            transform.position = player.transform.position + cameraPerspective;
+            if (Camera)
+            {
+                transform.position = ghost.transform.position + cameraPerspective;
+            }
+            else
+            {
+                transform.position = ghost.transform.position + canvasPerspective;
+            }
         }
-        else 
+        else
         {
-            transform.position = player.transform.position + canvasPerspective;
+            if (Camera)
+            {
+                transform.position = player.transform.position + cameraPerspective;
+            }
+            else
+            {
+                transform.position = player.transform.position + canvasPerspective;
+            }
         }
+        
 
         
     }
