@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
-    private IPuzzle puzzle;
+    private IPuzzle currentPuzzle;
 
     private GameObject interactionObject;
     public GameObject player;
@@ -40,7 +40,7 @@ public class InteractActions : MonoBehaviour
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
         Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
 
-        correctItem = interactionObject.GetComponent<CorrectItem>().correctItem;
+        correctItem = interactionObject.GetComponent<PuzzleData>().correctItem;
 
         Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
         Transform collider = interactionObject.transform.parent.Find("Collider");
