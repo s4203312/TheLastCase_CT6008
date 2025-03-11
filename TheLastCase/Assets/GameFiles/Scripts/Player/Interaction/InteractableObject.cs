@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerController;
     public Button playerButton;
-    [SerializeField] private string ActionName;
+    [SerializeField] private string PlayerActionName;
+    [SerializeField] private string GhostActionName;
     
     //Data stored about item
     public InventoryItemData itemData;
@@ -29,6 +31,7 @@ public class InteractableObject : MonoBehaviour
         {
             player.GetComponent<PlayerMovement>().interactedObject = null;
             playerButton.gameObject.SetActive(false);
+            playerButton.onClick.RemoveListener(FindAction);
         }
     }
 
@@ -36,6 +39,20 @@ public class InteractableObject : MonoBehaviour
     {
         InteractActions script = player.GetComponent<InteractActions>();
         playerButton.onClick.RemoveListener(FindAction);
-        script.StartCoroutine(ActionName);
+
+        if (playerController.GetComponent<PlayerController>().isGhostActive)
+        {
+            if(GhostActionName != "")
+            {
+                script.StartCoroutine(GhostActionName);
+            }
+        }
+        else
+        {
+            if (PlayerActionName != "")
+            {
+                script.StartCoroutine(PlayerActionName);
+            }
+        }
     }
 }

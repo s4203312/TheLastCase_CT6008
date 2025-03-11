@@ -2185,8 +2185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PlaceItem
+  PlayerActionName: PlaceItem
+  GhostActionName: 
   itemData: {fileID: 0}
 --- !u!65 &737087391
 BoxCollider:
@@ -3888,8 +3890,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: OpenDoor
+  PlayerActionName: OpenDoor
+  GhostActionName: KeyholeSquish
   itemData: {fileID: 0}
 --- !u!114 &1178697782
 MonoBehaviour:
@@ -4286,8 +4290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 0}
   playerButton: {fileID: 1411367428}
-  ActionName: PickUpItem
+  PlayerActionName: 
+  GhostActionName: 
   itemData: {fileID: 11400000, guid: 7a0b1d273abe151449c453626c9bb988, type: 2}
 --- !u!65 &1373643962
 BoxCollider:
@@ -4640,8 +4646,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 0}
   playerButton: {fileID: 1411367428}
-  ActionName: PickUpItem
+  PlayerActionName: 
+  GhostActionName: 
   itemData: {fileID: 11400000, guid: 1739f15c51f231540b137813c1c1b2cf, type: 2}
 --- !u!65 &1506476140
 BoxCollider:
@@ -4748,8 +4756,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PickUpItem
+  PlayerActionName: PickUpItem
+  GhostActionName: 
   itemData: {fileID: 11400000, guid: f74b4450d83d71a4f89361a9fff1be69, type: 2}
 --- !u!65 &1515806011
 BoxCollider:
@@ -5660,6 +5670,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharaters
       objectReference: {fileID: 0}
+    - target: {fileID: 1207237799497354322, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 1278871074}
+    - target: {fileID: 1207237799497354322, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1132355193}
+    - target: {fileID: 1207237799497354322, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: interactButton
+      value: 
+      objectReference: {fileID: 1411367428}
+    - target: {fileID: 2813908843691746424, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 1278871074}
     - target: {fileID: 2813908843691746424, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: interactButton
@@ -6284,8 +6314,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PlaceItem
+  PlayerActionName: PlaceItem
+  GhostActionName: 
   itemData: {fileID: 0}
 --- !u!65 &1825135621
 BoxCollider:
@@ -6479,8 +6511,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PickUpItem
+  PlayerActionName: PickUpItem
+  GhostActionName: 
   itemData: {fileID: 11400000, guid: 68dd04b6e470aae4b859f66ec05ce94c, type: 2}
 --- !u!65 &1845198076
 BoxCollider:
@@ -7188,8 +7222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PickUpItem
+  PlayerActionName: PickUpItem
+  GhostActionName: 
   itemData: {fileID: 11400000, guid: 2cb48e07925f7a842a8670cd3d8db3a4, type: 2}
 --- !u!65 &1921830139
 BoxCollider:
@@ -7653,8 +7689,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1132355193}
+  playerController: {fileID: 1284597433}
   playerButton: {fileID: 1411367428}
-  ActionName: PlaceItem
+  PlayerActionName: PlaceItem
+  GhostActionName: 
   itemData: {fileID: 0}
 --- !u!114 &2104476850
 MonoBehaviour:

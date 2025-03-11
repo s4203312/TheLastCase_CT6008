@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent ghost;
     public GameObject interactedObject;
 
-    private bool isGhostActive;
+    public bool isGhostActive;
 
     private void Awake()
     {
@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isGhostActive)
             {
-                Debug.Log("This is now false");
                 playerController.isGhostActive = false;
+
                 //Player components enabling
                 player.GetComponent<PlayerMovement>().enabled = true;
 
@@ -75,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                Debug.Log("This is now true");
                 playerController.isGhostActive = true;
                 ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
                 

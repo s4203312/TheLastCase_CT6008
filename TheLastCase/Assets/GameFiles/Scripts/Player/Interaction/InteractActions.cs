@@ -10,12 +10,16 @@ public class InteractActions : MonoBehaviour
 
     private GameObject interactionObject;
     public GameObject player;
+    public GameObject ghost;
     public Button interactButton;
 
     public InventoryItemData correctItem;
 
     [Header("Puzzle Managers")]
     public ManagerFiguresPuzzle figuresPuzzleManager;
+
+
+    //Player Actions
 
     public void OpenDoor()
     {
@@ -77,5 +81,19 @@ public class InteractActions : MonoBehaviour
         {
             // add dialogue of player saying you dont have anything for this yet
         }
+    }
+
+
+
+
+    //Ghost Actions
+
+    public void KeyholeSquish()
+    {
+        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+
+        //ghost.transform.position = interactionObject.transform.position + new Vector3(-2,0,0);
+
+        //Doesnt work yet issues with door?
     }
 }
