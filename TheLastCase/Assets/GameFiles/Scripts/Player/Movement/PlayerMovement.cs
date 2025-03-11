@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     //Vector3 targetDirection = hit.transform.position - player.transform.position;
                     //Vector3.RotateTowards(player.transform.forward, targetDirection, Time.deltaTime, 0.0f);
-                    Debug.Log(isGhostActive);
                     if (!isGhostActive)
                     {
                         player.SetDestination(hit.point);

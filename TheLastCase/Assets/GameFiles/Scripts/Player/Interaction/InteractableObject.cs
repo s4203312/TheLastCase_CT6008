@@ -29,13 +29,13 @@ public class InteractableObject : MonoBehaviour
         {
             player.GetComponent<PlayerMovement>().interactedObject = null;
             playerButton.gameObject.SetActive(false);
-            playerButton.onClick.RemoveListener(FindAction);
         }
     }
 
     private void FindAction()
     {
         InteractActions script = player.GetComponent<InteractActions>();
+        playerButton.onClick.RemoveListener(FindAction);
         script.StartCoroutine(ActionName);
     }
 }

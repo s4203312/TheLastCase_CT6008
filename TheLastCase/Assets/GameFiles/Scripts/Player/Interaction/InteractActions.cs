@@ -10,6 +10,7 @@ public class InteractActions : MonoBehaviour
 
     private GameObject interactionObject;
     public GameObject player;
+    public Button interactButton;
 
     public InventoryItemData correctItem;
 
@@ -19,15 +20,32 @@ public class InteractActions : MonoBehaviour
     public void OpenDoor()
     {
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        GameObject pivotPoint = interactionObject.transform.GetChild(0).gameObject;
 
-        interactionObject.SetActive(false);
-        Debug.Log("Door Open");
+        interactionObject.GetComponent<BoxCollider>().enabled = false;
+        interactButton.gameObject.SetActive(false);
+
+        StartCoroutine(OpeningDoor(pivotPoint));
+    }
+
+    public IEnumerator OpeningDoor(GameObject pivotPoint)
+    {
+        float targetAngle = Random.Range(75,105);
+        float rotatedAngle = 0f;
+        float rotationSpeed = 45f;
+
+        while (rotatedAngle < targetAngle)
+        {
+            float rotationStep = rotationSpeed * Time.deltaTime;
+            interactionObject.transform.RotateAround(pivotPoint.transform.position, Vector3.down, rotationStep);
+            rotatedAngle += rotationStep;
+            yield return null;
+        }
     }
 
     public void PickUpItem()
     {
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
-        Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
 
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData);
 
@@ -38,8 +56,7 @@ public class InteractActions : MonoBehaviour
     public void PlaceItem()
     {
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
-        Button interactButton = interactionObject.GetComponent<InteractableObject>().playerButton;
-
+        
         correctItem = interactionObject.GetComponent<PuzzleData>().correctItem;
 
         Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
