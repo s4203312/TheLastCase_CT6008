@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,7 @@ public class InteractActions : MonoBehaviour
     public GameObject ghost;
     public Button interactButton;
 
-    public InventoryItemData correctItem;
-
-    [Header("Puzzle Managers")]
-    public ManagerFiguresPuzzle figuresPuzzleManager;
+    public GameObject Managers;
 
 
     //Player Actions
@@ -57,33 +55,39 @@ public class InteractActions : MonoBehaviour
         interactButton.gameObject.SetActive(false);
     }
 
-    public void PlaceItem()
+    public void PlaceItem(string itemPosition)
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
-        
-        correctItem = interactionObject.GetComponent<PuzzleData>().correctItem;
+        //interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
 
-        Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
-        Transform collider = interactionObject.transform.parent.Find("Collider");
+        //Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
+        //Transform collider = interactionObject.transform.parent.Find("Collider");
 
-        if (InventoryManager.IsItemInInventory(correctItem))
-        {
-            InventoryManager.Instance.RemoveItemFromInventory(correctItem);
+        //InventoryManager.Instance.Inventory[int.Parse(itemPosition)]
 
-            puzzleItem.gameObject.SetActive(true);
-            collider.gameObject.SetActive(false);
+        //if (InventoryManager.IsItemInInventory(correctItem))
+        //{
+        //    InventoryManager.Instance.RemoveItemFromInventory(correctItem);
 
-            interactButton.gameObject.SetActive(false);
-            correctItem = null;
-        }
+        //    puzzleItem.gameObject.SetActive(true);
+        //    collider.gameObject.SetActive(false);
 
-        else
-        {
-            // add dialogue of player saying you dont have anything for this yet
-        }
+        //    interactButton.gameObject.SetActive(false);
+        //    correctItem = null;
+        //}
+
+        //else
+        //{
+        // add dialogue of player saying you dont have anything for this yet
+        //}
     }
 
+    public void AccessInventory()
+    {
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
+        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();
+
+    }
 
 
     //Ghost Actions

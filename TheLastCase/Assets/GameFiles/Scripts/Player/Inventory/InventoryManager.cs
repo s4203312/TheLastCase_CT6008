@@ -6,6 +6,8 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
 
+    public bool inspectingInventory = false;
+
     //List for the inventory of the player
     public List<InventoryItemData> Inventory = new List<InventoryItemData>();
 
@@ -44,4 +46,6 @@ public class InventoryManager : MonoBehaviour
     {
         return Instance != null && Instance.Inventory.Contains(item);
     }
+
+    public void IsInspectingInventory(bool value) { inspectingInventory = value; }
 }
