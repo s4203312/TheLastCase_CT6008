@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraTrigger : MonoBehaviour
 {
     public CameraMove cameraController;
-    public Transform targetRoomPosition; // Assign Room1CamPos, Room2CamPos, etc.
+    public Transform targetRoomPosition;
 
     private void OnTriggerEnter(Collider other)
     {

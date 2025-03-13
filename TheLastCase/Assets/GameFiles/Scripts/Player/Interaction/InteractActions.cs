@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class InteractActions : MonoBehaviour
 
     public GameObject Managers;
 
+    private float cooldownTime = 0.5f;
+    private float lastClickTime = 0f;
 
     //Player Actions
 
@@ -57,28 +60,29 @@ public class InteractActions : MonoBehaviour
 
     public void PlaceItem(string itemPosition)
     {
-        //interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        if (Time.time - lastClickTime < cooldownTime)
+        {
+            return; // Exit the function if the cooldown hasn't passed
+        }
 
-        //Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
-        //Transform collider = interactionObject.transform.parent.Find("Collider");
+        lastClickTime = Time.time;
 
-        //InventoryManager.Instance.Inventory[int.Parse(itemPosition)]
+        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        Transform itemTransform = interactionObject.transform.parent.Find("PuzzleItem").transform;
 
-        //if (InventoryManager.IsItemInInventory(correctItem))
-        //{
-        //    InventoryManager.Instance.RemoveItemFromInventory(correctItem);
+        InventoryItemData itemData = InventoryManager.Instance.Inventory[int.Parse(itemPosition) - 1];
 
-        //    puzzleItem.gameObject.SetActive(true);
-        //    collider.gameObject.SetActive(false);
+        GameObject chosenItem = itemData.itemObject;
 
-        //    interactButton.gameObject.SetActive(false);
-        //    correctItem = null;
-        //}
+        if (chosenItem != null)
+        {
+            GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
+            item.SetActive(true);
 
-        //else
-        //{
-        // add dialogue of player saying you dont have anything for this yet
-        //}
+            Debug.Log("Item Placed");
+            
+            InventoryManager.Instance.RemoveItemFromInventory(itemData);
+        }
     }
 
     public void AccessInventory()
