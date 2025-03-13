@@ -70,18 +70,24 @@ public class InteractActions : MonoBehaviour
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
         Transform itemTransform = interactionObject.transform.parent.Find("PuzzleItem").transform;
 
-        InventoryItemData itemData = InventoryManager.Instance.Inventory[int.Parse(itemPosition) - 1];
+        int index = int.Parse(itemPosition) - 1;
 
-        GameObject chosenItem = itemData.itemObject;
-
-        if (chosenItem != null)
+        if (index >= 0 && index < InventoryManager.Instance.Inventory.Count)
         {
-            GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
-            item.SetActive(true);
+            InventoryItemData itemData = InventoryManager.Instance.Inventory[index];
 
-            Debug.Log("Item Placed");
-            
-            InventoryManager.Instance.RemoveItemFromInventory(itemData);
+            GameObject chosenItem = itemData.itemObject;
+
+            if (chosenItem != null)
+            {
+                GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
+                //item.transform.SetParent(itemTransform.transform);
+                item.SetActive(true);
+
+                Debug.Log("Item Placed");
+
+                InventoryManager.Instance.RemoveItemFromInventory(itemData);
+            }
         }
     }
 

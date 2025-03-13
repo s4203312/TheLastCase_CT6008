@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: Figurine2
   itemDescription: A small human shaped object. Looks out of place.
   itemPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  itemObject: {fileID: 7633731300935648800, guid: 38460c2ea40e9874e91aa6486a89b08c,
+    type: 3}

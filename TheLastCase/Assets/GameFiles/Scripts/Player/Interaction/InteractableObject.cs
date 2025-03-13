@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject playerController;
+    private GameObject player;
+    private GameObject playerController;
     public Button playerButton;
     [SerializeField] private string PlayerActionName;
     [SerializeField] private string GhostActionName;
@@ -14,6 +14,12 @@ public class InteractableObject : MonoBehaviour
     //Data stored about item
     public InventoryItemData itemData;
 
+    public void Start()
+    {
+        player = GameObject.Find("Player");
+        playerController = GameObject.Find("PlayerController");
+        playerButton = GameObject.Find("PlayerCanvas").transform.GetChild(0).GetComponent<Button>();
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
