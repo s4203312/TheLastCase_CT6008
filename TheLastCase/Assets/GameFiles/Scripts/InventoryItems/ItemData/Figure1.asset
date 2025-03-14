@@ -17,3 +17,4 @@ MonoBehaviour:
   itemPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   itemObject: {fileID: 7959723871886973452, guid: 5af194a21296d9c4e91d81d01f9f3a40,
     type: 3}
+  puzzleID: Figures

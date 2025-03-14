@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
-    private IPuzzle currentPuzzle;
 
     private GameObject interactionObject;
     public GameObject player;
@@ -68,7 +67,8 @@ public class InteractActions : MonoBehaviour
         lastClickTime = Time.time;
 
         interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
-        Transform itemTransform = interactionObject.transform.parent.Find("PuzzleItem").transform;
+        Transform itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
         int index = int.Parse(itemPosition) - 1;
 
@@ -81,12 +81,15 @@ public class InteractActions : MonoBehaviour
             if (chosenItem != null)
             {
                 GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
-                //item.transform.SetParent(itemTransform.transform);
+                item.transform.SetParent(itemTransform);
                 item.SetActive(true);
 
                 Debug.Log("Item Placed");
 
+                PuzzleRegistry.Instance.CheckPuzzleByID(itemData.puzzleID);
+
                 InventoryManager.Instance.RemoveItemFromInventory(itemData);
+                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();                
             }
         }
     }
