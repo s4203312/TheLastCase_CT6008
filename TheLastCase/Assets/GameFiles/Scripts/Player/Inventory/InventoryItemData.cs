@@ -12,7 +12,7 @@ public class InventoryItemData : ScriptableObject
     public string itemName;
     public string itemDescription;
     public Sprite itemPicture;
-    public GameObject itemObject;
+    public GameObject itemObject; // remove and add second list for inventory gameobjects
     public string puzzleID;
     //Can put other things here like UI pic
 
