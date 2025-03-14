@@ -47,11 +47,11 @@ public class UIInventoryLoad : MonoBehaviour
                     if (inventoryManager.inspectingInventory)
                     {
                         // inspect item functionaility
-                        Debug.Log("Insepct");
+                        //Debug.Log("Insepct");
                     }
                     else
                     {
-                        Debug.Log("Place");
+                        //Debug.Log("Place");
                         interactActions.PlaceItem(itemPosition);                     
                     }       
                 }

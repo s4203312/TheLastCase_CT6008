@@ -30,9 +30,5 @@ public class PuzzleRegistry : MonoBehaviour
         {
             puzzle.CheckPuzzle();
         }
-        else
-        {
-            Debug.LogWarning($"Puzzle with ID {id} not found!");
-        }
     }
 }

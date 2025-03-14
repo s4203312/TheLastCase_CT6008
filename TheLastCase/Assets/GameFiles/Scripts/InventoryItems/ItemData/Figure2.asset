@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Figurine2
   itemDescription: A small human shaped object. Looks out of place.
-  itemPicture: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  itemPicture: {fileID: 21300000, guid: 723686f587e66c44c97834b3ce13e78f, type: 3}
   itemObject: {fileID: 7633731300935648800, guid: 38460c2ea40e9874e91aa6486a89b08c,
     type: 3}
   puzzleID: Figures

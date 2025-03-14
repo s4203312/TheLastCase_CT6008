@@ -7,7 +7,7 @@ public class InteractableObject : MonoBehaviour
 {
     private GameObject player;
     private GameObject playerController;
-    public Button playerButton;
+    private Button playerButton;
     [SerializeField] private string PlayerActionName;
     [SerializeField] private string GhostActionName;
     

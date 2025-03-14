@@ -26,7 +26,12 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
 
             if (puzzleData.itemHolder.childCount > 0)
             {
-                itemData = puzzleData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData;
+                itemData = puzzleData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData; 
+                puzzleData.isOccupied = true;
+            }
+            else
+            {
+                puzzleData.isOccupied = true;
             }
 
             if (puzzleData.correctItem == itemData && itemData != null)
@@ -36,13 +41,24 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
         }
 
         if (correctFigureHeadsPlaced == 3)
-        {
-            PuzzleComplete();
+        {        
+            PuzzleComplete();          
         }
     }
 
     public void PuzzleComplete()
     {
+        foreach (GameObject pedestal in pedestals)
+        {
+            Transform collider = pedestal.transform.Find("Collider");
+            PuzzleData puzzleData = collider.GetComponent<PuzzleData>();
+
+            collider.gameObject.SetActive(false);
+
+            BoxCollider itemCollider =  puzzleData.itemHolder.GetChild(0).GetComponent<BoxCollider>();
+            itemCollider.enabled = false;
+        }
+
         Debug.Log("Puzzle Complete");
     }
 }

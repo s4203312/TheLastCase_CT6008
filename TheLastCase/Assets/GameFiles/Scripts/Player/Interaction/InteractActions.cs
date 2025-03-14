@@ -61,7 +61,7 @@ public class InteractActions : MonoBehaviour
     {
         if (Time.time - lastClickTime < cooldownTime)
         {
-            return; // Exit the function if the cooldown hasn't passed
+            return;
         }
 
         lastClickTime = Time.time;
@@ -82,16 +82,21 @@ public class InteractActions : MonoBehaviour
             {
                 GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
                 item.transform.SetParent(itemTransform);
-                item.SetActive(true);
 
-                Debug.Log("Item Placed");
+                //Debug.Log("Item Placed");
 
                 PuzzleRegistry.Instance.CheckPuzzleByID(itemData.puzzleID);
 
                 InventoryManager.Instance.RemoveItemFromInventory(itemData);
-                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();                
+                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();
+                interactButton.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void InspectPuzzle()
+    {
+
     }
 
     public void AccessInventory()

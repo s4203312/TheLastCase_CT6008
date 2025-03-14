@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         if (!Inventory.Contains(item))
         {
             Inventory.Add(item);
-            Debug.Log("Item Added");
+            //Debug.Log("Item Added");
         }
     }
 
