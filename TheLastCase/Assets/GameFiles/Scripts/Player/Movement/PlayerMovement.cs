@@ -38,12 +38,15 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            Ray ray = playerController.playerCamera.ScreenPointToRay(Input.mousePosition);
+            Camera gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().OutputCamera;
+
+            Ray ray = gameCam.ScreenPointToRay(Input.mousePosition);
             //Ray ray = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
             {
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 Debug.Log(hit.point);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
                 {
@@ -62,33 +65,33 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //if (Input.GetMouseButtonDown(1))          //Switch to ghost gone for now
-        //{
-        //    if (isGhostActive)
-        //    {
-        //        playerController.isGhostActive = false;
+        if (Input.GetMouseButtonDown(1))          //Switch between ghost and player
+        {
+            if (isGhostActive)
+            {
+                playerController.isGhostActive = false;
 
-        //        //Player components enabling
-        //        player.GetComponent<PlayerMovement>().enabled = true;
+                //Player components enabling
+                player.GetComponent<PlayerMovement>().enabled = true;
 
-        //        //Ghost components disabling
-        //        ghost.GetComponent<PlayerMovement>().enabled = false;
+                //Ghost components disabling
+                ghost.GetComponent<PlayerMovement>().enabled = false;
 
-        //        ghost.gameObject.SetActive(false);
-        //    }
-        //    else
-        //    {
-        //        playerController.isGhostActive = true;
-        //        ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
-                
-        //        //Player components disabling
-        //        player.GetComponent<PlayerMovement>().enabled = false;
+                ghost.gameObject.SetActive(false);
+            }
+            else
+            {
+                playerController.isGhostActive = true;
+                ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
 
-        //        //Ghost components disabling
-        //        ghost.GetComponent<PlayerMovement>().enabled = true;
+                //Player components disabling
+                player.GetComponent<PlayerMovement>().enabled = false;
 
-        //        ghost.gameObject.SetActive(true);
-        //    }
-        //}
+                //Ghost components disabling
+                ghost.GetComponent<PlayerMovement>().enabled = true;
+
+                ghost.gameObject.SetActive(true);
+            }
+        }
     }
 }

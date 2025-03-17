@@ -5,25 +5,42 @@ using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
+    private PlayerController playerController;
+    private CinemachineVirtualCamera gameCam;
+
     public CameraMove cameraController;
     public Transform targetRoomPosition;
     public bool inToRoom = true;
 
+    private void Start()
+    {
+        playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        
+        gameCam = cameraController.GetComponent<CinemachineVirtualCamera>();
+        gameCam.Follow = null;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        var cam = cameraController.GetComponent<CinemachineVirtualCamera>();
-
         if (inToRoom)       //Focus on room
         {
             if (other.CompareTag("Player")) // Make sure player has "Player" tag
             {
-                cam.Follow = null;
+                gameCam.Follow = null;
                 cameraController.MoveCameraToRoom(targetRoomPosition);
             }
         }
         else               //Follow if corridoors
         {
-            cam.Follow = GameObject.Find("Player").transform;
+            if(playerController.isGhostActive)
+            {
+                gameCam.Follow = GameObject.Find("Ghost").transform;
+            }
+            else
+            {
+                gameCam.Follow = GameObject.Find("Player").transform;
+            }
         }
     }
 }

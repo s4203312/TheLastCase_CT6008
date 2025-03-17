@@ -3993,7 +3993,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 40
   field of view: 70
   orthographic: 0
   orthographic size: 10
@@ -4714,7 +4714,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGhostActive: 0
-  playerCamera: {fileID: 1090491046}
 --- !u!4 &1284597435
 Transform:
   m_ObjectHideFlags: 0
@@ -5728,7 +5727,7 @@ MonoBehaviour:
     FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 40
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -6247,6 +6246,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1132355193}
+    - target: {fileID: 1207237799497354322, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: Managers
+      value: 
+      objectReference: {fileID: 1261471364}
     - target: {fileID: 1207237799497354322, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: interactButton
@@ -9251,6 +9255,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1090491047}
+  - {fileID: 2112558122}
+  - {fileID: 1125370184}
+  - {fileID: 1593313414}
   - {fileID: 1972964293}
   - {fileID: 823744270}
   - {fileID: 1654504150}
@@ -9267,9 +9274,6 @@ SceneRoots:
   - {fileID: 120952183}
   - {fileID: 571591913}
   - {fileID: 745182993}
-  - {fileID: 2112558122}
-  - {fileID: 1125370184}
-  - {fileID: 1593313414}
   - {fileID: 2119470176}
   - {fileID: 1225043505}
   - {fileID: 255899780}

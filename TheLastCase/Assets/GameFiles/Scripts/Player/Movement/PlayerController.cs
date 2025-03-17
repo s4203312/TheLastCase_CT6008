@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public bool isGhostActive = false;
-    public Camera playerCamera;
 
     // Start is called before the first frame update
     void Start()
