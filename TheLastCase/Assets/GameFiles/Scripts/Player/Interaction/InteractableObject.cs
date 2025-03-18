@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InteractableObject : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject playerCharacters;
     private GameObject playerController;
     private Button playerButton;
     [SerializeField] private string PlayerActionName;
@@ -16,7 +16,7 @@ public class InteractableObject : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player");
+        playerCharacters = GameObject.Find("PlayerCharacters");
         playerController = GameObject.Find("PlayerController");
         playerButton = GameObject.Find("PlayerCanvas").transform.GetChild(0).GetComponent<Button>();
     }
@@ -25,7 +25,7 @@ public class InteractableObject : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            player.GetComponent<PlayerMovement>().interactedObject = gameObject;
+            playerCharacters.GetComponent<PlayerMovement>().interactedObject = gameObject;
             playerButton.gameObject.SetActive(true);
             playerButton.onClick.AddListener(FindAction);
         }
@@ -35,7 +35,7 @@ public class InteractableObject : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            player.GetComponent<PlayerMovement>().interactedObject = null;
+            playerCharacters.GetComponent<PlayerMovement>().interactedObject = null;
             playerButton.gameObject.SetActive(false);
             playerButton.onClick.RemoveListener(FindAction);
         }
@@ -43,7 +43,7 @@ public class InteractableObject : MonoBehaviour
 
     private void FindAction()
     {
-        InteractActions script = player.GetComponent<InteractActions>();
+        InteractActions script = playerCharacters.GetComponent<InteractActions>();
         playerButton.onClick.RemoveListener(FindAction);
 
         if (playerController.GetComponent<PlayerController>().isGhostActive)

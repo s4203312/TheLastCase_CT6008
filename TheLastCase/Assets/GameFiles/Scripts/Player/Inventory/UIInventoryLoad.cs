@@ -13,13 +13,15 @@ public class UIInventoryLoad : MonoBehaviour
     public InventoryManager inventoryManager;
     public Sprite nullSprite;
 
-    public GameObject player;
+    public GameObject playerCharacter;
     private InteractActions interactActions;
     public GraphicRaycaster UIraycaster;
 
+    private bool localInspectingInventory;
+
     private void Start()
     {
-        interactActions = player.GetComponent<InteractActions>();
+        interactActions = playerCharacter.GetComponent<InteractActions>();
 
         inventoryManager = inventoryManager.GetComponent<InventoryManager>();
     }
@@ -43,15 +45,16 @@ public class UIInventoryLoad : MonoBehaviour
                 if (hitObject.CompareTag("InventoryImage"))
                 {
                     string itemPosition = string.Concat(hitObject.name[..1]);
+                    Debug.Log(itemPosition);
 
-                    if (inventoryManager.inspectingInventory)
+                    if (localInspectingInventory)
                     {
                         // inspect item functionaility
-                        //Debug.Log("Insepct");
+                        Debug.Log("Insepct");
                     }
                     else
                     {
-                        //Debug.Log("Place");
+                        Debug.Log("Place");
                         interactActions.PlaceItem(itemPosition);                     
                     }       
                 }
@@ -59,11 +62,12 @@ public class UIInventoryLoad : MonoBehaviour
         }
     }
 
-    public void LoadInventory()
+    public void LoadInventory(bool inspectingInventory)
     {
         //Setting panel active
 
         InventoryPanelUI.SetActive(true);
+        localInspectingInventory = inspectingInventory;
 
         //Clearing the inventory slots           
         for (int i = 0; i < 8; i++)
@@ -92,5 +96,11 @@ public class UIInventoryLoad : MonoBehaviour
             slot.transform.GetChild(1).GetComponent<TMP_Text>().text = Inventory[i].itemName;
             slot.transform.GetChild(2).GetComponent<TMP_Text>().text = Inventory[i].itemDescription;
         }
+    }
+
+    public void InventoryClose()
+    {
+        //Setting panel deactive
+        InventoryPanelUI.SetActive(false);
     }
 }

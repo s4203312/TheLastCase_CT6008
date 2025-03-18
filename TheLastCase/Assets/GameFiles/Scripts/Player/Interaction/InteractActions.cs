@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
@@ -23,7 +24,7 @@ public class InteractActions : MonoBehaviour
 
     public void OpenDoor()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
         GameObject pivotPoint = interactionObject.transform.GetChild(0).gameObject;
 
         interactionObject.GetComponent<BoxCollider>().enabled = false;
@@ -49,11 +50,13 @@ public class InteractActions : MonoBehaviour
 
     public void PickUpItem()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
-        InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData);
+        InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
+        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
 
-        Destroy(interactionObject);
+        interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
     }
 
@@ -66,7 +69,7 @@ public class InteractActions : MonoBehaviour
 
         lastClickTime = Time.time;
 
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
         Transform itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
@@ -75,20 +78,19 @@ public class InteractActions : MonoBehaviour
         if (index >= 0 && index < InventoryManager.Instance.Inventory.Count)
         {
             InventoryItemData itemData = InventoryManager.Instance.Inventory[index];
+            GameObject itemObject = InventoryManager.Instance.InventoryGameObjects[index];
+            Debug.Log(itemObject);
 
-            GameObject chosenItem = itemData.itemObject;
-
-            if (chosenItem != null)
+            if (itemObject != null)
             {
-                GameObject item = Instantiate(chosenItem, itemTransform.position, Quaternion.identity);
-                item.transform.SetParent(itemTransform);
-
-                //Debug.Log("Item Placed");
+                itemObject.transform.position = itemTransform.position;
+                itemObject.transform.SetParent(itemTransform);
+                itemObject.SetActive(true);
 
                 PuzzleRegistry.Instance.CheckPuzzleByID(itemData.puzzleID);
 
-                InventoryManager.Instance.RemoveItemFromInventory(itemData);
-                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();
+                InventoryManager.Instance.RemoveItemFromInventory(itemData, itemObject);
+                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
                 interactButton.gameObject.SetActive(false);
             }
         }
@@ -103,7 +105,7 @@ public class InteractActions : MonoBehaviour
     {
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
-        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory();
+        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory(false);
 
     }
 
@@ -112,9 +114,9 @@ public class InteractActions : MonoBehaviour
 
     public void KeyholeSquish()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
-        //ghost.transform.position = interactionObject.transform.position + new Vector3(-2,0,0);
+        ghost.GetComponent<NavMeshAgent>().Warp(ghost.transform.position + (-interactionObject.transform.right * 2));
 
         //Doesnt work yet issues with door?
     }
