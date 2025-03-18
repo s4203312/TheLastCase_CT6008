@@ -12,16 +12,14 @@ public class InventoryItemData : ScriptableObject
     public string itemName;
     public string itemDescription;
     public Sprite itemPicture;
-    public GameObject itemObject; // remove and add second list for inventory gameobjects
     public string puzzleID;
     //Can put other things here like UI pic
 
-    public InventoryItemData(string itemName, string itemDescription, Sprite itemPicture, GameObject itemObject, string puzzleID)
+    public InventoryItemData(string itemName, string itemDescription, Sprite itemPicture, string puzzleID)
     {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemPicture = itemPicture;
-        this.itemObject = itemObject;
         this.puzzleID = puzzleID;
     }
 }

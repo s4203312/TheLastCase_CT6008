@@ -24,6 +24,8 @@ public class CameraMove : MonoBehaviour
         // Get current position
         Vector3 startPosition = gameObject.GetComponent<CinemachineVirtualCamera>().transform.position;
         Vector3 endPosition = target.position;
+        //Quaternion startRotation = gameObject.GetComponent<CinemachineVirtualCamera>().transform.rotation;
+        //Quaternion endRotation = target.rotation;
 
         float t = 0;
 
@@ -31,6 +33,7 @@ public class CameraMove : MonoBehaviour
         {
             t += Time.deltaTime * transitionSpeed;
             gameObject.GetComponent<CinemachineVirtualCamera>().transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            //gameObject.GetComponent<CinemachineVirtualCamera>().transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
             yield return null;
         }
 

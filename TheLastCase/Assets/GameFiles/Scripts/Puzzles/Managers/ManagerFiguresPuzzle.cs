@@ -8,6 +8,9 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
 
     private InventoryItemData itemData;
 
+    public Animator animator;
+    [SerializeField] GameObject key;
+
     [SerializeField] private string puzzleID;
 
     private void Start()
@@ -58,6 +61,9 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
             BoxCollider itemCollider =  puzzleData.itemHolder.GetChild(0).GetComponent<BoxCollider>();
             itemCollider.enabled = false;
         }
+
+        key.SetActive(true);
+        animator.SetTrigger("PuzzleComplete");
 
         Debug.Log("Puzzle Complete");
     }
