@@ -736,6 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: OpenDoor
   GhostActionName: KeyholeSquish
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!208 &165646586
 NavMeshObstacle:
@@ -1546,7 +1547,7 @@ GameObject:
   - component: {fileID: 448754904}
   m_Layer: 0
   m_Name: BookShelf
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2181,6 +2182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: PickUpItem
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 11400000, guid: 2cb48e07925f7a842a8670cd3d8db3a4, type: 2}
 --- !u!65 &622906025
 BoxCollider:
@@ -2604,6 +2606,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetherMat: {fileID: 0}
+--- !u!114 &685385734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685385725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36831fc52160a664f869a4948eeb5797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1284597434}
+  loadedGhostObjects: []
 --- !u!1 &702559724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,6 +2868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: AccessInventory
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!65 &737087391
 BoxCollider:
@@ -3523,7 +3540,7 @@ GameObject:
   - component: {fileID: 895842819}
   m_Layer: 0
   m_Name: Clock
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4599,6 +4616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: OpenDoor
   GhostActionName: KeyholeSquish
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!114 &1178697782
 MonoBehaviour:
@@ -5128,6 +5146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: PickUpItem
   GhostActionName: 
+  onlyGhostVisable: 1
   itemData: {fileID: 11400000, guid: 7a0b1d273abe151449c453626c9bb988, type: 2}
 --- !u!65 &1373643962
 BoxCollider:
@@ -5157,7 +5176,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373643959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6698,6 +6717,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71533040285465701, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 81933222704997422, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6802,6 +6826,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 685385731}
+    - targetCorrespondingSourceObject: {fileID: 268230121202634585, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 685385734}
   m_SourcePrefab: {fileID: 100100000, guid: a789829543023bf4a9040984ecaba8c7, type: 3}
 --- !u!1 &1659482156
 GameObject:
@@ -7074,6 +7102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: PickUpItem
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 11400000, guid: f74b4450d83d71a4f89361a9fff1be69, type: 2}
 --- !u!65 &1709201855
 BoxCollider:
@@ -7749,6 +7778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: AccessInventory
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!65 &1825135621
 BoxCollider:
@@ -7981,6 +8011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: OpenDoor
   GhostActionName: KeyholeSquish
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!208 &1860581841
 NavMeshObstacle:
@@ -8466,6 +8497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: 
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!1001 &1898810974
 PrefabInstance:
@@ -9129,6 +9161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: PickUpItem
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 11400000, guid: 68dd04b6e470aae4b859f66ec05ce94c, type: 2}
 --- !u!65 &1961590741
 BoxCollider:
@@ -9603,6 +9636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: PickUpItem
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 11400000, guid: 1739f15c51f231540b137813c1c1b2cf, type: 2}
 --- !u!65 &2024130628
 BoxCollider:
@@ -9992,6 +10026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerActionName: AccessInventory
   GhostActionName: 
+  onlyGhostVisable: 0
   itemData: {fileID: 0}
 --- !u!114 &2104476850
 MonoBehaviour:

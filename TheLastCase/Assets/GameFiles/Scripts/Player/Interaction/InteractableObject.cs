@@ -10,7 +10,10 @@ public class InteractableObject : MonoBehaviour
     private Button playerButton;
     [SerializeField] private string PlayerActionName;
     [SerializeField] private string GhostActionName;
-    
+
+    //Used for appearing if ghost form
+    public bool onlyGhostVisable;
+
     //Data stored about item
     public InventoryItemData itemData;
 
