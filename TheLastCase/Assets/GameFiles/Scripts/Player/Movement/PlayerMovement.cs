@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -38,13 +36,13 @@ public class PlayerMovement : MonoBehaviour
             }
 
             gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().OutputCamera;
+
             Ray ray = gameCam.ScreenPointToRay(Input.mousePosition);
-            //Ray ray = CinemachineCore.Instance.GetActiveBrain(0).OutputCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
+                //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
                 {
                     if (!playerController.isGhostActive)
@@ -85,6 +83,44 @@ public class PlayerMovement : MonoBehaviour
                     virtualCam.Follow = ghost.transform;
                 }
             }
+        }
+
+        if (playerController.isGhostActive)
+        {
+            float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
+            if (distanceAway > 10)
+            {
+                //Decided on just pulling it back in
+                StartCoroutine(PullGhostBackIn());
+                
+
+                //Thought about moving it back towards player
+                //ghost.SetDestination((player.transform.position - ghost.transform.position) * -0.2f);
+            }
+        }
+    }
+
+    public IEnumerator PullGhostBackIn()
+    {
+        Vector3 targetPos = player.transform.position;
+        Vector3 startPos = ghost.transform.position;
+        float pullSpeed = 5f;
+        float elapsedTime = 0f;
+        float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; // Time required based on speed
+
+        while (elapsedTime < duration)
+        {
+            ghost.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        playerController.isGhostActive = false;
+        ghost.gameObject.SetActive(false);
+
+        if (virtualCam.Follow != null)
+        {
+            virtualCam.Follow = player.transform;
         }
     }
 }
