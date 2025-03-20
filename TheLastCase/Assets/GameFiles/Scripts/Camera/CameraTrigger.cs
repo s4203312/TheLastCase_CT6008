@@ -28,7 +28,7 @@ public class CameraTrigger : MonoBehaviour
             if (other.CompareTag("Player")) // Make sure player has "Player" tag
             {
                 gameCam.Follow = null;
-                cameraController.MoveCameraToRoom(targetRoomPosition);
+                cameraController.MoveCameraToRoom(targetRoomPosition.position, targetRoomPosition.rotation);
             }
         }
         else               //Follow if corridoors

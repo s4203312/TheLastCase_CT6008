@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent ghost;
     public GameObject interactedObject;
 
-    private Camera gameCam;
+    private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
 
     private void Awake()
@@ -35,14 +35,17 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>().OutputCamera;
+            gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
 
-            Ray ray = gameCam.ScreenPointToRay(Input.mousePosition);
+            gameCam.OutputCamera.transform.position = virtualCam.transform.position;
+            gameCam.OutputCamera.transform.rotation = virtualCam.transform.rotation;
+
+            Ray ray = gameCam.OutputCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
                 {
                     if (!playerController.isGhostActive)

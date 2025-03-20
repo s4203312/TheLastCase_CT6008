@@ -10,22 +10,22 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
 
     // Call this when entering a room and pass the target position
-    public void MoveCameraToRoom(Transform roomTarget)
+    public void MoveCameraToRoom(Vector3 roomPos, Quaternion roomRot)
     {
         if (!isMoving)
-            StartCoroutine(MoveCameraCoroutine(roomTarget));
+            StartCoroutine(MoveCameraCoroutine(roomPos, roomRot));
     }
 
     // Coroutine to smoothly move camera to target position
-    private IEnumerator MoveCameraCoroutine(Transform target)
+    private IEnumerator MoveCameraCoroutine(Vector3 roomPos, Quaternion roomRot)
     {
         isMoving = true;
 
         // Get current position
         Vector3 startPosition = gameObject.GetComponent<CinemachineVirtualCamera>().transform.position;
-        Vector3 endPosition = target.position;
+        Vector3 endPosition = roomPos;
         //Quaternion startRotation = gameObject.GetComponent<CinemachineVirtualCamera>().transform.rotation;
-        //Quaternion endRotation = target.rotation;
+        //Quaternion endRotation = roomRot;
 
         float t = 0;
 

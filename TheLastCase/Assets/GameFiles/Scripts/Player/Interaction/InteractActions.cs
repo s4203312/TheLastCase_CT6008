@@ -1,24 +1,27 @@
+using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
-
     private GameObject interactionObject;
-    public GameObject player;
-    public GameObject ghost;
+    private GameObject ghost;
     public Button interactButton;
 
     public GameObject Managers;
 
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
+
+    public Vector3 oldCameraPos;
+    public Quaternion oldCameraRot;
+
+    private void Start()
+    {
+        ghost = transform.GetChild(1).gameObject;
+    }
 
     //Player Actions
 
@@ -93,6 +96,28 @@ public class InteractActions : MonoBehaviour
                 inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
                 interactButton.gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void FocusOnPuzzle()
+    {
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
+
+        Button exitViewButton = GameObject.Find("GameUI").transform.GetChild(2).GetComponent<Button>();
+        Transform newCamera = interactionObject.transform.parent.GetChild(0);
+        CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
+
+        oldCameraPos = virtCam.transform.position;
+        oldCameraRot = virtCam.transform.rotation;
+
+        if (cameraMove != null)
+        {
+            GetComponent<PlayerMovement>().enabled = false;
+
+            cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
+
+            exitViewButton.gameObject.SetActive(true);
         }
     }
 
