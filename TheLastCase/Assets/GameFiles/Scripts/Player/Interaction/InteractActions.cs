@@ -117,7 +117,7 @@ public class InteractActions : MonoBehaviour
 
             cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
 
-            exitViewButton.gameObject.SetActive(true);
+            StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));
         }
     }
 
@@ -144,5 +144,13 @@ public class InteractActions : MonoBehaviour
         ghost.GetComponent<NavMeshAgent>().Warp(ghost.transform.position + (-interactionObject.transform.right * 2));
 
         //Doesnt work yet issues with door?
+    }
+
+    //
+
+    private IEnumerator DelayGameObject(int time, GameObject gameObject, bool active)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(active);
     }
 }
