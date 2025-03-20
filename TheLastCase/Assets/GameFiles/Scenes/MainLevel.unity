@@ -2186,7 +2186,7 @@ GameObject:
   - component: {fileID: 622147731}
   - component: {fileID: 622147732}
   m_Layer: 0
-  m_Name: Slot3
+  m_Name: PuzzleSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2201,11 +2201,11 @@ Transform:
   m_GameObject: {fileID: 622147730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47800064, y: 0.033000946, z: 2.212}
+  m_LocalPosition: {x: 0.47800094, y: 0.033000946, z: 2.2120001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1834185917}
+  m_Father: {fileID: 1253522346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &622147732
 BoxCollider:
@@ -3108,7 +3108,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 52322d0b8bb663d4eae35659b3bc5e63,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1834185917}
+      addedObject: {fileID: 1075499972}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 52322d0b8bb663d4eae35659b3bc5e63,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1410486106}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 52322d0b8bb663d4eae35659b3bc5e63,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 622147731}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 52322d0b8bb663d4eae35659b3bc5e63,
         type: 3}
       insertIndex: -1
@@ -4295,7 +4303,7 @@ GameObject:
   - component: {fileID: 1075499972}
   - component: {fileID: 1075499973}
   m_Layer: 0
-  m_Name: Slot1
+  m_Name: PuzzleSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4310,11 +4318,11 @@ Transform:
   m_GameObject: {fileID: 1075499971}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.35000038, y: 0.033000946, z: 2.212}
+  m_LocalPosition: {x: -0.35000017, y: 0.033000946, z: 2.2120001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1834185917}
+  m_Father: {fileID: 1253522346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1075499973
 BoxCollider:
@@ -5746,7 +5754,7 @@ GameObject:
   - component: {fileID: 1410486106}
   - component: {fileID: 1410486107}
   m_Layer: 0
-  m_Name: Slot2
+  m_Name: PuzzleSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5761,11 +5769,11 @@ Transform:
   m_GameObject: {fileID: 1410486105}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14100075, y: 0.033000946, z: 2.212}
+  m_LocalPosition: {x: 0.141001, y: 0.033000946, z: 2.2120001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1834185917}
+  m_Father: {fileID: 1253522346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1410486107
 BoxCollider:
@@ -8037,40 +8045,6 @@ MonoBehaviour:
   correctItem: {fileID: 11400000, guid: f74b4450d83d71a4f89361a9fff1be69, type: 2}
   itemHolder: {fileID: 653202638}
   isOccupied: 0
---- !u!1 &1834185916
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1834185917}
-  m_Layer: 0
-  m_Name: Slots
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1834185917
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834185916}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1075499972}
-  - {fileID: 1410486106}
-  - {fileID: 622147731}
-  m_Father: {fileID: 1253522346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1834796555
 GameObject:
   m_ObjectHideFlags: 0

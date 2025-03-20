@@ -32,7 +32,6 @@ public class BookshelfHover : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (Array.Exists(slots, slot => slot == hit.collider.gameObject))
             {
                 ShowButtonInFrontOfSlot(hit.collider.gameObject);
