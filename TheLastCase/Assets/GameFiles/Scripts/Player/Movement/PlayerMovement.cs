@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using Unity.AI.Navigation;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
@@ -93,29 +94,30 @@ public class PlayerMovement : MonoBehaviour
             float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
             if (distanceAway > 10)
             {
-                //Decided on just pulling it back in
-                StartCoroutine(PullGhostBackIn());
-                
-
-                //Thought about moving it back towards player
-                //ghost.SetDestination((player.transform.position - ghost.transform.position) * -0.2f);
+                //Pulling ghost back in
+                Vector3[] tetherPoints = GetComponent<GhostTetherRenderer>().linePoints.ToArray();
+                Array.Reverse(tetherPoints);
+                StartCoroutine(PullGhostBackIn(tetherPoints));
             }
         }
     }
 
-    public IEnumerator PullGhostBackIn()
+    public IEnumerator PullGhostBackIn(Vector3[] tetherPoints)
     {
-        Vector3 targetPos = player.transform.position;
-        Vector3 startPos = ghost.transform.position;
-        float pullSpeed = 5f;
-        float elapsedTime = 0f;
-        float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; // Time required based on speed
-
-        while (elapsedTime < duration)
+        foreach (var tetherPoint in tetherPoints)
         {
-            ghost.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            Vector3 targetPos = tetherPoint;
+            Vector3 startPos = ghost.transform.position;
+            float pullSpeed = 10f;
+            float elapsedTime = 0f;
+            float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; // Time required based on speed
+
+            while (elapsedTime < duration)
+            {
+                ghost.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
         }
 
         playerController.isGhostActive = false;
