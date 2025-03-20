@@ -55,7 +55,7 @@ public class UIInventoryLoad : MonoBehaviour
                     else
                     {
                         Debug.Log("Place");
-                        interactActions.PlaceItem(itemPosition);                     
+                        interactActions.PlaceItem(itemPosition);            
                     }       
                 }
             }
