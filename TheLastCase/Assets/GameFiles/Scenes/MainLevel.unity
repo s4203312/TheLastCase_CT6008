@@ -2636,7 +2636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c126d9ba6123583468f7a598b4dbb0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetherMat: {fileID: 0}
+  linePoints: []
+  tetherMat: {fileID: 2100000, guid: 2812d54def5435343872aae6514180ae, type: 2}
 --- !u!114 &685385734
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,44 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GhostTetherRenderer : MonoBehaviour
 {
+    //Start and end points for the line
     private GameObject player;
     private GameObject ghost;
+
     private LineRenderer lineRenderer;
+    public List<Vector3> linePoints = new List<Vector3>();
+
+    //Custom shader graph material
     public Material tetherMat;
 
     void Start()
     {
+        //Finding the player and ghost from parent object
         player = transform.GetChild(0).gameObject;
         ghost = transform.GetChild(1).gameObject;
 
-        lineRenderer = ghost.AddComponent<LineRenderer>();
-
+        //Adding a line renderer to the ghost object if it doesnt have one
+        if (ghost.TryGetComponent<LineRenderer>(out LineRenderer objectLineRenderer))
+        {
+            lineRenderer = objectLineRenderer;
+        }
+        else
+        {
+            lineRenderer = ghost.AddComponent<LineRenderer>();
+        }
+        
         //Setting up line renderer
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.05f;
-        lineRenderer.positionCount = 2;
-
-        //Ghostly colour. Needs changing with our material
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.2f;
         lineRenderer.material = tetherMat;
-        lineRenderer.startColor = new Color(0.5f, 1f, 1f, 0.5f); // Cyan with transparency
-        lineRenderer.endColor = new Color(0.5f, 1f, 1f, 0.2f);
+        lineRenderer.useWorldSpace = true;
+
+        //Defining points at start
+        linePoints.Add(player.transform.position);
+        lineRenderer.positionCount = linePoints.Count;
+        lineRenderer.SetPositions(linePoints.ToArray());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(ghost.transform.position, player.transform.position);
-        float width = Mathf.Clamp(distance * 0.02f, 0.05f, 0.3f); // Adjust min/max width
-        lineRenderer.startWidth = width;
-        lineRenderer.endWidth = width * 0.5f;
+        Vector3 currentEndPoint = ghost.transform.position;
+        int amountOfPoints = linePoints.Count;
 
-        if (player != null && ghost != null)
+        if (amountOfPoints == 0 || Vector3.Distance(linePoints[amountOfPoints - 1], currentEndPoint) >= 0.2)    //Ensuring the new point is 0.2 away from the last one    
         {
-            lineRenderer.SetPosition(0, player.transform.position);
-            lineRenderer.SetPosition(1, ghost.transform.position);
+            linePoints.Add(currentEndPoint);
+            UpdateTether(amountOfPoints + 1);       //One extra point for the end point of the ghost
         }
+    }
+
+    private void UpdateTether(int amountOfPoints)
+    {
+        lineRenderer.positionCount = amountOfPoints;
+
+        int i = 0;
+        foreach (var point in linePoints)       //Looping all points and reseting the renderer
+        {
+            lineRenderer.SetPosition(i, point);
+            i++;
+        }
+
+        lineRenderer.SetPosition(amountOfPoints, ghost.transform.position);     //Last point for the ghost position
+        
     }
 }
