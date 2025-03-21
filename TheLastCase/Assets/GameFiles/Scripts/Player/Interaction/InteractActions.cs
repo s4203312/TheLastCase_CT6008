@@ -15,7 +15,7 @@ public class InteractActions : MonoBehaviour
 
     public BookshelfHover bookshelfHover;
 
-    private bool isUsingButton;
+    public bool isUsingButton;
 
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
@@ -60,11 +60,14 @@ public class InteractActions : MonoBehaviour
     {
         if (!isUsingButton)
         {
-            interactionObject = GetComponent<PlayerMovement>().interactedObject;           
+            interactionObject = GetComponent<PlayerMovement>().interactedObject;
+            Debug.Log("Not Using Button");
         }
         else
-        {          
+        {
+            Debug.Log("Using Button");
             interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
+            isUsingButton = false;
         }
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
