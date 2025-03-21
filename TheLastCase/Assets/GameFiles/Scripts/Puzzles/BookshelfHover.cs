@@ -9,9 +9,12 @@ public class BookshelfHover : MonoBehaviour
 {
     public GameObject[] slots;   
     public Button placeItemButton;
+    public Button pickUpItemButton;
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
+
+    public Transform hitSlot;
 
     void Awake()
     {
@@ -30,15 +33,17 @@ public class BookshelfHover : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")))
         {
             if (Array.Exists(slots, slot => slot == hit.collider.gameObject))
             {
+                hitSlot = hit.transform;
                 ShowButtonInFrontOfSlot(hit.collider.gameObject);
             }
             else
             {
                 placeItemButton.gameObject.SetActive(false);
+                pickUpItemButton.gameObject.SetActive(false);
             }
         }
     }
@@ -46,7 +51,19 @@ public class BookshelfHover : MonoBehaviour
 
     void ShowButtonInFrontOfSlot(GameObject hoveredSlot)
     {
-        placeItemButton.gameObject.SetActive(true);
-        placeItemButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, 0.5f, 0f);
+        GameObject activeButton = null;
+        if (hitSlot.childCount > 0)
+        {
+            if (hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
+            {
+                activeButton = pickUpItemButton.gameObject;
+            }          
+        }
+        else
+        {
+            activeButton = placeItemButton.gameObject;
+        }
+        activeButton.gameObject.SetActive(true);
+        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, 0.5f, 0f);
     }
 }

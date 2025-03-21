@@ -45,16 +45,16 @@ public class UIInventoryLoad : MonoBehaviour
                 if (hitObject.CompareTag("InventoryImage"))
                 {
                     string itemPosition = string.Concat(hitObject.name[..1]);
-                    Debug.Log(itemPosition);
+                    //Debug.Log(itemPosition);
 
                     if (localInspectingInventory)
                     {
                         // inspect item functionaility
-                        Debug.Log("Insepct");
+                        //Debug.Log("Insepct");
                     }
                     else
                     {
-                        Debug.Log("Place");
+                        //Debug.Log("Place");
                         interactActions.PlaceItem(itemPosition);            
                     }       
                 }

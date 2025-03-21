@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
 {
-    public GameObject[] pedestals;
+    [Header("Puzzle Name")]
+    [SerializeField] private string puzzleID;
 
     private InventoryItemData itemData;
 
+    [Header("Used Objects")]
+    public GameObject[] pedestals;
     public Animator animator;
     [SerializeField] GameObject key;
-
-    [SerializeField] private string puzzleID;
 
     private void Start()
     {
@@ -25,19 +26,22 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
         foreach (GameObject pedestal in pedestals)
         {
             Transform collider = pedestal.transform.Find("Collider");
-            PuzzleData puzzleData = collider.GetComponent<PuzzleData>();
+            PuzzleSlotData puzzleSlotData = collider.GetComponent<PuzzleSlotData>();
 
-            if (puzzleData.itemHolder.childCount > 0)
+            if (puzzleSlotData.itemHolder.childCount > 0)
             {
-                itemData = puzzleData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData; 
-                puzzleData.isOccupied = true;
+                if (puzzleSlotData.isOccupied == false)
+                {
+                    itemData = puzzleSlotData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData;
+                    puzzleSlotData.isOccupied = true;
+                }                             
             }
             else
             {
-                puzzleData.isOccupied = true;
+                puzzleSlotData.isOccupied = false;
             }
 
-            if (puzzleData.correctItem == itemData && itemData != null)
+            if (puzzleSlotData.correctItem == itemData && itemData != null)
             {
                 correctFigureHeadsPlaced++;
             }
@@ -54,11 +58,11 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
         foreach (GameObject pedestal in pedestals)
         {
             Transform collider = pedestal.transform.Find("Collider");
-            PuzzleData puzzleData = collider.GetComponent<PuzzleData>();
+            PuzzleSlotData puzzleSlotData = collider.GetComponent<PuzzleSlotData>();
 
             collider.gameObject.SetActive(false);
 
-            BoxCollider itemCollider =  puzzleData.itemHolder.GetChild(0).GetComponent<BoxCollider>();
+            BoxCollider itemCollider = puzzleSlotData.itemHolder.GetChild(0).GetComponent<BoxCollider>();
             itemCollider.enabled = false;
         }
 

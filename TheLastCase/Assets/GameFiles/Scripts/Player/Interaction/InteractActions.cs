@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,6 +12,10 @@ public class InteractActions : MonoBehaviour
     public Button interactButton;
 
     public GameObject Managers;
+
+    public BookshelfHover bookshelfHover;
+
+    private bool isUsingButton;
 
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
@@ -53,18 +58,30 @@ public class InteractActions : MonoBehaviour
 
     public void PickUpItem()
     {
-        interactionObject = GetComponent<PlayerMovement>().interactedObject;
-
+        if (!isUsingButton)
+        {
+            interactionObject = GetComponent<PlayerMovement>().interactedObject;           
+        }
+        else
+        {          
+            interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
+        }
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
         inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
+      
+        interactionObject.transform.SetParent(null);
 
+        PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
+
+        interactionObject.GetComponent<BoxCollider>().enabled = true;
         interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
     }
 
     public void PlaceItem(string itemPosition)
     {
+        // breaks loop if function is called more than once in too many frames
         if (Time.time - lastClickTime < cooldownTime)
         {
             return;
@@ -73,8 +90,24 @@ public class InteractActions : MonoBehaviour
         lastClickTime = Time.time;
 
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
-        Transform itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
+
+        // logic for deciding if the object has multiple slots for placing items
+        Transform itemTransform = null;
+        Transform[] slots = interactionObject.transform.parent.GetComponentsInChildren<Transform>(true);
+        slots = slots.Where(t => t.name == "PuzzleSlot").ToArray();
+             
+        if (slots.Length > 1) 
+        {
+            if (bookshelfHover.enabled == true && bookshelfHover.hitSlot != null)
+            {
+                itemTransform = bookshelfHover.hitSlot;             
+            }
+        }
+        else
+        {
+            itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
+        }
 
         int index = int.Parse(itemPosition) - 1;
 
@@ -82,10 +115,13 @@ public class InteractActions : MonoBehaviour
         {
             InventoryItemData itemData = InventoryManager.Instance.Inventory[index];
             GameObject itemObject = InventoryManager.Instance.InventoryGameObjects[index];
-            Debug.Log(itemObject);
 
             if (itemObject != null)
             {
+                if (slots.Length > 1)
+                {
+                    itemObject.GetComponent<BoxCollider>().enabled = false;
+                }
                 itemObject.transform.position = itemTransform.position;
                 itemObject.transform.SetParent(itemTransform);
                 itemObject.SetActive(true);
@@ -146,11 +182,16 @@ public class InteractActions : MonoBehaviour
         //Doesnt work yet issues with door?
     }
 
-    //
+    // Extras
 
     private IEnumerator DelayGameObject(int time, GameObject gameObject, bool active)
     {
         yield return new WaitForSeconds(time);
         gameObject.SetActive(active);
+    }
+
+    public void UsingButton()
+    {
+        isUsingButton = true;
     }
 }
