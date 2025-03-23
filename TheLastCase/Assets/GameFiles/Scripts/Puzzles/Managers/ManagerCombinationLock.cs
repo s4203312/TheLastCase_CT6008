@@ -40,9 +40,8 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         // Initialize display numbers
         for (int i = 0; i < length; i++)
         {
-            int index = i; // Capture the correct index inside the loop
+            int index = i;
 
-            // Assign button click listeners dynamically
             increaseButtons[i].onClick.AddListener(() => ChangeNumber(index, 1));
             decreaseButtons[i].onClick.AddListener(() => ChangeNumber(index, -1));
 
@@ -85,10 +84,10 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
                 Debug.Log("Incorrect Code!");
                 return;
             }
-            else
-            {
-                PuzzleComplete();
-            }
+        }
+        if (currentNumbers == correctCombination)
+        {
+            PuzzleComplete();
         }
     }
 
