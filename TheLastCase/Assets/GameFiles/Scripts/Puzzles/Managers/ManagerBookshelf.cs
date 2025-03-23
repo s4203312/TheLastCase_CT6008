@@ -20,6 +20,8 @@ public class ManagerBookshelf : MonoBehaviour, IPuzzle
 
     void Start()
     {
+        BookshelfHover.slots = shelfSlots;
+        BookshelfHover.placeItemButton.gameObject.SetActive(false);
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
         BookshelfHover.enabled = false;
     }
@@ -60,10 +62,17 @@ public class ManagerBookshelf : MonoBehaviour, IPuzzle
                 correctBooksPlaced++;
             }
         }
+
+        if (correctBooksPlaced == shelfSlots.Length) 
+        {
+            PuzzleComplete();
+        }
     }
 
     public void PuzzleComplete()
     {
+        foreach (GameObject slot in shelfSlots) { slot.GetComponent<BoxCollider>().enabled = false; }
 
+        Debug.Log("Puzzle Complete");
     }
 }

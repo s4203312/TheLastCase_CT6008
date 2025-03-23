@@ -18,12 +18,13 @@ public class BookshelfHover : MonoBehaviour
 
     void Awake()
     {
-        virtualCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-        placeItemButton.gameObject.SetActive(false);
+        virtualCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();        
     }
 
     void Update()
     {
+
+
         gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
 
         gameCam.OutputCamera.transform.position = virtualCam.transform.position;
@@ -52,12 +53,9 @@ public class BookshelfHover : MonoBehaviour
     void ShowButtonInFrontOfSlot(GameObject hoveredSlot)
     {
         GameObject activeButton = null;
-        if (hitSlot.childCount > 0)
+        if (hitSlot.childCount > 0 && hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
         {
-            if (hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
-            {
-                activeButton = pickUpItemButton.gameObject;
-            }          
+            activeButton = pickUpItemButton.gameObject;
         }
         else
         {
