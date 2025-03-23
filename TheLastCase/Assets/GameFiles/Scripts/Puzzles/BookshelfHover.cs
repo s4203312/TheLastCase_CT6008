@@ -6,14 +6,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BookshelfHover : MonoBehaviour
-{
-    public GameObject[] slots;   
+{  
     public Button placeItemButton;
     public Button pickUpItemButton;
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
 
+    [HideInInspector]
+    public GameObject[] slots;
+    [HideInInspector]
     public Transform hitSlot;
 
     void Awake()
@@ -23,8 +25,6 @@ public class BookshelfHover : MonoBehaviour
 
     void Update()
     {
-
-
         gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
 
         gameCam.OutputCamera.transform.position = virtualCam.transform.position;
