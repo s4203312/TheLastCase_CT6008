@@ -63,5 +63,6 @@ public class InteractableObject : MonoBehaviour
                 script.StartCoroutine(PlayerActionName);
             }
         }
+        playerButton.gameObject.SetActive(false);
     }
 }

@@ -66,8 +66,12 @@ public class InteractActions : MonoBehaviour
         else
         {
             Debug.Log("Using Button");
-            interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
-            isUsingButton = false;
+            if (bookshelfHover.hitSlot.childCount > 0) 
+            {
+                interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
+                isUsingButton = false;
+            }
+
         }
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
         Transform inventoryManager = Managers.transform.Find("InventoryManager");

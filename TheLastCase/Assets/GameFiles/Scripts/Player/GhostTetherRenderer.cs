@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GhostTetherRenderer : MonoBehaviour
 {
@@ -36,11 +34,6 @@ public class GhostTetherRenderer : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.material = tetherMat;
         lineRenderer.useWorldSpace = true;
-
-        //Defining points at start
-        linePoints.Add(player.transform.position);
-        lineRenderer.positionCount = linePoints.Count;
-        lineRenderer.SetPositions(linePoints.ToArray());
     }
 
     void Update()
@@ -55,6 +48,15 @@ public class GhostTetherRenderer : MonoBehaviour
         }
     }
 
+    public void StartGhostPath()
+    {
+        //Defining points at start
+        linePoints.Clear();
+        linePoints.Add(player.transform.position);
+        lineRenderer.positionCount = linePoints.Count;
+        lineRenderer.SetPositions(linePoints.ToArray());
+    }
+
     private void UpdateTether(int amountOfPoints)
     {
         lineRenderer.positionCount = amountOfPoints;
@@ -65,8 +67,5 @@ public class GhostTetherRenderer : MonoBehaviour
             lineRenderer.SetPosition(i, point);
             i++;
         }
-
-        lineRenderer.SetPosition(amountOfPoints, ghost.transform.position);     //Last point for the ghost position
-        
     }
 }

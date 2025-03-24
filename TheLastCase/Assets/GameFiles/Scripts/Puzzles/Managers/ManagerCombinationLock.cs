@@ -77,6 +77,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
 
     public void CheckPuzzle()
     {
+        int j = 0;
         for (int i = 0; i < correctCombination.Length; i++)
         {
             if (currentNumbers[i] != correctCombination[i])
@@ -84,8 +85,13 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
                 Debug.Log("Incorrect Code!");
                 return;
             }
+            else
+            {
+                j++;
+            }
         }
-        if (currentNumbers == correctCombination)
+
+        if(j == correctCombination.Length)
         {
             PuzzleComplete();
         }

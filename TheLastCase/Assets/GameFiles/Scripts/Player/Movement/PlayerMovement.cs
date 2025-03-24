@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -69,8 +70,9 @@ public class PlayerMovement : MonoBehaviour
                 playerController.isGhostActive = false;
 
                 ghost.gameObject.SetActive(false);
+                GetComponent<GhostTetherRenderer>().enabled = false;
 
-                if(virtualCam.Follow != null)
+                if (virtualCam.Follow != null)
                 {
                     virtualCam.Follow = player.transform;
                 }
@@ -81,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
                 ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
 
                 ghost.gameObject.SetActive(true);
+                GetComponent<GhostTetherRenderer>().enabled = true;
+                GetComponent<GhostTetherRenderer>().StartGhostPath();
 
                 if (virtualCam.Follow != null)
                 {
@@ -97,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
                 //Pulling ghost back in
                 Vector3[] tetherPoints = GetComponent<GhostTetherRenderer>().linePoints.ToArray();
                 Array.Reverse(tetherPoints);
+                ghost.GetComponent<NavMeshAgent>().enabled = false;
                 StartCoroutine(PullGhostBackIn(tetherPoints));
             }
         }
@@ -122,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerController.isGhostActive = false;
         ghost.gameObject.SetActive(false);
+        ghost.GetComponent<NavMeshAgent>().enabled = true;
 
         if (virtualCam.Follow != null)
         {

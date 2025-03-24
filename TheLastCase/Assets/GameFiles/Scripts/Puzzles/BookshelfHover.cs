@@ -12,6 +12,7 @@ public class BookshelfHover : MonoBehaviour
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
+    public GameObject inventoryPanel;
 
     [HideInInspector]
     public GameObject[] slots;
@@ -20,7 +21,7 @@ public class BookshelfHover : MonoBehaviour
 
     void Awake()
     {
-        virtualCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();        
+        virtualCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
     void Update()
@@ -34,7 +35,7 @@ public class BookshelfHover : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")))
+        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             if (Array.Exists(slots, slot => slot == hit.collider.gameObject))
             {
@@ -53,7 +54,7 @@ public class BookshelfHover : MonoBehaviour
     void ShowButtonInFrontOfSlot(GameObject hoveredSlot)
     {
         GameObject activeButton = null;
-        if (hitSlot.childCount > 0 && hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
+        if (hitSlot.childCount > 0 || hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
         {
             activeButton = pickUpItemButton.gameObject;
         }
@@ -62,6 +63,6 @@ public class BookshelfHover : MonoBehaviour
             activeButton = placeItemButton.gameObject;
         }
         activeButton.gameObject.SetActive(true);
-        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, 0.5f, 0f);
+        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0.5f, 0f, 0f);
     }
 }
