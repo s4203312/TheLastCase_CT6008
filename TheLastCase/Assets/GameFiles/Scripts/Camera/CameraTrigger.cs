@@ -33,17 +33,12 @@ public class CameraTrigger : MonoBehaviour
         }
         else               //Follow if corridoors
         {
-            //Quaternion startRotation = gameCam.transform.rotation;
-            //Quaternion endRotation = new Quaternion(86.667f, -90.398f, 0.0151f , 1);
-
             if (playerController.isGhostActive)
             {
-                //gameCam.transform.rotation = endRotation;
                 gameCam.Follow = GameObject.Find("Ghost").transform;
             }
             else
             {
-                //gameCam.transform.rotation = endRotation;
                 gameCam.Follow = GameObject.Find("Player").transform;
             }
         }
