@@ -372,7 +372,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52322d0b8bb663d4eae35659b3bc5e63, type: 3}
---- !u!1001 &536564996
+--- !u!1001 &608166372
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -380,66 +380,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.96763
+      value: -26.6587
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 16.278824
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -148.9
+      value: 81.207825
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: -8679921383154817045, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 650e8541b5f6c3743ad33e11d46c0fa3,
+    - target: {fileID: 919132149155446097, guid: 0c40e1b8e3ffd9448938a48271aef99b,
         type: 3}
       propertyPath: m_Name
-      value: RemadeManor
+      value: RemadeManorfinalwhite
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 650e8541b5f6c3743ad33e11d46c0fa3, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 0c40e1b8e3ffd9448938a48271aef99b, type: 3}
 --- !u!1 &616512517
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,9 +835,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 50.1
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2170,5 +2170,5 @@ SceneRoots:
   - {fileID: 2066973802}
   - {fileID: 1726634183}
   - {fileID: 1939750307}
-  - {fileID: 536564996}
   - {fileID: 145942369}
+  - {fileID: 608166372}
