@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent player;
     [SerializeField] private NavMeshAgent ghost;
     public GameObject interactedObject;
+    public Button interactButton;
+
+    //Can change this to use a assets:// file link??
+    public GameObject playerPointShader;
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
@@ -50,13 +54,20 @@ public class PlayerMovement : MonoBehaviour
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
                 {
+                    //Destroy any left over shader before moving again
+                    Destroy(GameObject.Find("PlayerPointShader(Clone)"));
+
                     if (!playerController.isGhostActive)
                     {
                         player.SetDestination(hit.point);
+
+                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
+                        Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
                     else if(playerController.isGhostActive)
                     {
                         ghost.SetDestination(hit.point);        //Doesnt move player as tethered to player
+                        Instantiate(playerPointShader, hit.transform.position, Quaternion.identity);
                     }
                     
                 }
@@ -65,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))          //Switch between ghost and player
         {
+            interactButton.gameObject.SetActive(false); //Making button turn off to reduce errors
+
             if (playerController.isGhostActive)
             {
                 playerController.isGhostActive = false;
@@ -93,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (playerController.isGhostActive)
+        if (playerController.isGhostActive)         //Checking to pull ghost back in
         {
             float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
             if (distanceAway > 10)

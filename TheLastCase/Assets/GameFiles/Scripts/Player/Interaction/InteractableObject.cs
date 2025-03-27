@@ -28,6 +28,10 @@ public class InteractableObject : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            if(collision.gameObject.name == "Player" && onlyGhostVisable)       //Stops interact appearing for player on ghost objects
+            {
+                return;
+            }
             playerCharacters.GetComponent<PlayerMovement>().interactedObject = gameObject;
             playerButton.gameObject.SetActive(true);
             playerButton.onClick.AddListener(FindAction);

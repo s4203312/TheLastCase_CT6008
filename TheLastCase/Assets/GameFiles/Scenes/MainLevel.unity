@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11088,9 +11088,25 @@ PrefabInstance:
       objectReference: {fileID: 1411367428}
     - target: {fileID: 1962111032039054098, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
+      propertyPath: interactButton
+      value: 
+      objectReference: {fileID: 1411367428}
+    - target: {fileID: 1962111032039054098, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: interactedObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962111032039054098, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1284597434}
+    - target: {fileID: 1962111032039054098, guid: a789829543023bf4a9040984ecaba8c7,
+        type: 3}
+      propertyPath: playerPointShader
+      value: 
+      objectReference: {fileID: 3894014666321157015, guid: f2357d354e6d9644095d5c7df9760d28,
+        type: 3}
     - target: {fileID: 2813908843691746424, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: Managers
@@ -11104,12 +11120,12 @@ PrefabInstance:
     - target: {fileID: 6313989281084930442, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7366350744420056982, guid: a789829543023bf4a9040984ecaba8c7,
         type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2813908843691746424, guid: a789829543023bf4a9040984ecaba8c7, type: 3}

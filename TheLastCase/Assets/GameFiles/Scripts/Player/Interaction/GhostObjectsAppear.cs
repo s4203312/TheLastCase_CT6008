@@ -31,7 +31,7 @@ public class GhostObjectsAppear : MonoBehaviour
 
     private void LoadObjects()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, 1);
+        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, 5);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject.CompareTag("Interactable"))
