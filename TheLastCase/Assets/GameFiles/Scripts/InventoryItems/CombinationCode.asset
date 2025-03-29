@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add26b580d19be549885d38d756fa83f, type: 3}
-  m_Name: Book3
+  m_Name: CombinationCode
   m_EditorClassIdentifier: 
-  itemName: Book 3
-  itemDescription: A yellow book.
-  itemPicture: {fileID: 0}
-  puzzleID: Bookshelf
+  itemName: Combination
+  itemDescription: The note says 4512
+  itemPicture: {fileID: 21300000, guid: d390edf4309e7f548aa2e0be8bd49e4e, type: 3}
+  puzzleID: 

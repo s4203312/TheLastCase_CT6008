@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Book1
   m_EditorClassIdentifier: 
   itemName: Book 1
-  itemDescription: 
+  itemDescription: A black book.
   itemPicture: {fileID: 0}
   puzzleID: Bookshelf

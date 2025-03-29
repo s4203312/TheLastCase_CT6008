@@ -61,11 +61,9 @@ public class InteractActions : MonoBehaviour
         if (!isUsingButton)
         {
             interactionObject = GetComponent<PlayerMovement>().interactedObject;
-            Debug.Log("Not Using Button");
         }
         else
         {
-            Debug.Log("Using Button");
             if (bookshelfHover.hitSlot.childCount > 0) 
             {
                 interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;

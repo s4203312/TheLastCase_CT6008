@@ -12,10 +12,11 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
     [Header("Used Objects")]
     public GameObject[] pedestals;
     public Animator animator;
-    [SerializeField] GameObject key;
+    [SerializeField] GameObject note;
 
     private void Start()
     {
+        note.SetActive(false);
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
     }
 
@@ -28,13 +29,13 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
             Transform collider = pedestal.transform.Find("Collider");
             PuzzleSlotData puzzleSlotData = collider.GetComponent<PuzzleSlotData>();
 
+            InventoryItemData itemData = null;
+
             if (puzzleSlotData.itemHolder.childCount > 0)
             {
-                if (puzzleSlotData.isOccupied == false)
-                {
-                    itemData = puzzleSlotData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData;
-                    puzzleSlotData.isOccupied = true;
-                }                             
+                itemData = puzzleSlotData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData;
+                puzzleSlotData.isOccupied = true;
+
             }
             else
             {
@@ -66,7 +67,7 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
             itemCollider.enabled = false;
         }
 
-        key.SetActive(true);
+        note.SetActive(true);
         animator.SetTrigger("PuzzleComplete");
 
         Debug.Log("Puzzle Complete");

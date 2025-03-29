@@ -20,15 +20,25 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
 
     private int[] currentNumbers;  // Stores selected numbers
     private GameObject canvas;
+    private new BoxCollider collider;
+    private GameUI gameUI;
 
     [Header("Used Objects")]
     public GameObject lockObj;
     public GameObject lockCam;
     public CinemachineVirtualCamera VirtualCamera;
+    public GameObject bookForPuzzle;
+    public GameObject note;
 
     void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
+
+        bookForPuzzle.SetActive(false);
+        note.SetActive(false);
+
+        gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
+        collider = GameObject.Find("DeskWithLockPuzzle").transform.GetChild(1).GetComponent<BoxCollider>();
 
         canvas = GameObject.Find("Canvas_CombinationLock");
         canvas.SetActive(false);
@@ -99,6 +109,13 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
+        collider.enabled = false;
+
+        bookForPuzzle.SetActive(true);
+        note.SetActive(true);
+
+        gameUI.ExitView();
+
         Debug.Log("Puzzle Complete");
     }
 }
