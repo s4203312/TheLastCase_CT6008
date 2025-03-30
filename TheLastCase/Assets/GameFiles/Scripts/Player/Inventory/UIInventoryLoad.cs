@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal.Internal;
 using UnityEngine.UI;
 
 public class UIInventoryLoad : MonoBehaviour
@@ -10,13 +13,62 @@ public class UIInventoryLoad : MonoBehaviour
     public InventoryManager inventoryManager;
     public Sprite nullSprite;
 
+    public GameObject playerCharacter;
+    private InteractActions interactActions;
+    public GraphicRaycaster UIraycaster;
+
+    private bool localInspectingInventory;
+
     private void Start()
     {
+        interactActions = playerCharacter.GetComponent<InteractActions>();
+
         inventoryManager = inventoryManager.GetComponent<InventoryManager>();
     }
 
-    public void LoadInventory()
+    public void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            UIraycaster.Raycast(pointerData, results);
+
+            foreach (RaycastResult result in results)
+            {
+                GameObject hitObject = result.gameObject;
+
+                if (hitObject.CompareTag("InventoryImage"))
+                {
+                    string itemPosition = string.Concat(hitObject.name[..1]);
+                    //Debug.Log(itemPosition);
+
+                    if (localInspectingInventory)
+                    {
+                        // inspect item functionaility
+                        //Debug.Log("Insepct");
+                    }
+                    else
+                    {
+                        //Debug.Log("Place");
+                        interactActions.PlaceItem(itemPosition);            
+                    }       
+                }
+            }
+        }
+    }
+
+    public void LoadInventory(bool inspectingInventory)
+    {
+        //Setting panel active
+
+        InventoryPanelUI.SetActive(true);
+        localInspectingInventory = inspectingInventory;
+
         //Clearing the inventory slots           
         for (int i = 0; i < 8; i++)
         {
@@ -44,5 +96,11 @@ public class UIInventoryLoad : MonoBehaviour
             slot.transform.GetChild(1).GetComponent<TMP_Text>().text = Inventory[i].itemName;
             slot.transform.GetChild(2).GetComponent<TMP_Text>().text = Inventory[i].itemDescription;
         }
+    }
+
+    public void InventoryClose()
+    {
+        //Setting panel deactive
+        InventoryPanelUI.SetActive(false);
     }
 }

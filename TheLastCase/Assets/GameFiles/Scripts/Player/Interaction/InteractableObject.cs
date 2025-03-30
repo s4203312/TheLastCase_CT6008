@@ -5,21 +5,34 @@ using UnityEngine.UI;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject playerController;
-    public Button playerButton;
+    private GameObject playerCharacters;
+    private GameObject playerController;
+    private Button playerButton;
     [SerializeField] private string PlayerActionName;
     [SerializeField] private string GhostActionName;
-    
+
+    //Used for appearing if ghost form
+    public bool onlyGhostVisable;
+
     //Data stored about item
     public InventoryItemData itemData;
 
+    public void Start()
+    {
+        playerCharacters = GameObject.Find("PlayerCharacters");
+        playerController = GameObject.Find("PlayerController");
+        playerButton = GameObject.Find("PlayerCanvas").transform.GetChild(0).GetComponent<Button>();
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
-            player.GetComponent<PlayerMovement>().interactedObject = gameObject;
+            if(collision.gameObject.name == "Player" && onlyGhostVisable)       //Stops interact appearing for player on ghost objects
+            {
+                return;
+            }
+            playerCharacters.GetComponent<PlayerMovement>().interactedObject = gameObject;
             playerButton.gameObject.SetActive(true);
             playerButton.onClick.AddListener(FindAction);
         }
@@ -29,7 +42,7 @@ public class InteractableObject : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            player.GetComponent<PlayerMovement>().interactedObject = null;
+            playerCharacters.GetComponent<PlayerMovement>().interactedObject = null;
             playerButton.gameObject.SetActive(false);
             playerButton.onClick.RemoveListener(FindAction);
         }
@@ -37,7 +50,7 @@ public class InteractableObject : MonoBehaviour
 
     private void FindAction()
     {
-        InteractActions script = player.GetComponent<InteractActions>();
+        InteractActions script = playerCharacters.GetComponent<InteractActions>();
         playerButton.onClick.RemoveListener(FindAction);
 
         if (playerController.GetComponent<PlayerController>().isGhostActive)
@@ -54,5 +67,6 @@ public class InteractableObject : MonoBehaviour
                 script.StartCoroutine(PlayerActionName);
             }
         }
+        playerButton.gameObject.SetActive(false);
     }
 }

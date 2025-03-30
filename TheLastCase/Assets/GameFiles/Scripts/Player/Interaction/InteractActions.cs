@@ -1,29 +1,38 @@
+using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
-    private IPuzzle currentPuzzle;
-
     private GameObject interactionObject;
-    public GameObject player;
-    public GameObject ghost;
+    private GameObject ghost;
     public Button interactButton;
 
-    public InventoryItemData correctItem;
+    public GameObject Managers;
 
-    [Header("Puzzle Managers")]
-    public ManagerFiguresPuzzle figuresPuzzleManager;
+    public BookshelfHover bookshelfHover;
 
+    public bool isUsingButton;
+
+    private float cooldownTime = 0.5f;
+    private float lastClickTime = 0f;
+
+    public Vector3 oldCameraPos;
+    public Quaternion oldCameraRot;
+
+    private void Start()
+    {
+        ghost = transform.GetChild(1).gameObject;
+    }
 
     //Player Actions
 
     public void OpenDoor()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
         GameObject pivotPoint = interactionObject.transform.GetChild(0).gameObject;
 
         interactionObject.GetComponent<BoxCollider>().enabled = false;
@@ -49,51 +58,145 @@ public class InteractActions : MonoBehaviour
 
     public void PickUpItem()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        if (!isUsingButton)
+        {
+            interactionObject = GetComponent<PlayerMovement>().interactedObject;
+        }
+        else
+        {
+            if (bookshelfHover.hitSlot.childCount > 0) 
+            {
+                interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
+                isUsingButton = false;
+            }
 
-        InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData);
+        }
+        InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
+        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
+      
+        interactionObject.transform.SetParent(null);
 
-        Destroy(interactionObject);
+        PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
+
+        interactionObject.GetComponent<BoxCollider>().enabled = true;
+        interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
     }
 
-    public void PlaceItem()
+    public void PlaceItem(string itemPosition)
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
-        
-        correctItem = interactionObject.GetComponent<PuzzleData>().correctItem;
-
-        Transform puzzleItem = interactionObject.transform.parent.Find("PuzzleItem");
-        Transform collider = interactionObject.transform.parent.Find("Collider");
-
-        if (InventoryManager.IsItemInInventory(correctItem))
+        // breaks loop if function is called more than once in too many frames
+        if (Time.time - lastClickTime < cooldownTime)
         {
-            InventoryManager.Instance.RemoveItemFromInventory(correctItem);
-
-            puzzleItem.gameObject.SetActive(true);
-            collider.gameObject.SetActive(false);
-
-            interactButton.gameObject.SetActive(false);
-            correctItem = null;
+            return;
         }
 
+        lastClickTime = Time.time;
+
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
+
+        // logic for deciding if the object has multiple slots for placing items
+        Transform itemTransform = null;
+        Transform[] slots = interactionObject.transform.parent.GetComponentsInChildren<Transform>(true);
+        slots = slots.Where(t => t.name == "PuzzleSlot").ToArray();
+             
+        if (slots.Length > 1) 
+        {
+            if (bookshelfHover.enabled == true && bookshelfHover.hitSlot != null)
+            {
+                itemTransform = bookshelfHover.hitSlot;             
+            }
+        }
         else
         {
-            // add dialogue of player saying you dont have anything for this yet
+            itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
+        }
+
+        int index = int.Parse(itemPosition) - 1;
+
+        if (index >= 0 && index < InventoryManager.Instance.Inventory.Count)
+        {
+            InventoryItemData itemData = InventoryManager.Instance.Inventory[index];
+            GameObject itemObject = InventoryManager.Instance.InventoryGameObjects[index];
+
+            if (itemObject != null)
+            {
+                if (slots.Length > 1)
+                {
+                    itemObject.GetComponent<BoxCollider>().enabled = false;
+                }
+                itemObject.transform.position = itemTransform.position;
+                itemObject.transform.SetParent(itemTransform);
+                itemObject.SetActive(true);
+
+                PuzzleRegistry.Instance.CheckPuzzleByID(itemData.puzzleID);
+
+                InventoryManager.Instance.RemoveItemFromInventory(itemData, itemObject);
+                inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
+                interactButton.gameObject.SetActive(false);
+            }
         }
     }
 
+    public void FocusOnPuzzle()
+    {
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
+        Button exitViewButton = GameObject.Find("GameUI").transform.GetChild(2).GetComponent<Button>();
+        Transform newCamera = interactionObject.transform.parent.GetChild(0);
+        CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
+
+        oldCameraPos = virtCam.transform.position;
+        oldCameraRot = virtCam.transform.rotation;
+
+        if (cameraMove != null)
+        {
+            GetComponent<PlayerMovement>().enabled = false;
+
+            cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
+
+            StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));
+        }
+    }
+
+    public void InspectPuzzle()
+    {
+
+    }
+
+    public void AccessInventory()
+    {
+        Transform inventoryManager = Managers.transform.Find("InventoryManager");
+
+        inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory(false);
+
+    }
 
 
     //Ghost Actions
 
     public void KeyholeSquish()
     {
-        interactionObject = player.GetComponent<PlayerMovement>().interactedObject;
+        interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
-        //ghost.transform.position = interactionObject.transform.position + new Vector3(-2,0,0);
+        ghost.GetComponent<NavMeshAgent>().Warp(ghost.transform.position + (-interactionObject.transform.right * 2));
 
         //Doesnt work yet issues with door?
+    }
+
+    // Extras
+
+    private IEnumerator DelayGameObject(int time, GameObject gameObject, bool active)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.SetActive(active);
+    }
+
+    public void UsingButton()
+    {
+        isUsingButton = true;
     }
 }

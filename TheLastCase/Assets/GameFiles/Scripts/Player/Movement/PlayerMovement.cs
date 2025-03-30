@@ -1,11 +1,14 @@
+using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using Unity.AI.Navigation;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,17 +17,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent player;
     [SerializeField] private NavMeshAgent ghost;
     public GameObject interactedObject;
+    public Button interactButton;
 
-    public bool isGhostActive;
+    //Can change this to use a assets:// file link??
+    public GameObject playerPointShader;
+
+    private CinemachineBrain gameCam;
+    private CinemachineVirtualCamera virtualCam;
 
     private void Awake()
     {
-        isGhostActive = false;
-    }
-
-    void Start()
-    {
-        isGhostActive = playerController.isGhostActive;
+        playerController.isGhostActive = false;
+        virtualCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
 
@@ -35,57 +39,112 @@ public class PlayerMovement : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;
-            }      
+            }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
+
+            gameCam.OutputCamera.transform.position = virtualCam.transform.position;
+            gameCam.OutputCamera.transform.rotation = virtualCam.transform.rotation;
+
+            Ray ray = gameCam.OutputCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
             {
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
                 {
-                    //Vector3 targetDirection = hit.transform.position - player.transform.position;
-                    //Vector3.RotateTowards(player.transform.forward, targetDirection, Time.deltaTime, 0.0f);
-                    if (!isGhostActive)
+                    //Destroy any left over shader before moving again
+                    Destroy(GameObject.Find("PlayerPointShader(Clone)"));
+
+                    if (!playerController.isGhostActive)
                     {
                         player.SetDestination(hit.point);
+
+                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
+                        Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
-                    else if(isGhostActive)
+                    else if(playerController.isGhostActive)
                     {
                         ghost.SetDestination(hit.point);        //Doesnt move player as tethered to player
+                        Instantiate(playerPointShader, hit.transform.position, Quaternion.identity);
                     }
                     
                 }
             }
         }
 
-        if (Input.GetMouseButtonDown(1)) 
+        if (Input.GetMouseButtonDown(1))          //Switch between ghost and player
         {
-            if (isGhostActive)
+            interactButton.gameObject.SetActive(false); //Making button turn off to reduce errors
+
+            if (playerController.isGhostActive)
             {
                 playerController.isGhostActive = false;
 
-                //Player components enabling
-                player.GetComponent<PlayerMovement>().enabled = true;
-
-                //Ghost components disabling
-                ghost.GetComponent<PlayerMovement>().enabled = false;
-
                 ghost.gameObject.SetActive(false);
+                GetComponent<GhostTetherRenderer>().enabled = false;
+
+                if (virtualCam.Follow != null)
+                {
+                    virtualCam.Follow = player.transform;
+                }
             }
             else
             {
                 playerController.isGhostActive = true;
                 ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
-                
-                //Player components disabling
-                player.GetComponent<PlayerMovement>().enabled = false;
-
-                //Ghost components disabling
-                ghost.GetComponent<PlayerMovement>().enabled = true;
 
                 ghost.gameObject.SetActive(true);
+                GetComponent<GhostTetherRenderer>().enabled = true;
+                GetComponent<GhostTetherRenderer>().StartGhostPath();
+
+                if (virtualCam.Follow != null)
+                {
+                    virtualCam.Follow = ghost.transform;
+                }
             }
+        }
+
+        if (playerController.isGhostActive)         //Checking to pull ghost back in
+        {
+            float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
+            if (distanceAway > 10)
+            {
+                //Pulling ghost back in
+                Vector3[] tetherPoints = GetComponent<GhostTetherRenderer>().linePoints.ToArray();
+                Array.Reverse(tetherPoints);
+                ghost.GetComponent<NavMeshAgent>().enabled = false;
+                StartCoroutine(PullGhostBackIn(tetherPoints));
+            }
+        }
+    }
+
+    public IEnumerator PullGhostBackIn(Vector3[] tetherPoints)
+    {
+        foreach (var tetherPoint in tetherPoints)
+        {
+            Vector3 targetPos = tetherPoint;
+            Vector3 startPos = ghost.transform.position;
+            float pullSpeed = 10f;
+            float elapsedTime = 0f;
+            float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; // Time required based on speed
+
+            while (elapsedTime < duration)
+            {
+                ghost.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        playerController.isGhostActive = false;
+        ghost.gameObject.SetActive(false);
+        ghost.GetComponent<NavMeshAgent>().enabled = true;
+
+        if (virtualCam.Follow != null)
+        {
+            virtualCam.Follow = player.transform;
         }
     }
 }

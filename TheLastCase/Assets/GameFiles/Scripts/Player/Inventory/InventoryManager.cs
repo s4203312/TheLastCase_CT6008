@@ -8,9 +8,11 @@ public class InventoryManager : MonoBehaviour
 
     //List for the inventory of the player
     public List<InventoryItemData> Inventory = new List<InventoryItemData>();
+    public List<GameObject> InventoryGameObjects = new List<GameObject>();
 
     private void Awake()
     {
+
         if(Instance == null)
         {
             Instance = this;
@@ -21,21 +23,22 @@ public class InventoryManager : MonoBehaviour
     }
 
     //Adding item to list
-    public void AddItemToInventory(InventoryItemData item)
+    public void AddItemToInventory(InventoryItemData item, GameObject itemObject)
     {
         if (!Inventory.Contains(item))
         {
             Inventory.Add(item);
-            Debug.Log("Item Added");
+            InventoryGameObjects.Add(itemObject);
         }
     }
 
     //Removing item from list
-    public void RemoveItemFromInventory(InventoryItemData item)
+    public void RemoveItemFromInventory(InventoryItemData item, GameObject itemObject)
     {
         if (Inventory.Contains(item))
         {
             Inventory.Remove(item);
+            InventoryGameObjects.Remove(itemObject);
         }
     }
 
