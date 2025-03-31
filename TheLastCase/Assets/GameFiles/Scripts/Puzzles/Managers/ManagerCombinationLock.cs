@@ -38,7 +38,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         note.SetActive(false);
 
         gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-        collider = GameObject.Find("DeskWithLockPuzzle").transform.GetChild(1).GetComponent<BoxCollider>();
+        collider = GameObject.Find("CombinationLockDesk").transform.GetChild(1).GetComponent<BoxCollider>();
 
         canvas = GameObject.Find("Canvas_CombinationLock");
         canvas.SetActive(false);
