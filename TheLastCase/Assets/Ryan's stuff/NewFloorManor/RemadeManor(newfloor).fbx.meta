@@ -1,0 +1,299 @@
+fileFormatVersion: 2
+guid: 4627ced8bcb666643b725c299330bdd0
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BathWindow
+    second: {fileID: 2100000, guid: 7176351cd2dce3046b36429a8a394604, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BathroomDoor
+    second: {fileID: 2100000, guid: 178020057552dbc4f9331074304418f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BathroomF
+    second: {fileID: 2100000, guid: 8a81690641599b840a49f4ca8175b48e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BathroomOuterWalls
+    second: {fileID: 2100000, guid: 1265e216017eb144e83ade2daf34ee48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BathroomWalls
+    second: {fileID: 2100000, guid: 4e2a887f5724c8a43af6beb3a2e17f8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedDoor
+    second: {fileID: 2100000, guid: 3194d14322dd03d4fb056d37afbfe4eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedF
+    second: {fileID: 2100000, guid: bfe61da5062f40c4a8455ef22d8e0927, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedOutWalls
+    second: {fileID: 2100000, guid: 0caec2af985e3cd4183c30c647aa8e9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedWindow
+    second: {fileID: 2100000, guid: 35b0bb5a2dff6eb4b8a7d56d504d521d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedroomWalls
+    second: {fileID: 2100000, guid: d5f4510be9d86bd459c26c6d46641e49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlackMaterial
+    second: {fileID: 2100000, guid: 6d42e9414fc92f24eac60641db5a52c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomRDoor
+    second: {fileID: 2100000, guid: 14921da9254a05242bb9383364bdf2a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomRF
+    second: {fileID: 2100000, guid: 38ad23e5f356f3e44a6f307b03484461, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomRWindow
+    second: {fileID: 2100000, guid: 2f7d7e6e019afb341b61dd95a159016f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayBanister
+    second: {fileID: 2100000, guid: c6d9586fa5043e145b6d2c5232949b0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayF
+    second: {fileID: 2100000, guid: ec4c92eb537f2b842af6a6607b42acfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls
+    second: {fileID: 2100000, guid: 0c3104034db855a429ff2f32ca882fdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls.002
+    second: {fileID: 2100000, guid: 44b60a2bdb39e7649b96f91d1a13558c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls.004
+    second: {fileID: 2100000, guid: 9a98f78e53d730f44b7d2820a7248f3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls.005
+    second: {fileID: 2100000, guid: 99f88f65e3d7f8a4497b4a807c707589, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls.006
+    second: {fileID: 2100000, guid: 16ad0ef674abbb44cb655d1097116aa3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWalls.007
+    second: {fileID: 2100000, guid: a11bf74b6dc8ed9469b21d5bd678a6d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWindowFront
+    second: {fileID: 2100000, guid: 4253414f4db226848a702765f672f3a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWindowLeft
+    second: {fileID: 2100000, guid: 2318231f4e7d99146879018b179bf99e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HallwayWindowRight
+    second: {fileID: 2100000, guid: b3be9d3fe85aed545bbca7ee1250b399, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryDoor
+    second: {fileID: 2100000, guid: b70d370fb402440479b1601d058462c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryF
+    second: {fileID: 2100000, guid: 6a1bedf52ba70e04b8077eb6b562216c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryOuterWalls
+    second: {fileID: 2100000, guid: ac5b90f0211d617458f6d55cbd93bcb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryStudyDoor
+    second: {fileID: 2100000, guid: 7a36fe770920c6e4e918971e6c039e71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryStudyF
+    second: {fileID: 2100000, guid: 4e38930e8a2e16d46b47dd01e8287ab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryStudyOuterWalls
+    second: {fileID: 2100000, guid: 93e5c327248141546bee193a605b47a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryStudyWalls
+    second: {fileID: 2100000, guid: 0d11d5fd2e6bb1b42bf28281762e72a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryStudyWindow
+    second: {fileID: 2100000, guid: cdac07f242ca5a64b940e47911656a62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LibaryWalls
+    second: {fileID: 2100000, guid: ca80a98c958afe64f983d439538e9069, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 9a5d59cdf2b16794aa7ebad986d4645a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopRDoor
+    second: {fileID: 2100000, guid: c270c5705e36f034ba391f91dd47e6c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopRF
+    second: {fileID: 2100000, guid: 3198c82f77812524799e48655cb18474, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopRWindow
+    second: {fileID: 2100000, guid: 0294373a9d9b4a44db0dae2aa703b4e1, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
