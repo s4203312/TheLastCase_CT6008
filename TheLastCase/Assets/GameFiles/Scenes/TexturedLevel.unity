@@ -21550,6 +21550,7 @@ Transform:
   m_PrefabInstance: {fileID: 1040277103}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1048193147
 GameObject:
   m_ObjectHideFlags: 0
@@ -21638,6 +21639,8 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &1045672982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21737,6 +21740,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1045672982}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1053755115
 GameObject:
@@ -28933,7 +28939,11 @@ PrefabInstance:
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c58ae60ea08c12439d53fd718f683d4, type: 3}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1001 &1370802824
+=======
+--- !u!1001 &1377126662
+>>>>>>> Stashed changes
 =======
 --- !u!1001 &1377126662
 >>>>>>> Stashed changes
@@ -28942,6 +28952,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     m_TransformParent: {fileID: 0}
     m_Modifications:
@@ -28982,6 +28993,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81850424b0437264b8b0e8db0df9dec8,
 =======
+=======
+>>>>>>> Stashed changes
     m_TransformParent: {fileID: 433265367}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
@@ -29035,13 +29048,20 @@ PrefabInstance:
       value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - target: {fileID: -8679921383154817045, guid: 81850424b0437264b8b0e8db0df9dec8,
+=======
+    - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
+>>>>>>> Stashed changes
 =======
     - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
 >>>>>>> Stashed changes
@@ -29050,7 +29070,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - target: {fileID: -8679921383154817045, guid: 81850424b0437264b8b0e8db0df9dec8,
+=======
+    - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
+>>>>>>> Stashed changes
 =======
     - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
 >>>>>>> Stashed changes
@@ -29059,11 +29083,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - target: {fileID: 919132149155446097, guid: 81850424b0437264b8b0e8db0df9dec8,
         type: 3}
       propertyPath: m_Name
       value: Detective
 =======
+=======
+>>>>>>> Stashed changes
     - target: {fileID: -8679921383154817045, guid: 45fa813afa4e50c4c97a4a3fd77310de,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -29078,6 +29105,9 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Normal book (19)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -29085,8 +29115,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_SourcePrefab: {fileID: 100100000, guid: 81850424b0437264b8b0e8db0df9dec8, type: 3}
 =======
+=======
+>>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 45fa813afa4e50c4c97a4a3fd77310de, type: 3}
 --- !u!4 &1377126663 stripped
 Transform:
@@ -29241,6 +29274,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1392032901}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1396516157
 GameObject:
@@ -44066,6 +44102,7 @@ SceneRoots:
   - {fileID: 790211939}
   - {fileID: 1691351683}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 1571603019}
   - {fileID: 1895653432}
   - {fileID: 1332960136}
@@ -44079,5 +44116,7 @@ SceneRoots:
   - {fileID: 69514086}
   - {fileID: 2143258353}
   - {fileID: 1370802824}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
