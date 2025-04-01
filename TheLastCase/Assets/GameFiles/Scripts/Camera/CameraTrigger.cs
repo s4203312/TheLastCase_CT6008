@@ -9,8 +9,7 @@ public class CameraTrigger : MonoBehaviour
     private CinemachineVirtualCamera gameCam;
 
     public CameraMove cameraController;
-    public Transform targetRoomPosition;
-    public bool inToRoom = true;
+    public Transform[] targetRoomPositions;
 
     private void Start()
     {
@@ -23,15 +22,7 @@ public class CameraTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (inToRoom)       //Focus on room
-        {
-            if (other.CompareTag("Player")) // Make sure player has "Player" tag
-            {
-                gameCam.Follow = null;
-                cameraController.MoveCameraToRoom(targetRoomPosition.position, targetRoomPosition.rotation);
-            }
-        }
-        else               //Follow if corridoors
+        if(gameCam.Follow == null)
         {
             if (playerController.isGhostActive)
             {
@@ -40,6 +31,14 @@ public class CameraTrigger : MonoBehaviour
             else
             {
                 gameCam.Follow = GameObject.Find("Player").transform;
+            }
+        }
+        else
+        {
+            if (other.CompareTag("Player")) // Make sure player has "Player" tag
+            {
+                gameCam.Follow = null;
+                cameraController.MoveCameraToRoom(targetRoomPositions);
             }
         }
     }

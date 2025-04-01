@@ -1,6 +1,8 @@
 using Cinemachine;
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraMove : MonoBehaviour
@@ -10,10 +12,18 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
 
     // Call this when entering a room and pass the target position
-    public void MoveCameraToRoom(Vector3 roomPos, Quaternion roomRot)
+    public void MoveCameraToRoom(Transform[] rooms)
     {
-        if (!isMoving)
-            StartCoroutine(MoveCameraCoroutine(roomPos, roomRot));
+        if(rooms.Length == 1)
+        {
+            if (!isMoving)
+                StartCoroutine(MoveCameraCoroutine(rooms[0].position, rooms[0].rotation));
+        }
+        else
+        {
+            //Do fucntion here
+        }
+        
     }
 
     // Coroutine to smoothly move camera to target position
