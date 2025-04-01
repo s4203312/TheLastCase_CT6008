@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +12,7 @@ public class GameUI : MonoBehaviour
     private bool paused;
     public GameObject pausePanel;
 
-    private Vector3 oldCameraPos;
-    private Quaternion oldCameraRot;
+    private Transform oldCameraTran;
 
     private void Start()
     {
@@ -48,13 +48,13 @@ public class GameUI : MonoBehaviour
         GameObject playerCharacters = GameObject.Find("PlayerCharacters");
         CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
-        oldCameraPos = playerCharacters.GetComponent<InteractActions>().oldCameraPos;
-        oldCameraRot = playerCharacters.GetComponent<InteractActions>().oldCameraRot;
-
+        oldCameraTran = playerCharacters.GetComponent<InteractActions>().oldCameraTran;
+        Transform[] oldCameras = null;
+        //oldCameras.Append(oldCameraTran);
 
         if (cameraMove != null)
         {
-            cameraMove.MoveCameraToRoom(oldCameraPos, oldCameraRot);
+            cameraMove.MoveCameraToRoom(oldCameras);
 
             playerCharacters.GetComponent<PlayerMovement>().enabled = true;
 

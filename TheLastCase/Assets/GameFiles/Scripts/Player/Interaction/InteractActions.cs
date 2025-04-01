@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -20,8 +21,7 @@ public class InteractActions : MonoBehaviour
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
 
-    public Vector3 oldCameraPos;
-    public Quaternion oldCameraRot;
+    public Transform oldCameraTran;
 
     private void Start()
     {
@@ -32,6 +32,8 @@ public class InteractActions : MonoBehaviour
 
     public void OpenDoor()
     {
+        if (OnCallOnce()) return;
+
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
         GameObject pivotPoint = interactionObject.transform.GetChild(0).gameObject;
 
@@ -86,13 +88,7 @@ public class InteractActions : MonoBehaviour
 
     public void PlaceItem(string itemPosition)
     {
-        // breaks loop if function is called more than once in too many frames
-        if (Time.time - lastClickTime < cooldownTime)
-        {
-            return;
-        }
-
-        lastClickTime = Time.time;
+        if (OnCallOnce()) return;
 
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
@@ -146,17 +142,18 @@ public class InteractActions : MonoBehaviour
 
         Button exitViewButton = GameObject.Find("GameUI").transform.GetChild(2).GetComponent<Button>();
         Transform newCamera = interactionObject.transform.parent.GetChild(0);
+        Transform[] newCameras = null;
+        //newCameras.Append(newCamera);
         CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
 
-        oldCameraPos = virtCam.transform.position;
-        oldCameraRot = virtCam.transform.rotation;
+        oldCameraTran = virtCam.transform;
 
         if (cameraMove != null)
         {
             GetComponent<PlayerMovement>().enabled = false;
 
-            cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
+            cameraMove.MoveCameraToRoom(newCameras);
 
             StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));
         }
@@ -187,8 +184,9 @@ public class InteractActions : MonoBehaviour
         //Doesnt work yet issues with door?
     }
 
-    // Extras
 
+
+    // Extras
     private IEnumerator DelayGameObject(int time, GameObject gameObject, bool active)
     {
         yield return new WaitForSeconds(time);
@@ -198,5 +196,17 @@ public class InteractActions : MonoBehaviour
     public void UsingButton()
     {
         isUsingButton = true;
+    }
+
+    private bool OnCallOnce()
+    {
+        // breaks loop if function is called more than once in too many frames
+        if (Time.time - lastClickTime < cooldownTime)
+        {
+            return true;
+        }
+
+        lastClickTime = Time.time;
+        return false;
     }
 }
