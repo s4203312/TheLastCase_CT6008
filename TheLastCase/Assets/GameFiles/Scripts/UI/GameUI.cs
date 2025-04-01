@@ -11,6 +11,7 @@ public class GameUI : MonoBehaviour
     public Button exitView;
     private bool paused;
     public GameObject pausePanel;
+    public GameObject interactButton;
 
     private Vector3 oldCameraPos;
     private Quaternion oldCameraRot;
@@ -78,7 +79,10 @@ public class GameUI : MonoBehaviour
             exitView.gameObject.SetActive(false);
 
             StartCoroutine(DelayCameraFollow(2, cameraMove));
+
             playerCharacters.GetComponent<PlayerMovement>().enabled = true;
+            playerCharacters.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+            interactButton.GetComponent<Image>().enabled = true;           
         }
     }
 

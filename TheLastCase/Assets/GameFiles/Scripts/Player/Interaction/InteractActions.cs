@@ -159,6 +159,8 @@ public class InteractActions : MonoBehaviour
 
             StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));          
         }
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        interactButton.GetComponent<Image>().enabled = false;
     }
 
     public void InspectPuzzle()

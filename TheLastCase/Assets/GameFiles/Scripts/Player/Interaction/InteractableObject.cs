@@ -48,7 +48,7 @@ public class InteractableObject : MonoBehaviour
     //    collidedObjects = null;
     //}
 
-    public void OnCollisionStay(Collision collision)
+    public void OnCollisioStay(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
