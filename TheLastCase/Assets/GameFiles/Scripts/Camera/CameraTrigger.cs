@@ -20,6 +20,21 @@ public class CameraTrigger : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (gameCam.Follow == null)
+        {
+            if (playerController.isGhostActive)
+            {
+                gameCam.Follow = GameObject.Find("Ghost").transform;
+            }
+            else
+            {
+                gameCam.Follow = GameObject.Find("Player").transform;
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(gameCam.Follow == null)
@@ -38,7 +53,7 @@ public class CameraTrigger : MonoBehaviour
             if (other.CompareTag("Player")) // Make sure player has "Player" tag
             {
                 gameCam.Follow = null;
-                cameraController.MoveCameraToRoom(targetRoomPositions);
+                //cameraController.MoveCameraToRoom(targetRoomPositions);
             }
         }
     }

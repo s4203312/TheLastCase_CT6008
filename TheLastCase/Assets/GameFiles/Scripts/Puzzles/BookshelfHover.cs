@@ -63,6 +63,6 @@ public class BookshelfHover : MonoBehaviour
             activeButton = placeItemButton.gameObject;
         }
         activeButton.gameObject.SetActive(true);
-        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0.5f, 0f, 0f);
+        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, 0f, 0.5f);
     }
 }

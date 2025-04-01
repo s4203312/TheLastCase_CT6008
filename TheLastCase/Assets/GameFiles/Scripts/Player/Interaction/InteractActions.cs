@@ -21,7 +21,8 @@ public class InteractActions : MonoBehaviour
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
 
-    public Transform oldCameraTran;
+    [HideInInspector] public Vector3 oldCameraPos;
+    [HideInInspector] public Quaternion oldCameraRot;
 
     private void Start()
     {
@@ -142,20 +143,21 @@ public class InteractActions : MonoBehaviour
 
         Button exitViewButton = GameObject.Find("GameUI").transform.GetChild(2).GetComponent<Button>();
         Transform newCamera = interactionObject.transform.parent.GetChild(0);
-        Transform[] newCameras = null;
+        //Transform[] newCameras = null;
         //newCameras.Append(newCamera);
         CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
 
-        oldCameraTran = virtCam.transform;
+        oldCameraPos = virtCam.transform.position;
+        oldCameraRot = virtCam.transform.rotation;
 
         if (cameraMove != null)
         {
             GetComponent<PlayerMovement>().enabled = false;
 
-            cameraMove.MoveCameraToRoom(newCameras);
+            cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
 
-            StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));
+            StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));          
         }
     }
 
