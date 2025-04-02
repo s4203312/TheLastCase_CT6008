@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -61,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                         player.SetDestination(hit.point);
 
-                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 1.154952f, hit.point.z);
+                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
                         Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
                     else if(playerController.isGhostActive)
                     {
                         ghost.SetDestination(hit.point);        //Doesnt move player as tethered to player
-                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 1.154952f, hit.point.z);
+                        Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
                         Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
                     

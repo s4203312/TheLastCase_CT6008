@@ -27,22 +27,24 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public GameObject lockObj;
     public GameObject lockCam;
     public CinemachineVirtualCamera VirtualCamera;
-    public GameObject bookForPuzzle;
-    public GameObject note;
+    public GameObject lockedDoor;
+    public GameObject lockCollider;
+    //public GameObject bookForPuzzle;
+    //public GameObject note;
 
     void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
 
-        bookForPuzzle.SetActive(false);
-        note.SetActive(false);
+        //bookForPuzzle.SetActive(false);
+        //note.SetActive(false);
 
         gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-        collider = GameObject.Find("CombinationLockDesk").transform.GetChild(1).GetComponent<BoxCollider>();
+        collider = GameObject.Find("CombinationLockPuzzle").transform.GetChild(1).GetComponent<BoxCollider>();
 
         canvas = GameObject.Find("Canvas_CombinationLock");
-        canvas.SetActive(false);
-        lockObj.SetActive(false);
+
+        lockedDoor.GetComponent<BoxCollider>().enabled = false;
 
         int length = numberDisplays.Length;
         currentNumbers = new int[length];
@@ -60,19 +62,20 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         }
     }
 
-    private void Update()
-    {
-        if (lockCam.transform.position == VirtualCamera.transform.position)
-        {
-            canvas.SetActive(true);
-            lockObj.SetActive(true);
-        }
-        else
-        {
-            canvas.SetActive(false);
-            lockObj.SetActive(false);
-        }
-    }
+    //private void Update()
+    //{
+
+    //    if (Vector3.Distance(lockCam.transform.TransformPoint(lockCam.transform.localPosition), VirtualCamera.transform.position) < 15f)
+    //    {
+    //        canvas.SetActive(true);
+    //        lockObj.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        canvas.SetActive(false);
+    //        lockObj.SetActive(false);
+    //    }
+    //}
 
     public void ChangeNumber(int index, int change)
     {
@@ -111,8 +114,13 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     {
         collider.enabled = false;
 
-        bookForPuzzle.SetActive(true);
-        note.SetActive(true);
+        lockedDoor.GetComponent<BoxCollider>().enabled = true;
+        lockCollider.SetActive(false);
+
+        //bookForPuzzle.SetActive(true);
+        //note.SetActive(true);
+        canvas.SetActive(false);
+        lockObj.SetActive(false);
 
         gameUI.ExitView();
 

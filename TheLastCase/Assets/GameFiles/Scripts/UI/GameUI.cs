@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,14 +11,19 @@ public class GameUI : MonoBehaviour
     public Button exitView;
     private bool paused;
     public GameObject pausePanel;
+    public GameObject interactButton;
 
     private Vector3 oldCameraPos;
     private Quaternion oldCameraRot;
+
+    private CinemachineVirtualCamera gameCam;
 
     private void Start()
     {
         pausePanel.SetActive(false);
         exitView.gameObject.SetActive(false);
+
+        gameCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
     private void Update()
@@ -45,20 +51,38 @@ public class GameUI : MonoBehaviour
 
     public void ExitView()
     {
+        //GameObject playerCharacters = GameObject.Find("PlayerCharacters");
+        //CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        //CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
+        ////oldCameraTran = playerCharacters.GetComponent<InteractActions>().oldCameraTran;
+        ////Transform[] oldCameras = null;
+        ////oldCameras.Append(oldCameraTran);
+
+        //if (cameraMove != null)
+        //{
+        //    cameraMove.MoveCameraToRoom(oldCameras);
+
+        //    playerCharacters.GetComponent<PlayerMovement>().enabled = true;
+
+        //    exitView.gameObject.SetActive(false);
+        //}
+
         GameObject playerCharacters = GameObject.Find("PlayerCharacters");
-        CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-        CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
+        CameraMove cameraMove = gameCam.GetComponent<CameraMove>();
         oldCameraPos = playerCharacters.GetComponent<InteractActions>().oldCameraPos;
         oldCameraRot = playerCharacters.GetComponent<InteractActions>().oldCameraRot;
-
 
         if (cameraMove != null)
         {
             cameraMove.MoveCameraToRoom(oldCameraPos, oldCameraRot);
+          
+            exitView.gameObject.SetActive(false);
+
+            StartCoroutine(DelayCameraFollow(2, cameraMove));
 
             playerCharacters.GetComponent<PlayerMovement>().enabled = true;
-
-            exitView.gameObject.SetActive(false);
+            playerCharacters.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+            interactButton.GetComponent<Image>().enabled = true;           
         }
     }
 
@@ -71,5 +95,11 @@ public class GameUI : MonoBehaviour
     {
         Time.timeScale = 1f;
         Application.Quit();
+    }
+
+    private IEnumerator DelayCameraFollow(int time, CameraMove cameraMove)
+    {
+        yield return new WaitForSeconds(time);
+        cameraMove.FollowPlayer();
     }
 }

@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/GameFiles/Scenes/MainMenu.unity
     guid: 9e25bb3f6d4d8d149ac359a26e61a90e
   - enabled: 1
+    path: Assets/GameFiles/Scenes/NewLevel.unity
+    guid: 379c59ba5d1a0a147b584db874781356
+  - enabled: 1
+    path: Assets/GameFiles/Scenes/TexturedLevel.unity
+    guid: 8e11cbe092a59474f8afc7cc1e9e833b
+  - enabled: 1
     path: Assets/GameFiles/Scenes/MainLevel.unity
     guid: 4f24a8e4379b08a449a9ac8ae10fd923
   m_configObjects: {}
