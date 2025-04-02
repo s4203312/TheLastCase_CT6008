@@ -8761,6 +8761,7 @@ MonoBehaviour:
   VirtualCamera: {fileID: 1787981945}
   lockedDoor: {fileID: 983830754}
   lockCollider: {fileID: 1440322665}
+  playerButton: {fileID: 1329974714}
 --- !u!114 &1308500960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9903,9 +9904,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 10, z: 0}
-  m_XDamping: 1
+  m_XDamping: 1.5
   m_YDamping: 1
-  m_ZDamping: 1
+  m_ZDamping: 1.5
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0

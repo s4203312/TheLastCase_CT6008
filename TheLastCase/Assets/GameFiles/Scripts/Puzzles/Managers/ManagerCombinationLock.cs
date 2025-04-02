@@ -29,6 +29,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public CinemachineVirtualCamera VirtualCamera;
     public GameObject lockedDoor;
     public GameObject lockCollider;
+    public Button playerButton;
     //public GameObject bookForPuzzle;
     //public GameObject note;
 
@@ -123,6 +124,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         lockObj.SetActive(false);
 
         gameUI.ExitView();
+        playerButton.onClick.RemoveAllListeners();
 
         Debug.Log("Puzzle Complete");
     }

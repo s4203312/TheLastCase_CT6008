@@ -173,7 +173,6 @@ public class InteractActions : MonoBehaviour
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
         inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory(false);
-
     }
 
 

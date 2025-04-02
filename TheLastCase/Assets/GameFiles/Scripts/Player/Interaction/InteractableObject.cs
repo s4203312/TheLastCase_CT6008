@@ -48,7 +48,7 @@ public class InteractableObject : MonoBehaviour
     //    collidedObjects = null;
     //}
 
-    public void OnCollisioStay(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
@@ -75,7 +75,7 @@ public class InteractableObject : MonoBehaviour
     private void FindAction()
     {
         InteractActions script = playerCharacters.GetComponent<InteractActions>();
-        playerButton.onClick.RemoveListener(FindAction);
+        playerButton.onClick.RemoveAllListeners();
 
         if (playerController.GetComponent<PlayerController>().isGhostActive)
         {
