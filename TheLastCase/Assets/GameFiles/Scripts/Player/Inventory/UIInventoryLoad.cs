@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,8 @@ public class UIInventoryLoad : MonoBehaviour
     public GraphicRaycaster UIraycaster;
 
     private bool localInspectingInventory;
+    public bool isCurrentlyInspecting = false;
+    public GameObject currentlyInspectingObject;
 
     private void Start()
     {
@@ -48,8 +51,20 @@ public class UIInventoryLoad : MonoBehaviour
 
                     if (localInspectingInventory)
                     {
-                        // inspect item functionaility
-                        //Debug.Log("Insepct");
+                        if(hitObject.GetComponent<Image>().sprite != nullSprite)            //only inspect if there is an item there
+                        {
+                            //Finding the gameObject to spawn
+                            int index = int.Parse(itemPosition) - 1;
+                            if (index >= 0 && index < InventoryManager.Instance.Inventory.Count)
+                            {
+                                GameObject itemObject = InventoryManager.Instance.InventoryGameObjects[index];
+                                if (itemObject != null)
+                                {
+                                    currentlyInspectingObject = itemObject;
+                                    InspectInventory();
+                                }
+                            }
+                        }
                     }
                     else
                     {
@@ -101,5 +116,33 @@ public class UIInventoryLoad : MonoBehaviour
     {
         //Setting panel deactive
         InventoryPanelUI.SetActive(false);
+    }
+
+    public void InspectInventory() 
+    {
+        //Moving camera down
+        Transform newCamera = playerCharacter.transform.GetChild(0).transform;
+        CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
+
+        Vector3 oldCameraPos = virtCam.transform.position;
+        Quaternion oldCameraRot = virtCam.transform.rotation;
+
+        if (cameraMove != null)
+        {
+            playerCharacter.GetComponent<PlayerMovement>().enabled = false;
+
+            cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
+        }
+
+        playerCharacter.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        InventoryPanelUI.SetActive(false);       //Setting panel deactive
+        isCurrentlyInspecting = true;
+
+        //Spawning object infront of player
+        currentlyInspectingObject.SetActive(true);
+        currentlyInspectingObject.transform.position = playerCharacter.transform.GetChild(0).transform.position + (playerCharacter.transform.GetChild(0).transform.forward * 2.5f);
+
+
     }
 }

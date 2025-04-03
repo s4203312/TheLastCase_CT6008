@@ -24,30 +24,6 @@ public class InteractableObject : MonoBehaviour
         playerButton = GameObject.Find("PlayerCanvas").transform.GetChild(0).GetComponent<Button>();
     }
 
-    //public void Update()
-    //{
-    //    Collider[] collidedObjects = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), Quaternion.identity, LayerMask.GetMask("PlayerLayer"));
-    //    foreach (Collider collider in collidedObjects)
-    //    {
-    //        Debug.Log(collider);
-    //        if (collider.gameObject.name == "Player" && onlyGhostVisable)       //Stops interact appearing for player on ghost objects
-    //        {
-    //            return;
-    //        }
-    //        playerCharacters.GetComponent<PlayerMovement>().interactedObject = gameObject;          //Adding listener when player close
-    //        playerButton.gameObject.SetActive(true);
-    //        playerButton.onClick.AddListener(FindAction);
-    //    }
-    //    if(collidedObjects == null)         //Removing listeners when not close to player
-    //    {
-    //        Debug.Log("Removing");
-    //        playerCharacters.GetComponent<PlayerMovement>().interactedObject = null;
-    //        playerButton.gameObject.SetActive(false);
-    //        playerButton.onClick.RemoveListener(FindAction);
-    //    }
-    //    collidedObjects = null;
-    //}
-
     public void OnCollisionStay(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
