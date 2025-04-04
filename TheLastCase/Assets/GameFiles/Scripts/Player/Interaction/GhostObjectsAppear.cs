@@ -11,6 +11,8 @@ public class GhostObjectsAppear : MonoBehaviour
 
     public List<Collider> loadedGhostObjects = new List<Collider>();
 
+    private int distanceOfOverlap = 10;
+
     private void Start()
     {
         ghost = transform.GetChild(1).gameObject;
@@ -31,15 +33,17 @@ public class GhostObjectsAppear : MonoBehaviour
 
     private void LoadObjects()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, 5);
+        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, distanceOfOverlap);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject.CompareTag("Interactable"))
             {
+                Debug.Log("Interactable" + hitCollider);
                 if (hitCollider.gameObject.TryGetComponent<InteractableObject>(out InteractableObject script))
                 {
                     if (script.onlyGhostVisable && !(hitCollider.gameObject.GetComponent<MeshRenderer>().enabled == true))
                     {
+                        Debug.Log(hitCollider);
                         hitCollider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         //hitCollider.gameObject.GetComponent<Collider>().enabled = true;
                         loadedGhostObjects.Add(hitCollider);
@@ -51,7 +55,7 @@ public class GhostObjectsAppear : MonoBehaviour
 
     private void UpdateLoadedObjects()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, 1);
+        Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, distanceOfOverlap);
         //Iterating bakcwards to ensure that a index error is not found when removing the item from list
         for (int i = 0; i < loadedGhostObjects.Count; i++)
         {
