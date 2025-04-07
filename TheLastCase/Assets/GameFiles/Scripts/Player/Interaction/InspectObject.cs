@@ -22,8 +22,8 @@ public class InspectObject : MonoBehaviour
         if (inventoryLoadScipt.isCurrentlyInspecting)
         {
             inspectingObject = inventoryLoadScipt.currentlyInspectingObject;
-            dRotationX = Input.GetAxis("Mouse X");
-            dRotationY = Input.GetAxis("Mouse Y");
+            dRotationX = -Input.GetAxis("Mouse X");
+            dRotationY = -Input.GetAxis("Mouse Y");
 
             //Perform rotation of object with mouse
             if (Input.GetMouseButton(1) && inspectingObject != null)

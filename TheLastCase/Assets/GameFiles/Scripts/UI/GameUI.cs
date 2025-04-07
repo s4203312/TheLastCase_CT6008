@@ -102,7 +102,7 @@ public class GameUI : MonoBehaviour
             interactButton.GetComponent<Image>().enabled = true;           
         }
 
-
+        exitView.onClick.RemoveAllListeners();
     }
 
     public void QuitToMenu()
