@@ -123,7 +123,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         canvas.SetActive(false);
         lockObj.SetActive(false);
 
-        gameUI.ExitView();
+        gameUI.ExitView(1);
         playerButton.onClick.RemoveAllListeners();
 
         Debug.Log("Puzzle Complete");

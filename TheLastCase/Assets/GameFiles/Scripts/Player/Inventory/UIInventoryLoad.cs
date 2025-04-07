@@ -21,6 +21,8 @@ public class UIInventoryLoad : MonoBehaviour
     public bool isCurrentlyInspecting = false;
     public GameObject currentlyInspectingObject;
 
+    [HideInInspector] public Vector3 oldCameraPos;
+    [HideInInspector] public Quaternion oldCameraRot;
     private void Start()
     {
         interactActions = playerCharacter.GetComponent<InteractActions>();
@@ -121,27 +123,33 @@ public class UIInventoryLoad : MonoBehaviour
     public void InspectInventory() 
     {
         //Moving camera down
-        Transform newCamera = playerCharacter.transform.GetChild(0).transform;
+        Transform newCamera = playerCharacter.transform.GetChild(0).transform.GetChild(0).transform;
         CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
 
-        Vector3 oldCameraPos = virtCam.transform.position;
-        Quaternion oldCameraRot = virtCam.transform.rotation;
+        GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
+        Button exitViewButton = gameUI.transform.GetChild(2).GetComponent<Button>();
+
+        oldCameraPos = virtCam.transform.position;
+        oldCameraRot = virtCam.transform.rotation;
 
         if (cameraMove != null)
         {
             playerCharacter.GetComponent<PlayerMovement>().enabled = false;
 
             cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
+
+            exitViewButton.gameObject.SetActive(true);
+            exitViewButton.onClick.AddListener(() => gameUI.ExitView(2));
         }
 
-        playerCharacter.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        //playerCharacter.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         InventoryPanelUI.SetActive(false);       //Setting panel deactive
         isCurrentlyInspecting = true;
 
         //Spawning object infront of player
         currentlyInspectingObject.SetActive(true);
-        currentlyInspectingObject.transform.position = playerCharacter.transform.GetChild(0).transform.position + (playerCharacter.transform.GetChild(0).transform.forward * 2.5f);
+        currentlyInspectingObject.transform.position = playerCharacter.transform.GetChild(0).transform.GetChild(0).transform.position + (playerCharacter.transform.GetChild(0).transform.forward * 2.5f);
 
         currentlyInspectingObject.AddComponent<InspectObject>();
     }

@@ -49,7 +49,7 @@ public class GameUI : MonoBehaviour
         paused = false;
     }
 
-    public void ExitView()
+    public void ExitView(int index)
     {
         //GameObject playerCharacters = GameObject.Find("PlayerCharacters");
         //CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
@@ -69,8 +69,25 @@ public class GameUI : MonoBehaviour
 
         GameObject playerCharacters = GameObject.Find("PlayerCharacters");
         CameraMove cameraMove = gameCam.GetComponent<CameraMove>();
-        oldCameraPos = playerCharacters.GetComponent<InteractActions>().oldCameraPos;
-        oldCameraRot = playerCharacters.GetComponent<InteractActions>().oldCameraRot;
+
+        UIInventoryLoad inventoryLoad = GameObject.Find("InventoryManager").GetComponent<UIInventoryLoad>();
+
+        if (index == 1)
+        {
+            oldCameraPos = playerCharacters.GetComponent<InteractActions>().oldCameraPos;
+            oldCameraRot = playerCharacters.GetComponent<InteractActions>().oldCameraRot;
+        }
+        else if (index == 2)
+        {
+            oldCameraPos = inventoryLoad.oldCameraPos;
+            oldCameraRot = inventoryLoad.oldCameraRot;
+           
+            if (inventoryLoad.currentlyInspectingObject.activeInHierarchy == true)
+            {
+                inventoryLoad.currentlyInspectingObject.SetActive(false);
+                inventoryLoad.currentlyInspectingObject = null;
+            }
+        }
 
         if (cameraMove != null)
         {
@@ -81,9 +98,11 @@ public class GameUI : MonoBehaviour
             StartCoroutine(DelayCameraFollow(2, cameraMove));
 
             playerCharacters.GetComponent<PlayerMovement>().enabled = true;
-            playerCharacters.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+            //playerCharacters.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             interactButton.GetComponent<Image>().enabled = true;           
         }
+
+
     }
 
     public void QuitToMenu()

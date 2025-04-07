@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
@@ -141,7 +142,8 @@ public class InteractActions : MonoBehaviour
     {
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
-        Button exitViewButton = GameObject.Find("GameUI").transform.GetChild(2).GetComponent<Button>();
+        GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
+        Button exitViewButton = gameUI.transform.GetChild(2).GetComponent<Button>();
         Transform newCamera = interactionObject.transform.parent.GetChild(0);
         //Transform[] newCameras = null;
         //newCameras.Append(newCamera);
@@ -158,8 +160,9 @@ public class InteractActions : MonoBehaviour
             cameraMove.MoveCameraToRoom(newCamera.position, newCamera.rotation);
 
             StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));          
+            exitViewButton.onClick.AddListener(() => gameUI.ExitView(1));
         }
-        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         interactButton.GetComponent<Image>().enabled = false;
     }
 

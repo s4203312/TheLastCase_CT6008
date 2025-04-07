@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add26b580d19be549885d38d756fa83f, type: 3}
-  m_Name: Figure3
+  m_Name: Warrior_Axe
   m_EditorClassIdentifier: 
-  itemName: King Arthur
-  itemDescription: King Arthur's body.
-  itemPicture: {fileID: 21300000, guid: 723686f587e66c44c97834b3ce13e78f, type: 3}
-  puzzleID: 
+  itemName: Warrior's Axe
+  itemDescription: A battle worn axe. Maybe it could fit somewhere.
+  itemPicture: {fileID: 0}
+  puzzleID: Figures
