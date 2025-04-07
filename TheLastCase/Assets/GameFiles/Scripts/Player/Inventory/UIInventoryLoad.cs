@@ -143,6 +143,6 @@ public class UIInventoryLoad : MonoBehaviour
         currentlyInspectingObject.SetActive(true);
         currentlyInspectingObject.transform.position = playerCharacter.transform.GetChild(0).transform.position + (playerCharacter.transform.GetChild(0).transform.forward * 2.5f);
 
-
+        currentlyInspectingObject.AddComponent<InspectObject>();
     }
 }
