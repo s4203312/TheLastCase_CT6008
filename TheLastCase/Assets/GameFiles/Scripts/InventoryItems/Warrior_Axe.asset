@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Warrior's Axe
   itemDescription: A battle worn axe. Maybe it could fit somewhere.
-  itemPicture: {fileID: 0}
+  itemPicture: {fileID: 21300000, guid: 8b208aab2bf0c244f99029ad7e335a74, type: 3}
   puzzleID: Figures
