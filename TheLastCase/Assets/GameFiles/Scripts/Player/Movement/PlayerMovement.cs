@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
                 ghost.gameObject.SetActive(false);
                 GetComponent<GhostTetherRenderer>().enabled = false;
+                GameObject.Find("Main Camera").transform.GetChild(0).gameObject.SetActive(false);       //Screen shader unactive
 
                 if (virtualCam.Follow != null)
                 {
@@ -98,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
                 ghost.gameObject.SetActive(true);
                 GetComponent<GhostTetherRenderer>().enabled = true;
+                GameObject.Find("Main Camera").transform.GetChild(0).gameObject.SetActive(true);        //Screen shader active
                 GetComponent<GhostTetherRenderer>().StartGhostPath();
 
                 if (virtualCam.Follow != null)
@@ -142,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
         playerController.isGhostActive = false;
         ghost.gameObject.SetActive(false);
         ghost.GetComponent<NavMeshAgent>().enabled = true;
+        GameObject.Find("Main Camera").transform.GetChild(0).gameObject.SetActive(false);       //Screen shader unactive
 
         if (virtualCam.Follow != null)
         {
