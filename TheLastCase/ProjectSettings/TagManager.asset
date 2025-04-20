@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - InventoryImage
+  - InspectInteractable
   layers:
   - Default
   - TransparentFX
