@@ -18,12 +18,15 @@ public class GameUI : MonoBehaviour
 
     private CinemachineVirtualCamera gameCam;
 
+    private GameObject playerCharacters;
+
     private void Start()
     {
         pausePanel.SetActive(false);
         exitView.gameObject.SetActive(false);
 
         gameCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        playerCharacters = GameObject.Find("PlayerCharacters");
     }
 
     private void Update()
@@ -67,7 +70,6 @@ public class GameUI : MonoBehaviour
         //    exitView.gameObject.SetActive(false);
         //}
 
-        GameObject playerCharacters = GameObject.Find("PlayerCharacters");
         CameraMove cameraMove = gameCam.GetComponent<CameraMove>();
 
         UIInventoryLoad inventoryLoad = GameObject.Find("InventoryManager").GetComponent<UIInventoryLoad>();
@@ -95,11 +97,7 @@ public class GameUI : MonoBehaviour
           
             exitView.gameObject.SetActive(false);
 
-            StartCoroutine(DelayCameraFollow(2, cameraMove));
-
-            playerCharacters.GetComponent<PlayerMovement>().enabled = true;
-            //playerCharacters.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
-            interactButton.GetComponent<Image>().enabled = true;           
+            StartCoroutine(DelayCameraFollow(1.75f, cameraMove));
         }
 
         exitView.onClick.RemoveAllListeners();
@@ -116,9 +114,13 @@ public class GameUI : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator DelayCameraFollow(int time, CameraMove cameraMove)
+    private IEnumerator DelayCameraFollow(float time, CameraMove cameraMove)
     {
         yield return new WaitForSeconds(time);
+        
+        playerCharacters.GetComponent<PlayerMovement>().enabled = true;
+        interactButton.GetComponent<Image>().enabled = true;
+        interactButton.transform.GetChild(0).gameObject.SetActive(true);
         cameraMove.FollowPlayer();
     }
 }

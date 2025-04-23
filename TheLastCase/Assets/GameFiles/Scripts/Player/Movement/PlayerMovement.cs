@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Can change this to use a assets:// file link??
     public GameObject playerPointShader;
+    public bool ghostPullingBackIn = false;
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
@@ -114,9 +115,11 @@ public class PlayerMovement : MonoBehaviour
         if (playerController.isGhostActive)         //Checking to pull ghost back in
         {
             float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
-            if (distanceAway > 10)
+            //float distanceAway = (GetComponent<GhostTetherRenderer>().linePoints.Count * 0.2f);
+            if (distanceAway > 25)
             {
                 //Pulling ghost back in
+                ghostPullingBackIn = true;
                 Vector3[] tetherPoints = GetComponent<GhostTetherRenderer>().linePoints.ToArray();
                 Array.Reverse(tetherPoints);
                 ghost.GetComponent<NavMeshAgent>().enabled = false;
@@ -143,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        ghostPullingBackIn = false;
+        GetComponent<GhostTetherRenderer>().linePoints.Clear();
         playerController.isGhostActive = false;
         ghost.gameObject.SetActive(false);
         ghost.GetComponent<NavMeshAgent>().enabled = true;

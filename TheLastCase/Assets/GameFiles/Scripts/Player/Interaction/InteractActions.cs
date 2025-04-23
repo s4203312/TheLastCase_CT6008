@@ -172,6 +172,7 @@ public class InteractActions : MonoBehaviour
         }
         //gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         interactButton.GetComponent<Image>().enabled = false;
+        interactButton.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     

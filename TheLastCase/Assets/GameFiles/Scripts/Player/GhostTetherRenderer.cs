@@ -38,13 +38,23 @@ public class GhostTetherRenderer : MonoBehaviour
 
     void Update()
     {
-        Vector3 currentEndPoint = ghost.transform.position;
-        int amountOfPoints = linePoints.Count;
-
-        if (amountOfPoints == 0 || Vector3.Distance(linePoints[amountOfPoints - 1], currentEndPoint) >= 0.2)    //Ensuring the new point is 0.2 away from the last one    
+        if (ghost.transform.parent.GetComponent<PlayerMovement>().playerController.isGhostActive)
         {
-            linePoints.Add(currentEndPoint);
-            UpdateTether(amountOfPoints + 1);       //One extra point for the end point of the ghost
+            Vector3 currentEndPoint = ghost.transform.position;
+            int amountOfPoints = linePoints.Count;
+
+            if (amountOfPoints == 0 || Vector3.Distance(linePoints[amountOfPoints - 1], currentEndPoint) >= 0.2)    //Ensuring the new point is 0.2 away from the last one    
+            {
+                if (!ghost.transform.parent.GetComponent<PlayerMovement>().ghostPullingBackIn)
+                {
+                    linePoints.Add(currentEndPoint);
+                    UpdateTether(amountOfPoints + 1);       //One extra point for the end point of the ghost
+                }
+            }
+        }
+        else
+        {
+            linePoints.Clear();
         }
     }
 
