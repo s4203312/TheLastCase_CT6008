@@ -81,8 +81,11 @@ public class InteractActions : MonoBehaviour
       
         interactionObject.transform.SetParent(null);
 
-        PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
-
+        if (interactionObject.GetComponent<InteractableObject>().itemData != null)
+        {
+            PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
+        }
+        
         interactionObject.GetComponent<BoxCollider>().enabled = true;
         interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
@@ -138,6 +141,11 @@ public class InteractActions : MonoBehaviour
         }
     }
 
+    public void PlaceAndRotate()
+    {
+
+    }
+
     public void FocusOnPuzzle()
     {
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
@@ -166,10 +174,7 @@ public class InteractActions : MonoBehaviour
         interactButton.GetComponent<Image>().enabled = false;
     }
 
-    public void InspectPuzzle()
-    {
-
-    }
+    
 
     public void AccessInventory()
     {

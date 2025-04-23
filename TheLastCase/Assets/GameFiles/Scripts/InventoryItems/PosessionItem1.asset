@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add26b580d19be549885d38d756fa83f, type: 3}
-  m_Name: Warrior_Axe 1
+  m_Name: PosessionItem1
   m_EditorClassIdentifier: 
-  itemName: Warrior's Axe
-  itemDescription: A battle worn axe. Maybe it could fit somewhere.
+  itemName: 
+  itemDescription: 
   itemPicture: {fileID: 0}
-  puzzleID: 
+  puzzleID: SimplePosess

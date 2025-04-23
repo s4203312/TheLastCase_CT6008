@@ -50,6 +50,8 @@ public class InteractableObject : MonoBehaviour
 
     private void FindAction()
     {
+        playerCharacters.GetComponent<PlayerMovement>().StopPlayer();
+
         InteractActions script = playerCharacters.GetComponent<InteractActions>();
         playerButton.onClick.RemoveAllListeners();
 

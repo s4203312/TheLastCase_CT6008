@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Wukong's Blade
   itemDescription: A set piece. It looks like it could fit somewhere.
   itemPicture: {fileID: 21300000, guid: 30bb1ea0654c1814d833b0ec0fa000a2, type: 3}
-  puzzleID: 
+  puzzleID: Statues

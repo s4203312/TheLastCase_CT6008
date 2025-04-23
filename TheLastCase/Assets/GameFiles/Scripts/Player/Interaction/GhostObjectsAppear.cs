@@ -38,12 +38,10 @@ public class GhostObjectsAppear : MonoBehaviour
         {
             if (hitCollider.gameObject.CompareTag("Interactable"))
             {
-                Debug.Log("Interactable" + hitCollider);
                 if (hitCollider.gameObject.TryGetComponent<InteractableObject>(out InteractableObject script))
                 {
                     if (script.onlyGhostVisable && !(hitCollider.gameObject.GetComponent<MeshRenderer>().enabled == true))
                     {
-                        Debug.Log(hitCollider);
                         hitCollider.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         //hitCollider.gameObject.GetComponent<Collider>().enabled = true;
                         loadedGhostObjects.Add(hitCollider);

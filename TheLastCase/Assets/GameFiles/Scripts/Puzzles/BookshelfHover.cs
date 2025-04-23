@@ -54,7 +54,7 @@ public class BookshelfHover : MonoBehaviour
     void ShowButtonInFrontOfSlot(GameObject hoveredSlot)
     {
         GameObject activeButton = null;
-        if (hitSlot.childCount > 0 || hitSlot.GetComponent<PuzzleSlotData>().isOccupied)
+        if (hitSlot.childCount > 0 || hitSlot.GetComponent<PuzzleData>().isOccupied)
         {
             activeButton = pickUpItemButton.gameObject;
         }

@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
-                if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable") 
+                if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable")
                 {
                     //Destroy any left over shader before moving again
                     Destroy(GameObject.Find("PlayerPointShader(Clone)"));
@@ -64,13 +64,13 @@ public class PlayerMovement : MonoBehaviour
                         Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
                         Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
-                    else if(playerController.isGhostActive)
+                    else if (playerController.isGhostActive)
                     {
                         ghost.SetDestination(hit.point);        //Doesnt move player as tethered to player
                         Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
                         Instantiate(playerPointShader, shaderSpawnPos, Quaternion.identity);
                     }
-                    
+
                 }
             }
         }
@@ -94,8 +94,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                StopPlayer();
+
                 playerController.isGhostActive = true;
-                ghost.transform.position = player.transform.position;        //Moves ghost too player position to ensure its in same place when switch happens
+                ghost.transform.position = player.transform.position - (player.transform.forward * 1.2f);        //Moves ghost too player position to ensure its in same place when switch happens
 
                 ghost.gameObject.SetActive(true);
                 GetComponent<GhostTetherRenderer>().enabled = true;
@@ -150,5 +152,10 @@ public class PlayerMovement : MonoBehaviour
         {
             virtualCam.Follow = player.transform;
         }
+    }
+
+    public void StopPlayer()
+    {
+        player.SetDestination(player.transform.position);
     }
 }

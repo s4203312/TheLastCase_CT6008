@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleSlotData : MonoBehaviour
+public class PuzzleData : MonoBehaviour
 {
     public InventoryItemData correctItem;
 

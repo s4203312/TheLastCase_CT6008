@@ -45,7 +45,7 @@ public class ManagerBookshelf : MonoBehaviour, IPuzzle
 
         foreach (GameObject slot in  shelfSlots)
         {
-            PuzzleSlotData puzzleSlotData = slot.GetComponent<PuzzleSlotData>();
+            PuzzleData puzzleSlotData = slot.GetComponent<PuzzleData>();
 
             if (puzzleSlotData.itemHolder.childCount > 0)
             {

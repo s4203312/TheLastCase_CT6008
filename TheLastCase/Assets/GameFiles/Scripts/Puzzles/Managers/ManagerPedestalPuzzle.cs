@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
+public class ManagerPedestalPuzzle : MonoBehaviour, IPuzzle
 {
     [Header("Puzzle Name")]
     [SerializeField] private string puzzleID;
@@ -27,7 +27,7 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
         foreach (GameObject pedestal in pedestals)
         {
             Transform collider = pedestal.transform.Find("Collider");
-            PuzzleSlotData puzzleSlotData = collider.GetComponent<PuzzleSlotData>();
+            PuzzleData puzzleSlotData = collider.GetComponent<PuzzleData>();
 
             InventoryItemData itemData = null;
 
@@ -59,7 +59,7 @@ public class ManagerFiguresPuzzle : MonoBehaviour, IPuzzle
         foreach (GameObject pedestal in pedestals)
         {
             Transform collider = pedestal.transform.Find("Collider");
-            PuzzleSlotData puzzleSlotData = collider.GetComponent<PuzzleSlotData>();
+            PuzzleData puzzleSlotData = collider.GetComponent<PuzzleData>();
 
             collider.gameObject.SetActive(false);
 

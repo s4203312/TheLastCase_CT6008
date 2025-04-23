@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Samurai Sword
   itemDescription: A well crafted blade. Looks like it would fit somewhere.
   itemPicture: {fileID: 21300000, guid: 2c9ffbdcad25ad64aac4a910c53cd3d6, type: 3}
-  puzzleID: Figures
+  puzzleID: Statues

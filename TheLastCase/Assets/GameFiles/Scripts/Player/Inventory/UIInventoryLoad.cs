@@ -63,6 +63,7 @@ public class UIInventoryLoad : MonoBehaviour
                                 if (itemObject != null)
                                 {
                                     currentlyInspectingObject = itemObject;
+                                    playerCharacter.GetComponent<PlayerMovement>().StopPlayer();
                                     InspectInventory();
                                 }
                             }
