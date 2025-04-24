@@ -28,11 +28,14 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     {
         foreach (GameObject statue in statues)
         {
+            int modelIndex = System.Array.IndexOf(statues, statue);
+
             if (statue.transform.GetChild(0).transform.position == VirtualCamera.transform.position) { iscorrect = true; }
 
             if (iscorrect)
             {
                 inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+                
             }
         }
     }
