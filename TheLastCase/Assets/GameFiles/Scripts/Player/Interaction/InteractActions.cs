@@ -85,7 +85,9 @@ public class InteractActions : MonoBehaviour
         {
             PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
         }
-        
+
+        Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
+
         interactionObject.GetComponent<BoxCollider>().enabled = true;
         interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);

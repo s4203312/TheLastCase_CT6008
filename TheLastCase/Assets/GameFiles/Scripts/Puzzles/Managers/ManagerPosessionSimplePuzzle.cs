@@ -22,6 +22,8 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
+
+        movingObjectSlot.SetActive(false);
     }
 
     private void Update()
@@ -32,7 +34,12 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
             //{
             //    movingObject.GetComponent<GhostPosession>().enabled = true;
             //}
-            if (!isItemInCorrectPos) { movingObject.GetComponent<GhostPosession>().enabled = true; }          
+            if (!isItemInCorrectPos) 
+            { 
+                movingObject.GetComponent<GhostPosession>().enabled = true;
+
+                movingObjectSlot.SetActive(true);
+            }          
         }
         else
         {
@@ -41,6 +48,8 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
             //    movingObject.GetComponent<GhostPosession>().enabled = false;
             //}
             movingObject.GetComponent<GhostPosession>().enabled = false;
+
+            movingObjectSlot.SetActive(false);
         }
     }
 

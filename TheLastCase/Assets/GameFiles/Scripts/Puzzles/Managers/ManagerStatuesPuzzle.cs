@@ -11,10 +11,13 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
     [Header("Used Objects")]
     public GameObject[] statues;
+    public GameObject[] statueWeaponSilhouettes;
 
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
+
+        foreach (GameObject weapons in statueWeaponSilhouettes) { weapons.SetActive(false); }
     }
 
     public void CheckPuzzle()
