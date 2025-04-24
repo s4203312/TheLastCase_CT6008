@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,32 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     [SerializeField] private string puzzleID;
 
     private InventoryItemData itemData;
+    private bool iscorrect = false;
 
     [Header("Used Objects")]
     public GameObject[] statues;
     public GameObject[] statueWeaponSilhouettes;
+    public CinemachineVirtualCamera VirtualCamera;
+    public InspectObject inpectManager;
 
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
 
         foreach (GameObject weapons in statueWeaponSilhouettes) { weapons.SetActive(false); }
+    }
+
+    public void Update()
+    {
+        foreach (GameObject statue in statues)
+        {
+            if (statue.transform.GetChild(0).transform.position == VirtualCamera.transform.position) { iscorrect = true; }
+
+            if (iscorrect)
+            {
+                inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+            }
+        }
     }
 
     public void CheckPuzzle()
