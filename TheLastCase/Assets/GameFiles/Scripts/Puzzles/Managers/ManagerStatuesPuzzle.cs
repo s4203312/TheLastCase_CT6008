@@ -35,7 +35,12 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             if (iscorrect)
             {
                 inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
-                
+
+                statueWeaponSilhouettes[modelIndex].SetActive(true);
+            }
+            else
+            {
+                statueWeaponSilhouettes[modelIndex].SetActive(false);
             }
         }
     }
