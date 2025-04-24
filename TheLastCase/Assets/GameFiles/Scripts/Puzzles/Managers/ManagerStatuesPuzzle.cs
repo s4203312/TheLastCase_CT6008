@@ -9,10 +9,10 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     [SerializeField] private string puzzleID;
 
     private InventoryItemData itemData;
-    private bool iscorrect = false;
+    //private bool iscorrect = false;
     private CinemachineBrain gameCam;
-    private int correctWeaponsPlaced = 0;
     [HideInInspector] public Transform hitSlot;
+    private GameObject currentStatue = null;
 
     [Header("Used Objects")]
     public GameObject[] statues;
@@ -34,45 +34,112 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
     public void Update()
     {
+        //foreach (GameObject statue in statues)
+        //{
+        //    int modelIndex = Array.IndexOf(statues, statue);           
+
+        //    GameObject currentStatue = null;
+
+        //    gameCam.OutputCamera.transform.position = VirtualCamera.transform.position;
+        //    gameCam.OutputCamera.transform.rotation = VirtualCamera.transform.rotation;
+
+        //    Ray ray = new Ray(gameCam.OutputCamera.transform.position, gameCam.OutputCamera.transform.forward);
+        //    RaycastHit hit;        
+
+        //    if (Physics.Raycast(ray, out hit, 100f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform.gameObject != null)
+        //    {
+        //        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
+        //        if (hit.transform.gameObject == statue)
+        //        {
+        //            iscorrect = true;
+        //            currentStatue = statue;
+        //        }
+        //    }
+
+        //    if (iscorrect && currentStatue != null)
+        //    {
+        //        GameObject puzzleSlot = statue.transform.Find("PuzzleSlot").gameObject;
+
+        //        if (puzzleSlot.GetComponent<PuzzleData>().isOccupied == false)
+        //        {
+        //            inpectManager.InspectionFunction(currentStatue.transform.GetChild(0).transform.parent.gameObject, false);
+        //        }
+        //        else
+        //        {
+        //            inpectManager.InspectionFunction(puzzleSlot.transform.GetChild(0).gameObject, true);
+        //        }
+
+        //        HoveringOnSlot();
+
+        //        statueWeaponSilhouettes[modelIndex].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        statueWeaponSilhouettes[modelIndex].SetActive(false);
+        //    }
+        //}
+
         foreach (GameObject statue in statues)
         {
-            int modelIndex = Array.IndexOf(statues, statue);           
-        
-            GameObject currentStatue = null;
+            int modelIndex = Array.IndexOf(statues, statue);
+            GameObject puzzleSlot = statue.transform.Find("PuzzleSlot").gameObject;
+            PuzzleData puzzleData = puzzleSlot.GetComponent<PuzzleData>();
 
             gameCam.OutputCamera.transform.position = VirtualCamera.transform.position;
             gameCam.OutputCamera.transform.rotation = VirtualCamera.transform.rotation;
 
-            int layerMask = (8);
-
             Ray ray = new Ray(gameCam.OutputCamera.transform.position, gameCam.OutputCamera.transform.forward);
-            RaycastHit hit;        
+            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, layerMask) && hit.transform.gameObject != null)
+            // Raycast, ignore "PuzzleSlot" layer
+            if (Physics.Raycast(ray, out hit, 100f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform != null)
             {
-                //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.gameObject == statue)
                 {
-                    iscorrect = true;
-                    currentStatue = statue;
+                    // Update current statue only if it changed
+                    if (currentStatue != statue)
+                    {
+                        currentStatue = statue;
+                    }
                 }
             }
 
-            if (iscorrect && currentStatue != null)
+            // Only handle interaction for the current selected statue
+            if (statue == currentStatue)
             {
-                GameObject puzzleSlot = statue.transform.Find("PuzzleSlot").gameObject;
-
-                if (puzzleSlot.GetComponent<PuzzleData>().isOccupied == false)
+                if (puzzleSlot.transform.childCount > 0)
                 {
-                    inpectManager.InspectionFunction(currentStatue.transform.GetChild(0).transform.parent.gameObject, false);
+                    puzzleData.isOccupied = true;
+
+                    GameObject heldItem = puzzleSlot.transform.GetChild(0).gameObject;
+                    InteractableObject heldObject = heldItem.GetComponent<InteractableObject>();
+
+                    float angle = Quaternion.Angle(statueWeaponSilhouettes[modelIndex].transform.rotation, heldItem.transform.rotation);
+
+                    if (puzzleData.correctItem == heldObject.itemData && angle <= 12f)
+                    {
+                        // Lock weapon in place
+                        heldItem.transform.rotation = statueWeaponSilhouettes[modelIndex].transform.rotation;
+                        puzzleSlot.GetComponent<BoxCollider>().enabled = false;
+                        statueWeaponSilhouettes[modelIndex].GetComponent<MeshRenderer>().enabled = false;
+
+                        inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+                    }
+                    else
+                    {
+                        // Still inspecting the item
+                        inpectManager.InspectionFunction(heldItem, true);
+                    }
                 }
                 else
                 {
-                    inpectManager.InspectionFunction(puzzleSlot.transform.GetChild(0).gameObject, true);
-                }
-              
-                HoveringOnSlot();
+                    puzzleData.isOccupied = false;
 
+                    // Inspect the statue normally
+                    inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+                }
+
+                HoveringOnSlot();
                 statueWeaponSilhouettes[modelIndex].SetActive(true);
             }
             else
@@ -80,6 +147,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 statueWeaponSilhouettes[modelIndex].SetActive(false);
             }
         }
+        CheckPuzzle();
     }
 
     public void HoveringOnSlot()
@@ -91,7 +159,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
+        if (Physics.Raycast(ray, out hit) && !inventoryPanel.activeInHierarchy)
         {
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (hit.transform.tag == "Silhouette")
@@ -120,37 +188,54 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             activeButton = placeItemButton.gameObject;
         }
         activeButton.gameObject.SetActive(true);
-        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, 0f, 0f);
+        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, .2f, .2f);
     }
 
 
     public void CheckPuzzle()
-    {  
+    {
+        int correctWeaponsPlaced = 0;
+
         foreach (GameObject statue in statues)
         {
-            PuzzleData puzzleData = statue.transform.Find("PuzzleSlot").GetComponent<PuzzleData>();
-
+            Transform puzzleSlot = statue.transform.Find("PuzzleSlot");
+            PuzzleData puzzleData = puzzleSlot.GetComponent<PuzzleData>();
             int modelIndex = Array.IndexOf(statues, statue);
 
-            if (statue.transform.Find("PuzzleSlot").childCount > 0)
+            if (puzzleSlot.childCount > 0)
             {
                 puzzleData.isOccupied = true;
 
-                if (puzzleData.correctItem == puzzleData.transform.gameObject.transform.GetChild(0).GetComponent<InteractableObject>().itemData && Quaternion.Angle(statueWeaponSilhouettes[modelIndex].transform.rotation, puzzleData.transform.GetChild(0).transform.rotation) <= 12f)
-                {                 
-                    puzzleData.transform.GetChild(0).transform.rotation = statueWeaponSilhouettes[modelIndex].transform.rotation;
-                    inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+                InteractableObject placedObject = puzzleSlot.GetChild(0).GetComponent<InteractableObject>();
+                bool correctItemPlaced = placedObject.itemData == puzzleData.correctItem;
 
-                    puzzleData.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+                float angleDifference = Quaternion.Angle(
+                    statueWeaponSilhouettes[modelIndex].transform.rotation,
+                    puzzleSlot.GetChild(0).transform.rotation
+                );
 
+                bool isRotationCorrect = angleDifference <= 2f;
+
+                // Only run this if the item is correct, rotation is good, and we haven't counted this one yet
+                if (correctItemPlaced && isRotationCorrect && !puzzleData.isCorrectlyPlaced)
+                {
+                    puzzleSlot.GetChild(0).rotation = statueWeaponSilhouettes[modelIndex].transform.rotation;
+                    //inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
+
+                    puzzleSlot.GetComponent<BoxCollider>().enabled = false;
                     statueWeaponSilhouettes[modelIndex].GetComponent<MeshRenderer>().enabled = false;
+
+                    puzzleData.isCorrectlyPlaced = true;
+                }
+
+                if (puzzleData.isCorrectlyPlaced)
+                {
                     correctWeaponsPlaced++;
-                    Debug.Log(correctWeaponsPlaced);
                 }
             }
             else
             {
-                statue.transform.Find("PuzzleSlot").GetComponent<PuzzleData>().isOccupied = false;
+                puzzleData.isOccupied = false;
             }
         }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7474,7 +7474,7 @@ Transform:
   m_GameObject: {fileID: 856656326}
   serializedVersion: 2
   m_LocalRotation: {x: -0.018269833, y: 0.7376763, z: -0.012170682, w: -0.6747976}
-  m_LocalPosition: {x: 0.22399537, y: 0.08767588, z: 0.03912718}
+  m_LocalPosition: {x: 0.224, y: 0.0877, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9959,7 +9959,7 @@ Transform:
   m_GameObject: {fileID: 1218903558}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06623975, y: 0.013353688, z: -0.0018116187, w: 0.99771273}
-  m_LocalPosition: {x: -0.0118624875, y: 0.07705889, z: -0.1591214}
+  m_LocalPosition: {x: -0.0138, y: 0.07705889, z: -0.1591214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10180,7 +10180,7 @@ GameObject:
   - component: {fileID: 1266249283}
   - component: {fileID: 1266249284}
   - component: {fileID: 1266249285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PuzzleSlot
   m_TagString: Silhouette
   m_Icon: {fileID: 0}
@@ -13085,7 +13085,7 @@ Transform:
   m_GameObject: {fileID: 1645600607}
   serializedVersion: 2
   m_LocalRotation: {x: -0.023149433, y: -0.72852445, z: 0.026000064, w: -0.6841347}
-  m_LocalPosition: {x: -0.17483453, y: 0.053119943, z: 0.018787213}
+  m_LocalPosition: {x: -0.1748, y: 0.053119943, z: 0.0175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13900,8 +13900,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.030397283, y: 0.08977237, z: 0.06164301}
-  m_Center: {x: 0.025140956, y: -0.025481759, z: 0.009143182}
+  m_Size: {x: 0.030397268, y: 0.08977237, z: 0.080569394}
+  m_Center: {x: 0.02514096, y: -0.025481757, z: 0.018606376}
 --- !u!1 &1768826331
 GameObject:
   m_ObjectHideFlags: 0
@@ -18886,8 +18886,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1397893, y: 0.32625067, z: 0.1681744}
-  m_Center: {x: 0.012069703, y: 0.0018120408, z: 0.009628361}
+  m_Size: {x: 0.13978931, y: 0.19111963, z: 0.1681744}
+  m_Center: {x: 0.012069702, y: 0.06937689, z: 0.009628363}
 --- !u!1 &5581023227123785141
 GameObject:
   m_ObjectHideFlags: 0

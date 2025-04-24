@@ -9,4 +9,6 @@ public class PuzzleData : MonoBehaviour
     public Transform itemHolder;
 
     public bool isOccupied;
+
+    public bool isCorrectlyPlaced;
 }
