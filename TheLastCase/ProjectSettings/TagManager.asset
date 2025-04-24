@@ -8,6 +8,7 @@ TagManager:
   - InventoryImage
   - InspectInteractable
   - Posessable
+  - Silhouette
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - IgnoreCameraCollisions
   - PuzzleSlot
   - IgnoreNavMesh
   - Interactable Floor

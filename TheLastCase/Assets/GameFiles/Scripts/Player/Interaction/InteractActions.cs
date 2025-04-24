@@ -68,12 +68,16 @@ public class InteractActions : MonoBehaviour
         }
         else
         {
-            if (bookshelfHover.hitSlot.childCount > 0) 
+            if (Managers.transform.Find("PuzzleManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
+            {
+                interactionObject = Managers.transform.Find("PuzzleManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.GetChild(0).gameObject;
+                isUsingButton = false;
+            }
+            else if (bookshelfHover.hitSlot.childCount > 0)
             {
                 interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
                 isUsingButton = false;
             }
-
         }
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
@@ -86,7 +90,10 @@ public class InteractActions : MonoBehaviour
             PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
         }
 
-        Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
+        if (interactionObject.transform.Find("SparkleEffect(Clone)"))
+        {
+            Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
+        }
 
         interactionObject.GetComponent<BoxCollider>().enabled = true;
         interactionObject.SetActive(false);

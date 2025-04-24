@@ -45,6 +45,7 @@ public class InspectObject : MonoBehaviour
                 inspectingObject.transform.rotation = Quaternion.AngleAxis(dRotationX * rotationSpeed, transform.up) *  //Rotates on X axis
                 Quaternion.AngleAxis(dRotationY * rotationSpeed, transform.right) *                                 //Rotates on Y axis
                 inspectingObject.transform.rotation;                                            //Multiplying the original rotation
+                PuzzleRegistry.Instance.CheckPuzzleByID(inspectingObject.GetComponent<InteractableObject>().itemData.puzzleID);
             }
             else
             {
