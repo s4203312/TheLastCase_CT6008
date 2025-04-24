@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
 
             if (interObj.GetComponent<InteractableObject>().itemData != null )
             {
-                Instantiate(sparkleEffect, interObj.transform);
+                GameObject particleEffect = Instantiate(sparkleEffect, interObj.transform);
+                particleEffect.tag = "Untagged";
             }
         }
     }
