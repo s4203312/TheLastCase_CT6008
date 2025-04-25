@@ -3,72 +3,7 @@ guid: cafa42bb166731b4d87b9b41c8cb1526
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_Alpha
-    second: {fileID: 2800000, guid: 359ceffe54f8d934ab76a169c5d992c0, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_BaseColor
-    second: {fileID: 2800000, guid: ce0999bec42a5b44887a26f58e599ae1, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_Emission
-    second: {fileID: 2800000, guid: 1da860478e844d546aee7c7a7fe4c238, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_Metallic
-    second: {fileID: 2800000, guid: 98346b63684e7464385e78fb481b32ec, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_Normal
-    second: {fileID: 2800000, guid: 3fd98191c7913b342941f81e74a1b958, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 3_Roughness
-    second: {fileID: 2800000, guid: 2411779060374d149bce1d23e5bfbaec, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_Alpha
-    second: {fileID: 2800000, guid: 0dadb1362fb35984bb61ee1a5c39a084, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_BaseColor
-    second: {fileID: 2800000, guid: 5c8869ff3d6a920449717e69193bd716, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_Emission
-    second: {fileID: 2800000, guid: 9e5cf2ed09cd57e44b2aea6c5f79d1dd, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_Metallic
-    second: {fileID: 2800000, guid: bf9358448a39fd44a8b25fcacf48d6c4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_Normal
-    second: {fileID: 2800000, guid: a8a23ccf79e85654b9babadc121909a4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 4_Roughness
-    second: {fileID: 2800000, guid: 3d72828f0e3d04e45994113a738104b4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: IMG_20220407_162315_186
-    second: {fileID: 2800000, guid: 2504c2207470a3e4fbfb92ea0e7aade2, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
