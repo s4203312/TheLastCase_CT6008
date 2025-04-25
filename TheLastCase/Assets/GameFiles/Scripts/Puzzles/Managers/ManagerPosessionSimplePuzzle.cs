@@ -16,13 +16,14 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     [Header("Used Objects")]
     public GameObject tableCam;
     public CinemachineVirtualCamera VirtualCamera;
+    public GameObject puzzleItem;
 
     private bool isItemInCorrectPos;
 
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
-
+        puzzleItem.SetActive(false);
         movingObjectSlot.SetActive(false);
     }
 
@@ -70,6 +71,8 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
+        tableCam.transform.parent.Find("Collider").transform.gameObject.SetActive(false);
+        puzzleItem.SetActive(true);
         Debug.Log("Puzzle Complete");
     }
 }

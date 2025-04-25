@@ -36,8 +36,8 @@ public class GhostObjectsAppear : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, distanceOfOverlap);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.CompareTag("Interactable"))
-            {
+            //if (hitCollider.gameObject.CompareTag("Interactable"))
+            //{
                 if (hitCollider.gameObject.TryGetComponent<InteractableObject>(out InteractableObject script))
                 {
                     if (script.onlyGhostVisable && !(hitCollider.gameObject.GetComponent<MeshRenderer>().enabled == true))
@@ -47,7 +47,7 @@ public class GhostObjectsAppear : MonoBehaviour
                         loadedGhostObjects.Add(hitCollider);
                     }
                 }
-            }
+            //}
         }
     }
 

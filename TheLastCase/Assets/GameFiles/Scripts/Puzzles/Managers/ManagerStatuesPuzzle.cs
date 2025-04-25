@@ -20,6 +20,8 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     public CinemachineVirtualCamera VirtualCamera;
     public InspectObject inpectManager;
     public GameObject inventoryPanel;
+    public GameObject inventoryButton;
+    public GameObject collisionBox;
     public Button placeItemButton;
     public Button pickUpItemButton;
 
@@ -32,53 +34,14 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         foreach (GameObject weapons in statueWeaponSilhouettes) { weapons.SetActive(false); }
     }
 
-    public void Update()
+    public void OnCollisionStay()
     {
-        //foreach (GameObject statue in statues)
-        //{
-        //    int modelIndex = Array.IndexOf(statues, statue);           
+        InspectingStatues();
+        CheckPuzzle();
+    }
 
-        //    GameObject currentStatue = null;
-
-        //    gameCam.OutputCamera.transform.position = VirtualCamera.transform.position;
-        //    gameCam.OutputCamera.transform.rotation = VirtualCamera.transform.rotation;
-
-        //    Ray ray = new Ray(gameCam.OutputCamera.transform.position, gameCam.OutputCamera.transform.forward);
-        //    RaycastHit hit;        
-
-        //    if (Physics.Raycast(ray, out hit, 100f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform.gameObject != null)
-        //    {
-        //        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
-        //        if (hit.transform.gameObject == statue)
-        //        {
-        //            iscorrect = true;
-        //            currentStatue = statue;
-        //        }
-        //    }
-
-        //    if (iscorrect && currentStatue != null)
-        //    {
-        //        GameObject puzzleSlot = statue.transform.Find("PuzzleSlot").gameObject;
-
-        //        if (puzzleSlot.GetComponent<PuzzleData>().isOccupied == false)
-        //        {
-        //            inpectManager.InspectionFunction(currentStatue.transform.GetChild(0).transform.parent.gameObject, false);
-        //        }
-        //        else
-        //        {
-        //            inpectManager.InspectionFunction(puzzleSlot.transform.GetChild(0).gameObject, true);
-        //        }
-
-        //        HoveringOnSlot();
-
-        //        statueWeaponSilhouettes[modelIndex].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        statueWeaponSilhouettes[modelIndex].SetActive(false);
-        //    }
-        //}
-
+    public void InspectingStatues()
+    {
         foreach (GameObject statue in statues)
         {
             int modelIndex = Array.IndexOf(statues, statue);
@@ -92,7 +55,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             RaycastHit hit;
 
             // Raycast, ignore "PuzzleSlot" layer
-            if (Physics.Raycast(ray, out hit, 100f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform != null)
+            if (Physics.Raycast(ray, out hit, 5f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform != null)
             {
                 if (hit.transform.gameObject == statue)
                 {
@@ -102,6 +65,10 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                         currentStatue = statue;
                     }
                 }
+            }
+            else
+            {
+                inventoryButton.SetActive(true);
             }
 
             // Only handle interaction for the current selected statue
@@ -141,13 +108,13 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
                 HoveringOnSlot();
                 statueWeaponSilhouettes[modelIndex].SetActive(true);
+                inventoryButton.SetActive(false);
             }
             else
             {
                 statueWeaponSilhouettes[modelIndex].SetActive(false);
-            }
+            }          
         }
-        CheckPuzzle();
     }
 
     public void HoveringOnSlot()
@@ -231,6 +198,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 if (puzzleData.isCorrectlyPlaced)
                 {
                     correctWeaponsPlaced++;
+                    Debug.Log("Corect" + correctWeaponsPlaced);
                 }
             }
             else
@@ -252,6 +220,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             Transform collider = statue.transform.Find("Collider");
             collider.gameObject.SetActive(false);
         }
+        collisionBox.SetActive(false);
 
         Debug.Log("Puzzle Complete");
     }
