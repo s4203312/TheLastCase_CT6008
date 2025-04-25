@@ -68,9 +68,9 @@ public class InteractActions : MonoBehaviour
         }
         else
         {
-            if (Managers.transform.Find("PuzzleManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
+            if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
             {
-                interactionObject = Managers.transform.Find("PuzzleManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.GetChild(0).gameObject;
+                interactionObject = GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.GetChild(0).gameObject;
                 isUsingButton = false;
             }
             else if (bookshelfHover.hitSlot.childCount > 0)
