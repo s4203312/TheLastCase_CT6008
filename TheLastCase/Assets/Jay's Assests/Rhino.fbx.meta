@@ -3,37 +3,7 @@ guid: c7cec00d1049a8a449131aa8c4370dd5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 5_BaseColor
-    second: {fileID: 2800000, guid: 01caf0aaae8b8b341bc130f7b5195dc6, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 5_Emission
-    second: {fileID: 2800000, guid: 5c0a94bb45bf24a4cbf31a4947445703, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 5_Metallic
-    second: {fileID: 2800000, guid: 6fdb44d5d76af0a489f762c733950246, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 5_Normal
-    second: {fileID: 2800000, guid: d733c6d51f964fa45bea3a0dcc5b7e7a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Frame 5_Roughness
-    second: {fileID: 2800000, guid: 393a5ded9c8a74a498205370c665afcc, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Rhino
-    second: {fileID: 2800000, guid: 55a41be35140bca46bdcb96ceb8a7b32, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
