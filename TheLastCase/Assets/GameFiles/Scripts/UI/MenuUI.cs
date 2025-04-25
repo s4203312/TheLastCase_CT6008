@@ -11,10 +11,12 @@ public class MenuUI : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioClip clip;
 
     public void Start()
     {
         VolumeChange(.5f);
+
     }
 
     public void StartGame()
