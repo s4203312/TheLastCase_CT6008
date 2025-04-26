@@ -94,7 +94,9 @@ public class GameUI : MonoBehaviour
         if (cameraMove != null)
         {
             cameraMove.MoveCameraToRoom(oldCameraPos, oldCameraRot);
-          
+
+            playerCharacters.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+
             exitView.gameObject.SetActive(false);
 
             StartCoroutine(DelayCameraFollow(1.75f, cameraMove));

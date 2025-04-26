@@ -141,6 +141,11 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 pickUpItemButton.gameObject.SetActive(false);
             }
         }
+        else
+        {
+            placeItemButton.gameObject.SetActive(false);
+            pickUpItemButton.gameObject.SetActive(false);
+        }
     }
 
     void ShowButtonInFrontOfSlot(GameObject hoveredSlot)

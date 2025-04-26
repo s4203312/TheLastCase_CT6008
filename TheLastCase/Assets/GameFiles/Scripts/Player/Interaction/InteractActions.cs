@@ -15,7 +15,7 @@ public class InteractActions : MonoBehaviour
 
     public GameObject Managers;
 
-    public BookshelfHover bookshelfHover;
+    public ShelfHover shelfHover;
 
     public bool isUsingButton;
 
@@ -68,14 +68,17 @@ public class InteractActions : MonoBehaviour
         }
         else
         {
-            if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
+            if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot != null)
             {
-                interactionObject = GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.GetChild(0).gameObject;
-                isUsingButton = false;
+                if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
+                {
+                    interactionObject = GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.GetChild(0).gameObject;
+                    isUsingButton = false;
+                }
             }
-            else if (bookshelfHover.hitSlot.childCount > 0)
+            else if (shelfHover.hitSlot.childCount > 0)
             {
-                interactionObject = bookshelfHover.hitSlot.GetChild(0).gameObject;
+                interactionObject = shelfHover.hitSlot.GetChild(0).gameObject;
                 isUsingButton = false;
             }
         }
@@ -114,9 +117,9 @@ public class InteractActions : MonoBehaviour
              
         if (slots.Length > 1) 
         {
-            if (bookshelfHover.enabled == true && bookshelfHover.hitSlot != null)
+            if (shelfHover.enabled == true && shelfHover.hitSlot != null)
             {
-                itemTransform = bookshelfHover.hitSlot;             
+                itemTransform = shelfHover.hitSlot;             
             }
         }
         else
@@ -179,7 +182,7 @@ public class InteractActions : MonoBehaviour
             StartCoroutine(DelayGameObject(2, exitViewButton.gameObject, true));          
             exitViewButton.onClick.AddListener(() => gameUI.ExitView(1));
         }
-        //gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        gameObject.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
         interactButton.GetComponent<Image>().enabled = false;
         interactButton.transform.GetChild(0).gameObject.SetActive(false);
     }
