@@ -35,7 +35,7 @@ public class ShelfHover : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy && GameObject.Find("PlayerController").GetComponent<PlayerController>() == false)
+        if (Physics.Raycast(ray, out hit, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             if (Array.Exists(slots, slot => slot == hit.collider.gameObject))
             {
