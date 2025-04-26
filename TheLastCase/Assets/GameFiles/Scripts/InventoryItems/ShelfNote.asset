@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bookshelf Note
   itemDescription: The numbers on the note say. IV-V-I-II
-  itemPicture: {fileID: 0}
+  itemPicture: {fileID: 21300000, guid: 9e31da3c224b69840a8056b7a8962f53, type: 3}
   puzzleID: 
