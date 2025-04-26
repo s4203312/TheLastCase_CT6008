@@ -75,6 +75,8 @@ public class ManagerShelfPuzzle : MonoBehaviour, IPuzzle
     {
         foreach (GameObject slot in shelfSlots) { slot.GetComponent<BoxCollider>().enabled = false; }
 
+        shelfHover.gameObject.transform.GetChild(1).transform.gameObject.SetActive(false);
+
         shelfNote.SetActive(true);
 
         Debug.Log("Puzzle Complete");

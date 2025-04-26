@@ -139,8 +139,10 @@ public class InteractActions : MonoBehaviour
                 if (slots.Length > 1)
                 {
                     itemObject.GetComponent<BoxCollider>().enabled = false;
+                    itemObject.transform.rotation = itemTransform.rotation;
                 }
                 itemObject.transform.position = itemTransform.position;
+                
                 itemObject.transform.SetParent(itemTransform);
                 itemObject.SetActive(true);
 
