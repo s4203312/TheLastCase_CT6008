@@ -349,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactButton: {fileID: 0}
   Managers: {fileID: 0}
-  bookshelfHover: {fileID: 0}
+  shelfHover: {fileID: 0}
   isUsingButton: 0
   oldCameraPos: {x: 0, y: 0, z: 0}
   oldCameraRot: {x: 0, y: 0, z: 0, w: 0}
@@ -2192,6 +2192,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3309647610274660934}
   - {fileID: 3320658907948800059}
   - {fileID: 7553347247347004698}
   m_Father: {fileID: 81933222704997422}
@@ -2707,6 +2708,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5661841415940239983}
+  - {fileID: 6256326145375853475}
   m_Father: {fileID: 6046363798252304714}
   m_LocalEulerAnglesHint: {x: 5.6509666, y: 1.5524005, z: -3.6261966}
 --- !u!1 &8079993023076548634
@@ -2943,7 +2945,7 @@ GameObject:
   - component: {fileID: 3320658907948800059}
   - component: {fileID: 3157586035850098275}
   m_Layer: 0
-  m_Name: Detective.063
+  m_Name: Detective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3245,6 +3247,37 @@ Transform:
   - {fileID: 1603990772708887464}
   m_Father: {fileID: 5208243904059823421}
   m_LocalEulerAnglesHint: {x: -18.079624, y: -4.4010324, z: 2.1009197}
+--- !u!1 &8975499720789752821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3309647610274660934}
+  m_Layer: 0
+  m_Name: Vision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3309647610274660934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975499720789752821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4049204346833213020}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9065442400434792820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,4 +3628,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45e02dc33cc3da747aa9647cbd07a0c6,
     type: 3}
   m_PrefabInstance: {fileID: 4141476996230435040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5861529499474115656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2357228726626329660}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.083
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.244
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.68981445
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7239806
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0025392403
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0012921412
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+        type: 3}
+      propertyPath: m_Name
+      value: Detective Stache
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d7a3ddfb864bae42abcc0103411ff77, type: 3}
+--- !u!4 &6256326145375853475 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d7a3ddfb864bae42abcc0103411ff77,
+    type: 3}
+  m_PrefabInstance: {fileID: 5861529499474115656}
   m_PrefabAsset: {fileID: 0}
