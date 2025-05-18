@@ -20,10 +20,12 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     public CinemachineVirtualCamera VirtualCamera;
     public InspectObject inpectManager;
     public GameObject inventoryPanel;
-    public GameObject inventoryButton;
     public GameObject collisionBox;
     public Button placeItemButton;
     public Button pickUpItemButton;
+
+    [Header("Reward Items")]
+    public GameObject rhinoHorn;
 
     private void Start()
     {
@@ -66,10 +68,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                     }
                 }
             }
-            else
-            {
-                inventoryButton.SetActive(true);
-            }
 
             // Only handle interaction for the current selected statue
             if (statue == currentStatue)
@@ -108,7 +106,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
                 HoveringOnSlot();
                 statueWeaponSilhouettes[modelIndex].SetActive(true);
-                inventoryButton.SetActive(false);
             }
             else
             {
@@ -126,14 +123,14 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit) && !inventoryPanel.activeInHierarchy)
+        if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (hit.transform.tag == "Silhouette")
             {
 
                 hitSlot = hit.transform;
-                ShowButtonInFrontOfSlot(hit.collider.gameObject);
+                ShowButtonInFrontOfSlot(hit.collider.gameObject, hit.point);
             }
             else
             {
@@ -148,7 +145,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         }
     }
 
-    void ShowButtonInFrontOfSlot(GameObject hoveredSlot)
+    void ShowButtonInFrontOfSlot(GameObject hoveredSlot, Vector3 hitPoint)
     {
         GameObject activeButton = null;
         if (hitSlot.childCount > 0 || hitSlot.GetComponent<PuzzleData>().isOccupied)
@@ -160,7 +157,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             activeButton = placeItemButton.gameObject;
         }
         activeButton.gameObject.SetActive(true);
-        activeButton.transform.position = hoveredSlot.transform.position + new Vector3(0f, .2f, .2f);
+        activeButton.transform.position = hitPoint;
     }
 
 
@@ -228,5 +225,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         collisionBox.SetActive(false);
 
         Debug.Log("Puzzle Complete");
+        PuzzleRegistry.Instance.PuzzleFinished();
+        GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
     }
 }

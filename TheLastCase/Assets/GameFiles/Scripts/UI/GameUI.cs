@@ -12,6 +12,7 @@ public class GameUI : MonoBehaviour
     private bool paused;
     public GameObject pausePanel;
     public GameObject interactButton;
+    public GameObject inventoryButton;
 
     private Vector3 oldCameraPos;
     private Quaternion oldCameraRot;
@@ -102,6 +103,7 @@ public class GameUI : MonoBehaviour
             StartCoroutine(DelayCameraFollow(1.75f, cameraMove));
         }
 
+        inventoryButton.gameObject.SetActive(true);
         exitView.onClick.RemoveAllListeners();
     }
 

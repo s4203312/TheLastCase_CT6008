@@ -34,6 +34,7 @@ public class InteractableObject : MonoBehaviour
             }
             playerCharacters.GetComponent<PlayerMovement>().interactedObject = gameObject;
             playerButton.gameObject.SetActive(true);
+            playerButton.onClick.RemoveAllListeners();
             playerButton.onClick.AddListener(FindAction);
         }
     }

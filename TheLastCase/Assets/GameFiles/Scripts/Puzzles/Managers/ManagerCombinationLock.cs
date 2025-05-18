@@ -19,7 +19,6 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public Button[] decreaseButtons;   // Buttons for decreasing numbers
 
     private int[] currentNumbers;  // Stores selected numbers
-    private GameObject canvas;
     private new BoxCollider collider;
     private GameUI gameUI;
 
@@ -30,6 +29,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public GameObject lockedDoor;
     public GameObject lockCollider;
     public Button playerButton;
+    public GameObject canvas;
     //public GameObject bookForPuzzle;
     //public GameObject note;
 
@@ -41,9 +41,6 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         //note.SetActive(false);
 
         gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
-        collider = GameObject.Find("CombinationLock").transform.GetChild(1).GetComponent<BoxCollider>();
-
-        canvas = GameObject.Find("Canvas_CombinationLock");
 
         lockedDoor.GetComponent<BoxCollider>().enabled = false;
 
@@ -113,8 +110,6 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
-        collider.enabled = false;
-
         lockedDoor.GetComponent<BoxCollider>().enabled = true;
         lockCollider.SetActive(false);
 

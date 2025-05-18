@@ -48,7 +48,7 @@ public class InspectObject : MonoBehaviour
             }
             else
             {
-                virtualCam.transform.RotateAround(inspectingObject.transform.position, Vector3.up, (dRotationX * rotationSpeed));
+                virtualCam.transform.RotateAround(inspectingObject.transform.position, Vector3.up, (dRotationX * (rotationSpeed * 2f)));
                 virtualCam.LookAt = inspectingObject.transform;
             }
                                                                          

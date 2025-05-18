@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
@@ -12,6 +13,7 @@ public class InteractActions : MonoBehaviour
     private GameObject interactionObject;
     private GameObject ghost;
     public Button interactButton;
+    public Button inventoryButton;
 
     public GameObject Managers;
 
@@ -91,6 +93,7 @@ public class InteractActions : MonoBehaviour
         if (interactionObject.GetComponent<InteractableObject>().itemData != null)
         {
             PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
+            PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
         }
 
         if (interactionObject.transform.Find("SparkleEffect(Clone)"))
@@ -155,13 +158,9 @@ public class InteractActions : MonoBehaviour
         }
     }
 
-    public void PlaceAndRotate()
-    {
-
-    }
-
     public void FocusOnPuzzle()
     {
+        inventoryButton.gameObject.SetActive(false);
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
         GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
@@ -189,8 +188,6 @@ public class InteractActions : MonoBehaviour
         interactButton.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    
-
     public void AccessInventory()
     {
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
@@ -198,6 +195,20 @@ public class InteractActions : MonoBehaviour
         inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory(false);
     }
 
+    public void FinalDoorCheck()
+    {
+        if (PuzzleRegistry.Instance.puzzleCounter == 0)
+        {
+            GameObject finalDoor = GameObject.Find("ExitDoor");
+            finalDoor.transform.Find("DoorCheckCollider").GetComponent<BoxCollider>().enabled = false;
+            finalDoor.transform.GetChild(3).transform.GetChild(1).GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+
+    public void CompleteGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
     //Ghost Actions
 
@@ -206,8 +217,6 @@ public class InteractActions : MonoBehaviour
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
         ghost.GetComponent<NavMeshAgent>().Warp(ghost.transform.position + (-interactionObject.transform.right * 2));
-
-        //Doesnt work yet issues with door?
     }
 
 

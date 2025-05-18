@@ -8,6 +8,8 @@ public class PuzzleRegistry : MonoBehaviour
 
     private Dictionary<string, IPuzzle> puzzles = new Dictionary<string, IPuzzle>();
 
+    public int puzzleCounter = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -30,5 +32,10 @@ public class PuzzleRegistry : MonoBehaviour
         {
             puzzle.CheckPuzzle();
         }
+    }
+
+    public void PuzzleFinished()
+    {
+        puzzleCounter++;
     }
 }
