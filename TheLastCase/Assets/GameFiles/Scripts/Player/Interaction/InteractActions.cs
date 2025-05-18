@@ -163,6 +163,11 @@ public class InteractActions : MonoBehaviour
         inventoryButton.gameObject.SetActive(false);
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
+        if (interactionObject.TryGetComponent<InspectionChecker>(out InspectionChecker inspectionCheck)) 
+        { 
+            inspectionCheck.enabled = true;
+        }
+
         GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
         Button exitViewButton = gameUI.transform.GetChild(2).GetComponent<Button>();
         Transform newCamera = interactionObject.transform.parent.GetChild(0);

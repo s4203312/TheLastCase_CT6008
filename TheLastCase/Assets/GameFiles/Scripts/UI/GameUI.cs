@@ -103,6 +103,11 @@ public class GameUI : MonoBehaviour
             StartCoroutine(DelayCameraFollow(1.75f, cameraMove));
         }
 
+        if (playerCharacters.GetComponent<PlayerMovement>().interactedObject.TryGetComponent(out InspectionChecker inspectionCheck))
+        {
+            inspectionCheck.enabled = false;
+        }
+
         inventoryButton.gameObject.SetActive(true);
         exitView.onClick.RemoveAllListeners();
     }
