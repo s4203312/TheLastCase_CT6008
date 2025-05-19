@@ -78,6 +78,11 @@ public class InteractActions : MonoBehaviour
                     isUsingButton = false;
                 }
             }
+            else if (GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.childCount > 0)
+            {
+                interactionObject = GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.GetChild(0).gameObject;
+                isUsingButton = false;
+            }
             else if (shelfHover.hitSlot.childCount > 0)
             {
                 interactionObject = shelfHover.hitSlot.GetChild(0).gameObject;

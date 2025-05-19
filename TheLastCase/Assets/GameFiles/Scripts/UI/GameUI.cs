@@ -109,6 +109,7 @@ public class GameUI : MonoBehaviour
         }
 
         inventoryButton.gameObject.SetActive(true);
+        playerCharacters.transform.GetChild(0).transform.GetChild(4).transform.gameObject.SetActive(false);
         exitView.onClick.RemoveAllListeners();
     }
 

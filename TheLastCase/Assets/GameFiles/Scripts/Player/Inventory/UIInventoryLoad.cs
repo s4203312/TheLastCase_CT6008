@@ -64,6 +64,7 @@ public class UIInventoryLoad : MonoBehaviour
                                 {
                                     currentlyInspectingObject = itemObject;
                                     playerCharacter.GetComponent<PlayerMovement>().StopPlayer();
+                                    playerCharacter.transform.GetChild(0).transform.GetChild(4).transform.gameObject.SetActive(true);
                                     InspectInventory();
                                 }
                             }
@@ -130,6 +131,7 @@ public class UIInventoryLoad : MonoBehaviour
 
         GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
         Button exitViewButton = gameUI.transform.GetChild(2).GetComponent<Button>();
+        gameUI.transform.GetChild(1).transform.gameObject.SetActive(false);
 
         oldCameraPos = virtCam.transform.position;
         oldCameraRot = virtCam.transform.rotation;
