@@ -23,9 +23,8 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     public GameObject collisionBox;
     public Button placeItemButton;
     public Button pickUpItemButton;
-
-    [Header("Reward Items")]
-    public GameObject rhinoHorn;
+    public Animator animator;
+    public GameUI gameUI;
 
     private void Start()
     {
@@ -196,6 +195,10 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
                     puzzleData.isCorrectlyPlaced = true;
                 }
+                if (correctItemPlaced && placedObject.name == "wukong_Sword_Ground")
+                {
+                    placedObject.transform.rotation = statueWeaponSilhouettes[modelIndex].transform.rotation;
+                }
 
                 if (puzzleData.isCorrectlyPlaced)
                 {
@@ -227,5 +230,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
         GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
+        animator.SetTrigger("PuzzleComplete");
+        gameUI.ExitView(1);
     }
 }

@@ -17,6 +17,8 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     public GameObject tableCam;
     public CinemachineVirtualCamera VirtualCamera;
     public GameObject puzzleItem;
+    public Animator animator;
+    public GameUI gameUI;
 
     private bool isItemInCorrectPos;
 
@@ -75,5 +77,7 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
         puzzleItem.SetActive(true);
         Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
+        animator.SetTrigger("PuzzleComplete");
+        gameUI.ExitView(1);
     }
 }
