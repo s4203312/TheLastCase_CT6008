@@ -218,7 +218,7 @@ public class InteractActions : MonoBehaviour
 
     public void FinalDoorCheck()
     {
-        if (PuzzleRegistry.Instance.puzzleCounter == 0)
+        if (PuzzleRegistry.Instance.puzzleCounter == 5)
         {
             GameObject finalDoor = GameObject.Find("ExitDoor");
             finalDoor.transform.Find("DoorCheckCollider").GetComponent<BoxCollider>().enabled = false;

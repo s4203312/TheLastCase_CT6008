@@ -79,7 +79,6 @@ public class ManagerShelfPuzzle : MonoBehaviour, IPuzzle
 
         shelfNote.SetActive(true);
 
-        Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
     }
 }

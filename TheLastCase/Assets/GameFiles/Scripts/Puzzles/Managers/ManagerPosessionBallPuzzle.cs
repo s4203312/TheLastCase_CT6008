@@ -18,7 +18,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
     public GameObject tableCam;
     public CinemachineVirtualCamera VirtualCamera;
     public GameObject inventoryPanel;
-    public GameObject puzzleItem;
+    public BoxCollider puzzleItem;
     public GameObject puzzleSlot;
     public Animator animator;
     public GameUI gameUI;
@@ -33,7 +33,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
-        puzzleItem.SetActive(false);
+        puzzleItem.enabled = false;
         movingObjectSlot.SetActive(false);
 
         gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
@@ -71,7 +71,6 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
 
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (hit.transform.tag == "Silhouette")
             {
 
@@ -113,15 +112,13 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         {
             if (puzzleSlot.transform.GetChild(0).GetComponent<InteractableObject>().itemData == puzzleSlot.GetComponent<PuzzleData>().correctItem)
             {
-                GameObject ball = puzzleSlot.transform.GetChild(0).gameObject;
-                Vector3 worldPos = ball.transform.position;
+                puzzleSlot.GetComponent<BoxCollider>().enabled = false;
+                puzzleSlot.GetComponent<MeshRenderer>().enabled = false;
 
-                //ball.transform.SetParent(null, false);
-                ball.transform.position = new Vector3(-31.868866f, 2.1079998f, -12.5079994f);
+                GameObject ball = GameObject.Find("yogaBall_Possess");
 
+                Destroy(ball.GetComponent<Animator>());
                 ball.tag = "Posessable";             
-
-                //puzzleSlot.SetActive(false);
                 isBallPlaced = true;
             }
         }
@@ -142,8 +139,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
     public void PuzzleComplete()
     {
         tableCam.transform.parent.Find("Collider").transform.gameObject.SetActive(false);
-        puzzleItem.SetActive(true);
-        Debug.Log("Puzzle Complete");
+        puzzleItem.enabled = true;
         PuzzleRegistry.Instance.PuzzleFinished();
         GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
         pickUpItemButton.onClick.RemoveAllListeners();

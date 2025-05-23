@@ -8,8 +8,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
     [Header("Puzzle Name")]
     [SerializeField] private string puzzleID;
 
-    private InventoryItemData itemData;
-    //private bool iscorrect = false;
     private CinemachineBrain gameCam;
     [HideInInspector] public Transform hitSlot;
     private GameObject currentStatue = null;
@@ -124,7 +122,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (hit.transform.tag == "Silhouette")
             {
 
@@ -188,7 +185,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 if (correctItemPlaced && isRotationCorrect && !puzzleData.isCorrectlyPlaced)
                 {
                     puzzleSlot.GetChild(0).rotation = statueWeaponSilhouettes[modelIndex].transform.rotation;
-                    //inpectManager.InspectionFunction(statue.transform.GetChild(0).transform.parent.gameObject, false);
 
                     puzzleSlot.GetComponent<BoxCollider>().enabled = false;
                     statueWeaponSilhouettes[modelIndex].GetComponent<MeshRenderer>().enabled = false;
@@ -203,7 +199,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 if (puzzleData.isCorrectlyPlaced)
                 {
                     correctWeaponsPlaced++;
-                    Debug.Log("Corect" + correctWeaponsPlaced);
                 }
             }
             else
@@ -227,9 +222,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         }
         collisionBox.SetActive(false);
 
-        Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
-        GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
         animator.SetTrigger("PuzzleComplete");
         gameUI.ExitView(1);
     }

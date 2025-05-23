@@ -30,15 +30,10 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public GameObject lockCollider;
     public Button playerButton;
     public GameObject canvas;
-    //public GameObject bookForPuzzle;
-    //public GameObject note;
 
     void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
-
-        //bookForPuzzle.SetActive(false);
-        //note.SetActive(false);
 
         gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
 
@@ -60,21 +55,6 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         }
     }
 
-    //private void Update()
-    //{
-
-    //    if (Vector3.Distance(lockCam.transform.TransformPoint(lockCam.transform.localPosition), VirtualCamera.transform.position) < 15f)
-    //    {
-    //        canvas.SetActive(true);
-    //        lockObj.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        canvas.SetActive(false);
-    //        lockObj.SetActive(false);
-    //    }
-    //}
-
     public void ChangeNumber(int index, int change)
     {
         currentNumbers[index] = (currentNumbers[index] + change + 10) % 10; // Cycle between 0-9
@@ -93,7 +73,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         {
             if (currentNumbers[i] != correctCombination[i])
             {
-                Debug.Log("Incorrect Code!");
+                //Debug.Log("Incorrect Code!");
                 return;
             }
             else
@@ -113,14 +93,11 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         lockedDoor.GetComponent<BoxCollider>().enabled = true;
         lockCollider.SetActive(false);
 
-        //bookForPuzzle.SetActive(true);
-        //note.SetActive(true);
         canvas.SetActive(false);
         lockObj.SetActive(false);
 
         gameUI.ExitView(1);
         playerButton.onClick.RemoveAllListeners();
 
-        Debug.Log("Puzzle Complete");
     }
 }

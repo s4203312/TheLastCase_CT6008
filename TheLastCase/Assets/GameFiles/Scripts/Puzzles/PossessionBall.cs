@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class PossessionBall : MonoBehaviour
 {
-    private Vector3 ballPosStart;
-
-    private void Start()
-    {
-        ballPosStart = transform.position;
-    }
+    public GameObject ballPosStart;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Books") 
         { 
-            transform.position = ballPosStart; 
+            transform.position = ballPosStart.transform.position; 
             gameObject.GetComponent<GhostPosession>().selectedItem = null;
         }
     }

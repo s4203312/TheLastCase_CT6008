@@ -46,7 +46,6 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
 
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
             if (hit.transform.tag == "Silhouette")
             {
 
@@ -97,7 +96,6 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
     public void PuzzleComplete()
     {
         puzzleCompleted = true;
-        Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
         GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
         pickUpItemButton.onClick.RemoveAllListeners();

@@ -51,8 +51,8 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
+            //if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 10.0f);
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable")
                 {
                     //Destroy any left over shader before moving again

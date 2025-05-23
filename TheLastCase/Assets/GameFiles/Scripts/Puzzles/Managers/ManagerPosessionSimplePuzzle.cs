@@ -69,7 +69,6 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     {
         tableCam.transform.parent.Find("Collider").transform.gameObject.SetActive(false);
         puzzleItem.SetActive(true);
-        Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
         animator.SetTrigger("PuzzleComplete");
         gameUI.ExitView(1);
