@@ -78,11 +78,22 @@ public class InteractActions : MonoBehaviour
                     isUsingButton = false;
                 }
             }
-            else if (GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.childCount > 0)
+            else if (GameObject.Find("PuzzleManager").GetComponent<ManagerPosessionBallPuzzle>().hitSlot != null)
             {
-                interactionObject = GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.GetChild(0).gameObject;
-                isUsingButton = false;
+                if (GameObject.Find("PuzzleManager").GetComponent<ManagerPosessionBallPuzzle>().hitSlot.childCount > 0)
+                {
+                    interactionObject = GameObject.Find("PuzzleManager").GetComponent<ManagerPosessionBallPuzzle>().hitSlot.GetChild(0).gameObject;
+                    isUsingButton = false;
+                }
             }
+            else if (GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot != null)
+            {
+                if (GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.childCount > 0)
+                {
+                    interactionObject = GameObject.Find("PuzzleManager").GetComponent<ManagerRhino>().hitSlot.GetChild(0).gameObject;
+                    isUsingButton = false;
+                }
+            }        
             else if (shelfHover.hitSlot.childCount > 0)
             {
                 interactionObject = shelfHover.hitSlot.GetChild(0).gameObject;
@@ -106,7 +117,7 @@ public class InteractActions : MonoBehaviour
             Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
         }
 
-        interactionObject.GetComponent<BoxCollider>().enabled = true;
+        interactionObject.GetComponent<BoxCollider>().enabled = false;
         interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
     }
@@ -168,7 +179,7 @@ public class InteractActions : MonoBehaviour
         inventoryButton.gameObject.SetActive(false);
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
-        if (interactionObject.TryGetComponent<InspectionChecker>(out InspectionChecker inspectionCheck)) 
+        if (interactionObject.TryGetComponent(out InspectionChecker inspectionCheck)) 
         { 
             inspectionCheck.enabled = true;
         }

@@ -9,7 +9,7 @@ public class GhostPosession : MonoBehaviour
     private float zPosition;
     private float orgYPos;
     private Vector3 offset;
-    private GameObject selectedItem;
+    public GameObject selectedItem;
 
     void Update()
     {

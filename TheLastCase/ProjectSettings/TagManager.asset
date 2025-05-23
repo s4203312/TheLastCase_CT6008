@@ -9,6 +9,7 @@ TagManager:
   - InspectInteractable
   - Posessable
   - Silhouette
+  - Books
   layers:
   - Default
   - TransparentFX

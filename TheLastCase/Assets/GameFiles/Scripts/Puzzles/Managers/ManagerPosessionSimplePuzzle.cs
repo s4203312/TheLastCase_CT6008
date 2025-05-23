@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
 {
@@ -27,16 +28,13 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
         puzzleItem.SetActive(false);
         movingObjectSlot.SetActive(false);
+
     }
 
     private void Update()
     {
         if (tableCam.transform.position == VirtualCamera.transform.position)
         {
-            //foreach (GameObject movingObject in movingObjects)
-            //{
-            //    movingObject.GetComponent<GhostPosession>().enabled = true;
-            //}
             if (!isItemInCorrectPos) 
             { 
                 movingObject.GetComponent<GhostPosession>().enabled = true;
@@ -46,10 +44,6 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
         }
         else
         {
-            //foreach (GameObject movingObject in movingObjects)
-            //{
-            //    movingObject.GetComponent<GhostPosession>().enabled = false;
-            //}
             movingObject.GetComponent<GhostPosession>().enabled = false;
 
             movingObjectSlot.SetActive(false);

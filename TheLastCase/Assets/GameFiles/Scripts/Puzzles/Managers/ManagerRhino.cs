@@ -13,6 +13,8 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
     public Button pickUpItemButton;
     public GameObject inventoryPanel;
     public GameObject rhinoHornSil;
+    public GameObject ballObjPuzzle;
+    public Animator animator;
 
     [HideInInspector] public Transform hitSlot;
     private CinemachineBrain gameCam;
@@ -84,7 +86,7 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
     {
         if (hitSlot != null) 
         { 
-            if (hitSlot.GetComponent<PuzzleData>().correctItem == hitSlot.transform.GetChild(0).GetComponent<InteractableObject>().itemData) 
+            if (hitSlot.GetComponent<PuzzleData>().correctItem == hitSlot.transform.GetChild(0).GetComponent<InteractableObject>().itemData)
             { 
                 PuzzleComplete(); 
                 hitSlot.transform.GetChild(0).transform.rotation = rhinoHornSil.transform.rotation;
@@ -95,9 +97,11 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
     public void PuzzleComplete()
     {
         puzzleCompleted = true;
-
         Debug.Log("Puzzle Complete");
         PuzzleRegistry.Instance.PuzzleFinished();
         GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
+        pickUpItemButton.onClick.RemoveAllListeners();
+        placeItemButton.onClick.RemoveAllListeners();
+        animator.SetTrigger("PuzzleComplete");
     }
 }
