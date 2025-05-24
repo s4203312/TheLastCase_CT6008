@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,14 +17,19 @@ public class GameUI : MonoBehaviour
 
     private Vector3 oldCameraPos;
     private Quaternion oldCameraRot;
-
     private CinemachineVirtualCamera gameCam;
-
     private GameObject playerCharacters;
+
+    [Header("Inspection UI")]
+    public GameObject inspectionUIPanel;
+    public TextMeshProUGUI itemNameText;
+    public Image itemSprite;
+    public TextMeshProUGUI itemDescriptionText;
 
     private void Start()
     {
         pausePanel.SetActive(false);
+        inspectionUIPanel.SetActive(false);
         exitView.gameObject.SetActive(false);
 
         gameCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
@@ -55,22 +61,6 @@ public class GameUI : MonoBehaviour
 
     public void ExitView(int index)
     {
-        //GameObject playerCharacters = GameObject.Find("PlayerCharacters");
-        //CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-        //CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
-        ////oldCameraTran = playerCharacters.GetComponent<InteractActions>().oldCameraTran;
-        ////Transform[] oldCameras = null;
-        ////oldCameras.Append(oldCameraTran);
-
-        //if (cameraMove != null)
-        //{
-        //    cameraMove.MoveCameraToRoom(oldCameras);
-
-        //    playerCharacters.GetComponent<PlayerMovement>().enabled = true;
-
-        //    exitView.gameObject.SetActive(false);
-        //}
-
         CameraMove cameraMove = gameCam.GetComponent<CameraMove>();
 
         UIInventoryLoad inventoryLoad = GameObject.Find("InventoryManager").GetComponent<UIInventoryLoad>();
@@ -89,6 +79,7 @@ public class GameUI : MonoBehaviour
             {
                 inventoryLoad.currentlyInspectingObject.SetActive(false);
                 inventoryLoad.currentlyInspectingObject = null;
+                Hide();
             }
         }
 
@@ -112,6 +103,17 @@ public class GameUI : MonoBehaviour
         playerCharacters.transform.GetChild(0).transform.GetChild(4).transform.gameObject.SetActive(false);
         exitView.onClick.RemoveAllListeners();
     }
+
+    public void ShowItem(InventoryItemData item)
+    {
+        itemNameText.text = $"Name : {item.itemName}";
+        itemSprite.sprite = item.itemPicture;
+        itemDescriptionText.text = $"Description : {item.itemDescription}";
+
+        inspectionUIPanel.SetActive(true);
+    }
+
+    public void Hide() { inspectionUIPanel.SetActive(false); }
 
     public void QuitToMenu()
     {

@@ -14,14 +14,12 @@ public class ManagerShelfPuzzle : MonoBehaviour, IPuzzle
     public ShelfHover shelfHover;
 
     public GameObject[] shelfSlots;
-    public GameObject shelfNote;
+    public Animator animator;
     public GameObject shelfCam;
     public CinemachineVirtualCamera VirtualCamera;
 
     void Start()
     {
-        shelfNote.SetActive(false);
-
         shelfHover.slots = shelfSlots;
         shelfHover.placeItemButton.gameObject.SetActive(false);
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
@@ -77,7 +75,8 @@ public class ManagerShelfPuzzle : MonoBehaviour, IPuzzle
 
         shelfHover.gameObject.transform.GetChild(1).transform.gameObject.SetActive(false);
 
-        shelfNote.SetActive(true);
+        animator.SetTrigger("PuzzleComplete");
+        GameObject.Find("GameUI").GetComponent<GameUI>().ExitView(1);
 
         PuzzleRegistry.Instance.PuzzleFinished();
     }

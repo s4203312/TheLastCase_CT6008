@@ -146,7 +146,6 @@ public class UIInventoryLoad : MonoBehaviour
             exitViewButton.onClick.AddListener(() => gameUI.ExitView(2));
         }
 
-        //playerCharacter.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         InventoryPanelUI.SetActive(false);       //Setting panel deactive
         isCurrentlyInspecting = true;
 
@@ -155,5 +154,7 @@ public class UIInventoryLoad : MonoBehaviour
         currentlyInspectingObject.transform.position = playerCharacter.transform.GetChild(0).transform.GetChild(0).transform.position + (playerCharacter.transform.GetChild(0).transform.forward * 2.5f);
 
         currentlyInspectingObject.AddComponent<InspectObject>();
+
+        gameUI.ShowItem(currentlyInspectingObject.GetComponent<InteractableObject>().itemData);
     }
 }
