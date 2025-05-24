@@ -36,7 +36,6 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
         puzzleItem.enabled = false;
         movingObjectSlot.SetActive(false);
-        movingObjectSlot.GetComponent<SphereCollider>().enabled = false;
 
         gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
     }
@@ -121,7 +120,6 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
 
                 movingObjectSlot.SetActive(true);
                 animatorBall.SetTrigger("ShowPath");
-                StartCoroutine(delayAnim());
 
             }
         }
@@ -150,11 +148,5 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         placeItemButton.onClick.RemoveAllListeners();
         animatorBook.SetTrigger("PuzzleComplete");
         gameUI.ExitView(1);
-    }
-
-    private IEnumerator delayAnim()
-    {
-        yield return new WaitForSeconds(2f);
-        movingObjectSlot.GetComponent<SphereCollider>().enabled = false;
     }
 }

@@ -64,6 +64,9 @@ public class CameraMove : MonoBehaviour
     // Coroutine to smoothly move camera to target position
     private IEnumerator MoveCameraCoroutine(Vector3 roomPos, Quaternion roomRot)
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         gameCam.Follow = null;
         gameCam.LookAt = null;
 
@@ -89,5 +92,9 @@ public class CameraMove : MonoBehaviour
         gameObject.GetComponent<CinemachineVirtualCamera>().transform.position = endPosition;       
 
         isMoving = false;
+
+        // Re-enable mouse
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
