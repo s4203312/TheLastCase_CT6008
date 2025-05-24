@@ -69,7 +69,10 @@ public class InspectObject : MonoBehaviour
             {
                 if (hit.transform.tag == "InspectInteractable")
                 {
-                    Debug.Log("Play animation here");
+                    if (hit.transform.TryGetComponent(out Animator animator))
+                    {
+                        animator.SetTrigger("Play");
+                    }
                 }
             }
         }

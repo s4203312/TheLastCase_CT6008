@@ -20,7 +20,8 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
     public GameObject inventoryPanel;
     public BoxCollider puzzleItem;
     public GameObject puzzleSlot;
-    public Animator animator;
+    public Animator animatorBook;
+    public Animator animatorBall;
     public GameUI gameUI;
     public Button placeItemButton;
     public Button pickUpItemButton;
@@ -35,6 +36,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
         puzzleItem.enabled = false;
         movingObjectSlot.SetActive(false);
+        movingObjectSlot.GetComponent<SphereCollider>().enabled = false;
 
         gameCam = GameObject.Find("Main Camera").GetComponent<CinemachineBrain>();
     }
@@ -48,15 +50,11 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
             if (!isItemInCorrectPos && isBallPlaced) 
             { 
                 movingObject.GetComponent<GhostPosession>().enabled = true;
-
-                movingObjectSlot.SetActive(true);
             }          
         }
         else
         {
             movingObject.GetComponent<GhostPosession>().enabled = false;
-
-            movingObjectSlot.SetActive(false);
         }
     }
 
@@ -120,6 +118,11 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
                 Destroy(ball.GetComponent<Animator>());
                 ball.tag = "Posessable";             
                 isBallPlaced = true;
+
+                movingObjectSlot.SetActive(true);
+                animatorBall.SetTrigger("ShowPath");
+                StartCoroutine(delayAnim());
+
             }
         }
 
@@ -131,6 +134,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
                 isItemInCorrectPos = true;
                 movingObject.GetComponent<GhostPosession>().enabled = false;
 
+                movingObjectSlot.SetActive(false);
                 PuzzleComplete();
             }         
         }
@@ -144,7 +148,13 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         GameObject.Find("Button_Interact").GetComponent<Button>().onClick.RemoveAllListeners();
         pickUpItemButton.onClick.RemoveAllListeners();
         placeItemButton.onClick.RemoveAllListeners();
-        animator.SetTrigger("PuzzleComplete");
+        animatorBook.SetTrigger("PuzzleComplete");
         gameUI.ExitView(1);
+    }
+
+    private IEnumerator delayAnim()
+    {
+        yield return new WaitForSeconds(2f);
+        movingObjectSlot.GetComponent<SphereCollider>().enabled = false;
     }
 }

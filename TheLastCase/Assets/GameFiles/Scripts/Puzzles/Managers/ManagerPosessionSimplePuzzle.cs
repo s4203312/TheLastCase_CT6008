@@ -17,7 +17,6 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     [Header("Used Objects")]
     public GameObject tableCam;
     public CinemachineVirtualCamera VirtualCamera;
-    public GameObject puzzleItem;
     public Animator animator;
     public GameUI gameUI;
 
@@ -26,7 +25,6 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     private void Start()
     {
         PuzzleRegistry.Instance.RegisterPuzzle(puzzleID, this);
-        puzzleItem.SetActive(false);
         movingObjectSlot.SetActive(false);
 
     }
@@ -68,7 +66,6 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
     public void PuzzleComplete()
     {
         tableCam.transform.parent.Find("Collider").transform.gameObject.SetActive(false);
-        puzzleItem.SetActive(true);
         PuzzleRegistry.Instance.PuzzleFinished();
         animator.SetTrigger("PuzzleComplete");
         gameUI.ExitView(1);

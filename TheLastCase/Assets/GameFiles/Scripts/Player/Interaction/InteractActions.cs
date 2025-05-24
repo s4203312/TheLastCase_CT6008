@@ -117,6 +117,11 @@ public class InteractActions : MonoBehaviour
             Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
         }
 
+        if (interactionObject.TryGetComponent(out Animator animator))
+        {
+            Destroy(animator);
+        }
+
         interactionObject.GetComponent<BoxCollider>().enabled = false;
         interactionObject.SetActive(false);
         interactButton.gameObject.SetActive(false);
