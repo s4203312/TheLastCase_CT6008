@@ -8,6 +8,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UIHints.Instance.ShowMessages(new List<(string, float)>
+        {
+            ("Welcome to our game!", 2f),
+            ("Use the mouse to move and interact, either holding or clicking.", 4f),
+            ("Get close to objects, inspect and interact to solve the puzzle and escape!", 4f)
+        });
+
         InteractableObject[] interactableObjects = FindObjectsOfType<InteractableObject>();
 
         foreach (InteractableObject interactableObject in interactableObjects)

@@ -131,6 +131,8 @@ public class InteractActions : MonoBehaviour
     {
         if (OnCallOnce()) return;
 
+        UIHints.Instance.ShowMessage("Sometimes you can rotate objects or move them!", 4f);
+
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
 
@@ -181,6 +183,8 @@ public class InteractActions : MonoBehaviour
 
     public void FocusOnPuzzle()
     {
+        UIHints.Instance.ShowMessage("Sometimes you can interact with more than think.", 3f);
+
         inventoryButton.gameObject.SetActive(false);
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
@@ -228,7 +232,19 @@ public class InteractActions : MonoBehaviour
             GameObject finalDoor = GameObject.Find("ExitDoor");
             finalDoor.transform.Find("DoorCheckCollider").GetComponent<BoxCollider>().enabled = false;
             finalDoor.transform.GetChild(3).transform.GetChild(1).GetComponent<BoxCollider>().enabled = true;
+            UIHints.Instance.ShowMessage("You have completed all the puzzles!", 3f);
         }
+        else { UIHints.Instance.ShowMessage("You have not completed all the puzzles.", 3f); }
+    }
+
+    public void GhostHint()
+    {
+        UIHints.Instance.ShowMessage("Looks like your ghost abilities could be useful here!", 3f);
+    }
+
+    public void HumanHint()
+    {
+        UIHints.Instance.ShowMessage("Ghosts cannot interact with the physical world!", 2.5f);
     }
 
     public void CompleteGame()
@@ -244,8 +260,6 @@ public class InteractActions : MonoBehaviour
 
         ghost.GetComponent<NavMeshAgent>().Warp(ghost.transform.position + (-interactionObject.transform.right * 2));
     }
-
-
 
     // Extras
     private IEnumerator DelayGameObject(int time, GameObject gameObject, bool active)

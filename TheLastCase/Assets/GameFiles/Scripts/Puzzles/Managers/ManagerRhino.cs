@@ -13,7 +13,6 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
     public Button pickUpItemButton;
     public GameObject inventoryPanel;
     public GameObject rhinoHornSil;
-    public GameObject ballObjPuzzle;
     public Animator animator;
 
     [HideInInspector] public Transform hitSlot;
@@ -33,6 +32,7 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
         {
             HoveringOnSlot();
         }
+        else { hitSlot = null; }
     }
 
     public void HoveringOnSlot()
@@ -62,6 +62,7 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
         {
             placeItemButton.gameObject.SetActive(false);
             pickUpItemButton.gameObject.SetActive(false);
+            hitSlot = null;
         }
     }
 

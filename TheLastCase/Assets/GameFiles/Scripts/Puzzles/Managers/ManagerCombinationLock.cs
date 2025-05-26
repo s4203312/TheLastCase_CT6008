@@ -19,7 +19,6 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public Button[] decreaseButtons;   // Buttons for decreasing numbers
 
     private int[] currentNumbers;  // Stores selected numbers
-    private new BoxCollider collider;
     private GameUI gameUI;
 
     [Header("Used Objects")]
@@ -73,7 +72,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         {
             if (currentNumbers[i] != correctCombination[i])
             {
-                //Debug.Log("Incorrect Code!");
+                UIHints.Instance.ShowMessage("The code was incorrect.", 3f);
                 return;
             }
             else
@@ -90,6 +89,7 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
+        UIHints.Instance.ShowMessage("The code was correct! It should be unlocked now.", 4f);
         lockedDoor.GetComponent<BoxCollider>().enabled = true;
         lockCollider.SetActive(false);
 
