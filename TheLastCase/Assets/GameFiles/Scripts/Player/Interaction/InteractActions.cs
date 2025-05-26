@@ -27,6 +27,9 @@ public class InteractActions : MonoBehaviour
     [HideInInspector] public Vector3 oldCameraPos;
     [HideInInspector] public Quaternion oldCameraRot;
 
+    public AudioClip pickUpSFX;
+    public AudioClip placeDownSFX;
+
     private void Start()
     {
         ghost = transform.GetChild(1).gameObject;
@@ -44,6 +47,7 @@ public class InteractActions : MonoBehaviour
         interactionObject.GetComponent<BoxCollider>().enabled = false;
         interactButton.gameObject.SetActive(false);
 
+        interactionObject.GetComponent<AudioSource>().Play();
         StartCoroutine(OpeningDoor(pivotPoint));
     }
 
@@ -51,7 +55,7 @@ public class InteractActions : MonoBehaviour
     {
         float targetAngle = Random.Range(75,105);
         float rotatedAngle = 0f;
-        float rotationSpeed = 45f;
+        float rotationSpeed = 30f;
 
         while (rotatedAngle < targetAngle)
         {
@@ -60,10 +64,15 @@ public class InteractActions : MonoBehaviour
             rotatedAngle += rotationStep;
             yield return null;
         }
+        interactionObject.GetComponent<AudioSource>().Stop();
     }
 
     public void PickUpItem()
     {
+        //Play SFX for pick up 
+        transform.GetChild(0).GetComponent<AudioSource>().clip = pickUpSFX;
+        transform.GetChild(0).GetComponent<AudioSource>().Play();
+
         if (!isUsingButton)
         {
             interactionObject = GetComponent<PlayerMovement>().interactedObject;
@@ -130,6 +139,10 @@ public class InteractActions : MonoBehaviour
     public void PlaceItem(string itemPosition)
     {
         if (OnCallOnce()) return;
+
+        //Play SFX for pick up 
+        transform.GetChild(0).GetComponent<AudioSource>().clip = placeDownSFX;
+        transform.GetChild(0).GetComponent<AudioSource>().Play();
 
         UIHints.Instance.ShowMessage("Sometimes you can rotate objects or move them!", 4f);
 

@@ -19,9 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject interactedObject;
     public Button interactButton;
 
-    //Can change this to use a assets:// file link??
     public GameObject playerPointShader;
     public bool ghostPullingBackIn = false;
+    public AudioClip footstepsSFX;
+    public AudioClip transformSFX;
 
     private CinemachineBrain gameCam;
     private CinemachineVirtualCamera virtualCam;
@@ -35,6 +36,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //Getting audio source information
+        AudioSource playerAudio = player.transform.parent.GetComponent<AudioSource>();
+        if (player.velocity.magnitude < 0.1f)
+        {
+            if(playerAudio.clip != transformSFX)
+            {
+                playerAudio.Stop();
+                playerAudio.clip = null;
+                playerAudio.loop = false;
+            }
+        }
+
         if (Input.GetMouseButton(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -60,6 +73,14 @@ public class PlayerMovement : MonoBehaviour
 
                     if (!playerController.isGhostActive)
                     {
+                        //Play footstep SFX
+                        if (!playerAudio.isPlaying)
+                        {
+                            playerAudio.clip = footstepsSFX;
+                            playerAudio.loop = true;
+                            playerAudio.Play();
+                        }
+
                         player.SetDestination(hit.point);
 
                         Vector3 shaderSpawnPos = new Vector3(hit.point.x, 0, hit.point.z);
@@ -79,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(1))          //Switch between ghost and player
         {
             interactButton.gameObject.SetActive(false); //Making button turn off to reduce errors
+
+            playerAudio.clip = transformSFX;
+            playerAudio.loop = false;
+            playerAudio.Play();
 
             if (playerController.isGhostActive)
             {

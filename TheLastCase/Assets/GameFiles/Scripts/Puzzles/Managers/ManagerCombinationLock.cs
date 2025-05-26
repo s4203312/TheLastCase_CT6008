@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,10 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
     public GameObject lockCollider;
     public Button playerButton;
     public GameObject canvas;
+
+    [Header("SFX")]
+    public AudioClip incorrectSFX;
+    public AudioClip correctSFX;
 
     void Start()
     {
@@ -73,6 +78,8 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
             if (currentNumbers[i] != correctCombination[i])
             {
                 UIHints.Instance.ShowMessage("The code was incorrect.", 3f);
+                lockObj.GetComponent<AudioSource>().clip = incorrectSFX;
+                lockObj.GetComponent<AudioSource>().Play();
                 return;
             }
             else
@@ -93,8 +100,11 @@ public class ManagerCombinationLock : MonoBehaviour, IPuzzle
         lockedDoor.GetComponent<BoxCollider>().enabled = true;
         lockCollider.SetActive(false);
 
+        lockObj.GetComponent<AudioSource>().clip = correctSFX;
+        lockObj.GetComponent<AudioSource>().Play();
+
         canvas.SetActive(false);
-        lockObj.SetActive(false);
+        lockObj.GetComponent<MeshRenderer>().enabled = false;
 
         gameUI.ExitView(1);
         playerButton.onClick.RemoveAllListeners();

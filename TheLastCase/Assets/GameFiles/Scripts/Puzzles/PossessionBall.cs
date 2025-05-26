@@ -11,7 +11,8 @@ public class PossessionBall : MonoBehaviour
         if (collision.transform.tag == "Books") 
         { 
             transform.position = ballPosStart.transform.position; 
-            gameObject.GetComponent<GhostPosession>().selectedItem = null;
+            GetComponent<GhostPosession>().selectedItem = null;
+            GetComponent<AudioSource>().Play();
         }
     }
 }

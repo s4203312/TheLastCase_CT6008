@@ -5,6 +5,8 @@ using UnityEngine;
 public class PuzzleRegistry : MonoBehaviour
 {
     public static PuzzleRegistry Instance;
+    public AudioClip correctSFX;
+    public AudioSource playerSource;
 
     private Dictionary<string, IPuzzle> puzzles = new Dictionary<string, IPuzzle>();
 
@@ -36,6 +38,8 @@ public class PuzzleRegistry : MonoBehaviour
 
     public void PuzzleFinished()
     {
+        playerSource.clip = correctSFX;
+        playerSource.Play();
         puzzleCounter++;
     }
 }

@@ -10,8 +10,6 @@ public class InspectObject : MonoBehaviour
 
     private float dRotationX;
     private float dRotationY;
-    private float currentX;
-    private float currentY;
     private float rotationSpeed = 4;
 
     private CinemachineVirtualCamera virtualCam;
