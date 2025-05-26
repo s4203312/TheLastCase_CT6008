@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     {
         UIHints.Instance.ShowMessages(new List<(string, float)>
         {
-            ("Welcome to our game!", 2f),
+            ("THE LAST CASE", 2f),
             ("Use the mouse to move and interact, either holding or clicking.", 4f),
             ("Get close to objects, inspect and interact to solve the puzzle and escape!", 4f)
         });

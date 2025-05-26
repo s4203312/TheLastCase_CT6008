@@ -32,7 +32,6 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
         {
             HoveringOnSlot();
         }
-        else { hitSlot = null; }
     }
 
     public void HoveringOnSlot()
@@ -62,7 +61,6 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
         {
             placeItemButton.gameObject.SetActive(false);
             pickUpItemButton.gameObject.SetActive(false);
-            hitSlot = null;
         }
     }
 

@@ -138,6 +138,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         {
             placeItemButton.gameObject.SetActive(false);
             pickUpItemButton.gameObject.SetActive(false);
+            //hitSlot = null;
         }
     }
 
@@ -220,7 +221,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             Transform collider = statue.transform.Find("Collider");
             collider.gameObject.SetActive(false);
         }
-        collisionBox.SetActive(false);
+        collisionBox.GetComponent<BoxCollider>().enabled = false;
 
         PuzzleRegistry.Instance.PuzzleFinished();
         animator.SetTrigger("PuzzleComplete");

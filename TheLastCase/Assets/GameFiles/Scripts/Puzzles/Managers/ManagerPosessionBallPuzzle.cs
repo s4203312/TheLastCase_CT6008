@@ -84,6 +84,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
         {
             placeItemButton.gameObject.SetActive(false);
             pickUpItemButton.gameObject.SetActive(false);
+            hitSlot = null;
         }
     }
 

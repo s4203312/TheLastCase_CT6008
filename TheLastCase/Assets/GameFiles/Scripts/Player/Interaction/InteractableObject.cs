@@ -52,6 +52,8 @@ public class InteractableObject : MonoBehaviour
     private void FindAction()
     {
         playerCharacters.GetComponent<PlayerMovement>().StopPlayer();
+        playerCharacters.GetComponent<AudioSource>().clip = null;
+        playerCharacters.GetComponent<AudioSource>().loop = false;
 
         InteractActions script = playerCharacters.GetComponent<InteractActions>();
         playerButton.onClick.RemoveAllListeners();
