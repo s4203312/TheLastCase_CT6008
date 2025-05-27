@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerAnim : MonoBehaviour
+public class PlayerAnim : MonoBehaviour         //Player Animation
 {
     private NavMeshAgent agent;
     private Animator anim;
@@ -16,7 +14,6 @@ public class PlayerAnim : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Speed = agent.velocity.magnitude;

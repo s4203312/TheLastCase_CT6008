@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,6 +47,7 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
+    //Finds correct action to fire from the listener on the button
     private void FindAction()
     {
         playerCharacters.GetComponent<PlayerMovement>().StopPlayer();

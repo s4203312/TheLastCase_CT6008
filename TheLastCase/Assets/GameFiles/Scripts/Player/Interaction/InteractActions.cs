@@ -1,32 +1,29 @@
 using Cinemachine;
 using System.Collections;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InteractActions : MonoBehaviour
 {
+    //Necessary variables
     private GameObject interactionObject;
     private GameObject ghost;
     public Button interactButton;
     public Button inventoryButton;
-
     public GameObject Managers;
-
     public ShelfHover shelfHover;
-
     public bool isUsingButton;
 
+    //Camera variables
     private float cooldownTime = 0.5f;
     private float lastClickTime = 0f;
-
     [HideInInspector] public Vector3 oldCameraPos;
     [HideInInspector] public Quaternion oldCameraRot;
 
+    //Audio
     public AudioClip pickUpSFX;
     public AudioClip placeDownSFX;
 
@@ -36,8 +33,7 @@ public class InteractActions : MonoBehaviour
     }
 
     //Player Actions
-
-    public void OpenDoor()
+    public void OpenDoor()          //Moves door around a pivot
     {
         if (OnCallOnce()) return;
 
@@ -67,7 +63,7 @@ public class InteractActions : MonoBehaviour
         interactionObject.GetComponent<AudioSource>().Stop();
     }
 
-    public void PickUpItem()
+    public void PickUpItem()        //Interacting and picking up any item
     {
         //Play SFX for pick up 
         transform.GetChild(0).GetComponent<AudioSource>().clip = pickUpSFX;
@@ -79,6 +75,7 @@ public class InteractActions : MonoBehaviour
         }
         else
         {
+            //Solution to ensure that you can pick up items via the ground and UI
             if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot != null)
             {
                 if (GameObject.Find("StatuesManager").GetComponent<ManagerStatuesPuzzle>().hitSlot.childCount > 0)
@@ -109,6 +106,8 @@ public class InteractActions : MonoBehaviour
                 isUsingButton = false;
             }
         }
+
+        //Normal Picking up item and adding to inventory
         InventoryManager.Instance.AddItemToInventory(interactionObject.GetComponent<InteractableObject>().itemData, interactionObject);
         Transform inventoryManager = Managers.transform.Find("InventoryManager");
         inventoryManager.gameObject.GetComponent<UIInventoryLoad>().InventoryClose();
@@ -121,6 +120,7 @@ public class InteractActions : MonoBehaviour
             PuzzleRegistry.Instance.CheckPuzzleByID(interactionObject.GetComponent<InteractableObject>().itemData.puzzleID);
         }
 
+        //Destroying the partical effect
         if (interactionObject.transform.Find("SparkleEffect(Clone)"))
         {
             Destroy(interactionObject.transform.Find("SparkleEffect(Clone)").gameObject);
@@ -136,7 +136,7 @@ public class InteractActions : MonoBehaviour
         interactButton.gameObject.SetActive(false);
     }
 
-    public void PlaceItem(string itemPosition)
+    public void PlaceItem(string itemPosition)      //Placing an item in a puzzle slot
     {
         if (OnCallOnce()) return;
 
@@ -166,6 +166,7 @@ public class InteractActions : MonoBehaviour
             itemTransform = interactionObject.transform.parent.Find("PuzzleSlot").transform;
         }
 
+        //Logic for using inventory slot as marker for item placed
         int index = int.Parse(itemPosition) - 1;
 
         if (index >= 0 && index < InventoryManager.Instance.Inventory.Count)
@@ -194,10 +195,8 @@ public class InteractActions : MonoBehaviour
         }
     }
 
-    public void FocusOnPuzzle()
+    public void FocusOnPuzzle()     //Moving the camera to view the puzzle or items
     {
-        UIHints.Instance.ShowMessage("Sometimes you can interact with more than think.", 3f);
-
         inventoryButton.gameObject.SetActive(false);
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 
@@ -206,17 +205,17 @@ public class InteractActions : MonoBehaviour
             inspectionCheck.enabled = true;
         }
 
+        //Fetching gameobjects
         GameUI gameUI = GameObject.Find("GameUI").GetComponent<GameUI>();
         Button exitViewButton = gameUI.transform.GetChild(2).GetComponent<Button>();
         Transform newCamera = interactionObject.transform.parent.GetChild(0);
-        //Transform[] newCameras = null;
-        //newCameras.Append(newCamera);
         CinemachineVirtualCamera virtCam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
         CameraMove cameraMove = virtCam.GetComponent<CameraMove>();
 
         oldCameraPos = virtCam.transform.position;
         oldCameraRot = virtCam.transform.rotation;
 
+        //Using camera logic to move view
         if (cameraMove != null)
         {
             GetComponent<PlayerMovement>().enabled = false;
@@ -238,7 +237,7 @@ public class InteractActions : MonoBehaviour
         inventoryManager.gameObject.GetComponent<UIInventoryLoad>().LoadInventory(false);
     }
 
-    public void FinalDoorCheck()
+    public void FinalDoorCheck()        //Make sure you cant leave without all puzzles finished
     {
         if (PuzzleRegistry.Instance.puzzleCounter == 5)
         {
@@ -265,9 +264,12 @@ public class InteractActions : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    //Ghost Actions
 
-    public void KeyholeSquish()
+
+
+
+    //Ghost Actions
+    public void KeyholeSquish()     //Unused door mechanic
     {
         interactionObject = GetComponent<PlayerMovement>().interactedObject;
 

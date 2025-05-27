@@ -1,10 +1,8 @@
 using Cinemachine;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.Universal.Internal;
 using UnityEngine.UI;
 
 public class UIInventoryLoad : MonoBehaviour
@@ -23,6 +21,7 @@ public class UIInventoryLoad : MonoBehaviour
 
     [HideInInspector] public Vector3 oldCameraPos;
     [HideInInspector] public Quaternion oldCameraRot;
+
     private void Start()
     {
         interactActions = playerCharacter.GetComponent<InteractActions>();
@@ -49,11 +48,10 @@ public class UIInventoryLoad : MonoBehaviour
                 if (hitObject.CompareTag("InventoryImage"))
                 {
                     string itemPosition = string.Concat(hitObject.name[..1]);
-                    //Debug.Log(itemPosition);
 
                     if (localInspectingInventory)
                     {
-                        if(hitObject.GetComponent<Image>().sprite != nullSprite)            //only inspect if there is an item there
+                        if(hitObject.GetComponent<Image>().sprite != nullSprite)            //Only inspect if there is an item there
                         {
                             //Finding the gameObject to spawn
                             int index = int.Parse(itemPosition) - 1;
@@ -72,7 +70,6 @@ public class UIInventoryLoad : MonoBehaviour
                     }
                     else
                     {
-                        //Debug.Log("Place");
                         interactActions.PlaceItem(itemPosition);            
                     }       
                 }

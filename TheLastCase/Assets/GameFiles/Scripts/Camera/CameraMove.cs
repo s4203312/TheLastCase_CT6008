@@ -1,27 +1,21 @@
 using Cinemachine;
-using Cinemachine.Utility;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEditor.SceneView;
 
 public class CameraMove : MonoBehaviour
 {
     private PlayerController playerController;
     private CinemachineVirtualCamera gameCam;
-
-    public float transitionSpeed = 2.0f; // Speed of the camera movement
-
+    public float transitionSpeed = 2.0f; //Speed of the camera movement
     private bool isMoving = false;
 
     private void Start()
     {
         playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-
         gameCam = GetComponent<CinemachineVirtualCamera>();
         gameCam.Follow = null;
 
+        //Checking when object to follow
         FollowPlayer();
     }
 
@@ -45,18 +39,6 @@ public class CameraMove : MonoBehaviour
     // Call this when entering a room and pass the target position
     public void MoveCameraToRoom(Vector3 pos, Quaternion rot)
     {
-        //if(rooms.Length == 1)
-        //{
-        //    if (!isMoving)
-        //        StartCoroutine(MoveCameraCoroutine(rooms[0].position, rooms[0].rotation));
-        //}
-        //else
-        //{
-        //    //Do fucntion here
-        //}
-
-        // new system
-
         if (!isMoving)
             StartCoroutine(MoveCameraCoroutine(pos, rot));
     }

@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ManagerPedestalPuzzle : MonoBehaviour, IPuzzle
 {
     [Header("Puzzle Name")]
     [SerializeField] private string puzzleID;
-
-    private InventoryItemData itemData;
 
     [Header("Used Objects")]
     public GameObject[] pedestals;
@@ -31,6 +27,7 @@ public class ManagerPedestalPuzzle : MonoBehaviour, IPuzzle
 
             InventoryItemData itemData = null;
 
+            // Check to see if position is available for item
             if (puzzleSlotData.itemHolder.childCount > 0)
             {
                 itemData = puzzleSlotData.itemHolder.GetChild(0).GetComponent<InteractableObject>().itemData;
@@ -48,6 +45,7 @@ public class ManagerPedestalPuzzle : MonoBehaviour, IPuzzle
             }
         }
 
+        // Check all three items are in correct slots
         if (correctFigureHeadsPlaced == 3)
         {        
             PuzzleComplete();          

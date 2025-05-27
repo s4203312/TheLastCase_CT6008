@@ -1,9 +1,5 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
 {
@@ -50,6 +46,7 @@ public class ManagerPosessionSimplePuzzle : MonoBehaviour, IPuzzle
 
     public void CheckPuzzle()
     {
+        // Checking if puzzle item has reached destination
         if (Vector3.Distance(movingObject.transform.position, movingObjectSlot.transform.position) < 0.2f)
         {
             if (movingObject.GetComponent<InteractableObject>().itemData == movingObjectSlot.GetComponent<PuzzleData>().correctItem)

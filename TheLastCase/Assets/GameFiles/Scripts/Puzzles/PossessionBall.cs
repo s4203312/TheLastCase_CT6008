@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PossessionBall : MonoBehaviour
 {
     public GameObject ballPosStart;
 
+    // Break ball if hits books
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Books") 

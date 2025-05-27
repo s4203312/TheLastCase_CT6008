@@ -1,27 +1,23 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
     private PlayerController playerController;
     private CinemachineVirtualCamera gameCam;
-
     public CameraMove cameraController;
     public Transform[] targetRoomPositions;
 
     private void Start()
     {
         playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        
         gameCam = cameraController.GetComponent<CinemachineVirtualCamera>();
         gameCam.Follow = null;
     }
 
-
     private void Update()
     {
+        //Setting what the camera follows
         if (gameCam.Follow == null)
         {
             if (playerController.isGhostActive)
@@ -35,6 +31,7 @@ public class CameraTrigger : MonoBehaviour
         }
     }
 
+    //Old camera triggering with rooms
     private void OnTriggerEnter(Collider other)
     {
         if(gameCam.Follow == null)

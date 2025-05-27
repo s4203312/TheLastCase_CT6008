@@ -1,7 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +63,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
 
         RaycastHit hit;
 
+        // Raycast only hits "PuzzleSlot" layer
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             if (hit.transform.tag == "Silhouette")
@@ -108,6 +106,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
     {
         if (puzzleSlot.transform.childCount > 0)
         {
+            // Checking if the ball is in the slot
             if (puzzleSlot.transform.GetChild(0).GetComponent<InteractableObject>().itemData == puzzleSlot.GetComponent<PuzzleData>().correctItem)
             {
                 puzzleSlot.GetComponent<BoxCollider>().enabled = false;
@@ -119,6 +118,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
                 ball.tag = "Posessable";             
                 isBallPlaced = true;
 
+                //Starting animation if ball is placed
                 movingObjectSlot.SetActive(true);
                 animatorBall.SetTrigger("ShowPath");
 
@@ -127,6 +127,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
 
         if (Vector3.Distance(movingObject.transform.position, movingObjectSlot.transform.position) < 0.2f)
         {
+            //Checking if ball has reached destination and is it the ball
             if (movingObject.GetComponent<InteractableObject>().itemData == movingObjectSlot.GetComponent<PuzzleData>().correctItem)
             {
                 movingObject.transform.position = movingObjectSlot.transform.position;
@@ -141,6 +142,7 @@ public class ManagerPosessionBallPuzzle : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
+        //Turning off logic to ensure puzzle can no longer be interacted with
         tableCam.transform.parent.Find("Collider").transform.gameObject.SetActive(false);
         puzzleItem.enabled = true;
         PuzzleRegistry.Instance.PuzzleFinished();

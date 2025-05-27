@@ -53,7 +53,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
             Ray ray = new Ray(gameCam.OutputCamera.transform.position, gameCam.OutputCamera.transform.forward);
             RaycastHit hit;
 
-            // Raycast, ignore "PuzzleSlot" layer
+            // Raycast ignore "PuzzleSlot" layer
             if (Physics.Raycast(ray, out hit, 5f, ~LayerMask.GetMask("PuzzleSlot")) && hit.transform != null)
             {
                 if (hit.transform.gameObject == statue)
@@ -120,6 +120,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
         RaycastHit hit;
 
+        // Raycast only hits "PuzzleSlot" layer
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             if (hit.transform.tag == "Silhouette")
@@ -138,7 +139,6 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
         {
             placeItemButton.gameObject.SetActive(false);
             pickUpItemButton.gameObject.SetActive(false);
-            //hitSlot = null;
         }
     }
 
@@ -175,6 +175,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
                 InteractableObject placedObject = puzzleSlot.GetChild(0).GetComponent<InteractableObject>();
                 bool correctItemPlaced = placedObject.itemData == puzzleData.correctItem;
 
+                // Checking rotation difference
                 float angleDifference = Quaternion.Angle(
                     statueWeaponSilhouettes[modelIndex].transform.rotation,
                     puzzleSlot.GetChild(0).transform.rotation
@@ -216,6 +217,7 @@ public class ManagerStatuesPuzzle : MonoBehaviour, IPuzzle
 
     public void PuzzleComplete()
     {
+        // Turns off colliders so puzzle cant be interacted with
         foreach (GameObject statue in statues)
         {
             Transform collider = statue.transform.Find("Collider");

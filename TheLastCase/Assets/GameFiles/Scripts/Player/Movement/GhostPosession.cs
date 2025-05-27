@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Cinemachine;
 
 public class GhostPosession : MonoBehaviour
 {
@@ -47,6 +43,7 @@ public class GhostPosession : MonoBehaviour
 
                     orgYPos = selectedItem.transform.position.y;
 
+                    //Locking the z pos
                     zPosition = cam.WorldToScreenPoint(selectedItem.transform.position).z;
                     offset = selectedItem.transform.position - GetMouseWorldPosition(cam);
                 }
@@ -54,6 +51,7 @@ public class GhostPosession : MonoBehaviour
         }
     }
 
+    //Moving item along the z axis when pick up
     void MoveItem()
     {
         selectedItem.transform.position = GetMouseWorldPosition(Camera.main) + offset;

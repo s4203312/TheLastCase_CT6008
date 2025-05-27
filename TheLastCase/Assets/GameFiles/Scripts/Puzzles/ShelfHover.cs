@@ -1,11 +1,9 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShelfHover : MonoBehaviour
+public class ShelfHover : MonoBehaviour             //Original logic for hovering over slot.
 {  
     public Button placeItemButton;
     public Button pickUpItemButton;

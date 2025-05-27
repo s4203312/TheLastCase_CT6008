@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,9 +6,7 @@ public class GhostObjectsAppear : MonoBehaviour
 {
     public PlayerController playerController;
     private GameObject ghost;
-
     public List<Collider> loadedGhostObjects = new List<Collider>();
-
     private int distanceOfOverlap = 10;
 
     private void Start()
@@ -20,6 +16,7 @@ public class GhostObjectsAppear : MonoBehaviour
 
     private void Update()
     {
+        //Only allowing the ghost to see the objects
         if (playerController.isGhostActive) 
         { 
             LoadObjects();
@@ -36,25 +33,22 @@ public class GhostObjectsAppear : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, distanceOfOverlap);
         foreach (var hitCollider in hitColliders)
         {
-            //if (hitCollider.gameObject.CompareTag("Interactable"))
-            //{
-                if (hitCollider.gameObject.TryGetComponent<InteractableObject>(out InteractableObject script))
+            if (hitCollider.gameObject.TryGetComponent(out InteractableObject script))
+            {
+                if (script.onlyGhostVisable && !(hitCollider.gameObject.GetComponent<MeshRenderer>().enabled == true))
                 {
-                    if (script.onlyGhostVisable && !(hitCollider.gameObject.GetComponent<MeshRenderer>().enabled == true))
-                    {
-                        hitCollider.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                        //hitCollider.gameObject.GetComponent<Collider>().enabled = true;
-                        loadedGhostObjects.Add(hitCollider);
-                    }
+                    hitCollider.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                    loadedGhostObjects.Add(hitCollider);
                 }
-            //}
+            }
         }
     }
 
     private void UpdateLoadedObjects()
     {
         Collider[] hitColliders = Physics.OverlapSphere(ghost.transform.position, distanceOfOverlap);
-        //Iterating bakcwards to ensure that a index error is not found when removing the item from list
+
+        //Iterating backwards to ensure that a index error is not found when removing the item from list
         for (int i = 0; i < loadedGhostObjects.Count; i++)
         {
             Collider loadedObject = loadedGhostObjects[i];
@@ -62,7 +56,6 @@ public class GhostObjectsAppear : MonoBehaviour
             {
                 loadedGhostObjects.Remove(loadedObject);
                 loadedObject.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                //loadedObject.gameObject.GetComponent<Collider>().enabled = false;
             }
         }
     }
@@ -72,7 +65,6 @@ public class GhostObjectsAppear : MonoBehaviour
         foreach (var loadedObject in loadedGhostObjects)
         {
             loadedObject.gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //loadedObject.gameObject.GetComponent<Collider>().enabled = false;
         }
         loadedGhostObjects.Clear();
     }

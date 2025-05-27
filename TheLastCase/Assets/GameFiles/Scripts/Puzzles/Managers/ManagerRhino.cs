@@ -43,6 +43,7 @@ public class ManagerRhino : MonoBehaviour, IPuzzle
 
         RaycastHit hit;
 
+        // Raycast only hits "PuzzleSlot" layer
         if (Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("PuzzleSlot")) && !inventoryPanel.activeInHierarchy)
         {
             if (hit.transform.tag == "Silhouette")

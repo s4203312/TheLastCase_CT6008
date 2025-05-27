@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasFollow : MonoBehaviour
 {
+    //Inspector Variables
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject ghost;
     [SerializeField] private bool Camera;
+    public PlayerController playerController;
 
-
+    //Private Variables
     private Vector3 cameraPerspective;
     private Vector3 canvasPerspective;
-
-    public PlayerController playerController;
     private bool isGhostActive;
+
 
     private void Start()
     {
@@ -25,6 +24,7 @@ public class CanvasFollow : MonoBehaviour
     {
         isGhostActive = playerController.isGhostActive;
 
+        //Checking if cavnas or camera is following player or ghost
         if (isGhostActive)
         {
             if (Camera)

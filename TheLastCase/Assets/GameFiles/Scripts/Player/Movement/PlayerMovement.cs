@@ -1,10 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System;
-using System.Linq;
 using Unity.AI.Navigation;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -36,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //Getting audio source information
+        //Getting audio source information for footsteps
         AudioSource playerAudio = player.transform.parent.GetComponent<AudioSource>();
         if (player.velocity.magnitude < 0.1f)
         {
@@ -64,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100))
-            //if (Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.transform.GetComponent<NavMeshSurface>() || hit.transform.tag == "Interactable")
                 {
@@ -101,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         {
             interactButton.gameObject.SetActive(false); //Making button turn off to reduce errors
 
+            //Fixing the loop for footsteps
             playerAudio.clip = transformSFX;
             playerAudio.loop = false;
             playerAudio.Play();
@@ -140,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
         if (playerController.isGhostActive)         //Checking to pull ghost back in
         {
             float distanceAway = Vector3.Distance(player.transform.position, ghost.transform.position);
-            //float distanceAway = (GetComponent<GhostTetherRenderer>().linePoints.Count * 0.2f);
             if (distanceAway > 25)
             {
                 //Pulling ghost back in
@@ -161,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 startPos = ghost.transform.position;
             float pullSpeed = 10f;
             float elapsedTime = 0f;
-            float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; // Time required based on speed
+            float duration = Vector3.Distance(startPos, targetPos) / pullSpeed; //Time required based on speed
 
             while (elapsedTime < duration)
             {

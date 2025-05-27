@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IPuzzle
+public interface IPuzzle        //Interface for puzzle creation
 {
     void CheckPuzzle();
 

@@ -65,6 +65,7 @@ public class UIHints : MonoBehaviour
         }
     }
 
+    // Cool fade effect on box
     private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
     {
         float elapsed = 0f;
