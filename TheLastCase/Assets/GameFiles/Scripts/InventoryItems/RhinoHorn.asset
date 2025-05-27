@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rhino Horn
   itemDescription: A broken off piece of a rhino.
-  itemPicture: {fileID: 0}
+  itemPicture: {fileID: 21300000, guid: 7a69ea748246d884797841bd17fe39f3, type: 3}
   puzzleID: Rhino
